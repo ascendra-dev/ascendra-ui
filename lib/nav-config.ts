@@ -1,0 +1,206 @@
+import { NavCategory } from './types';
+
+export const navConfig: NavCategory[] = [
+  {
+    title: 'Getting Started',
+    items: [
+      { name: 'Overview', slug: '' },
+      { name: 'Design Tokens', slug: 'design-tokens' },
+      { name: 'Usage Guidelines', slug: 'guidelines' },
+      { name: 'Accessibility', slug: 'accessibility' },
+    ],
+  },
+  {
+    title: 'Sample Dialogs',
+    items: [
+      { name: 'Dialog Gallery', slug: 'dialogs' },
+    ],
+  },
+  {
+    title: 'Sample Sheets',
+    items: [
+      { name: 'Sheet Gallery', slug: 'sheets' },
+    ],
+  },
+  {
+    title: 'Sample Drawers',
+    items: [
+      { name: 'Drawer Gallery', slug: 'drawers' },
+    ],
+  },
+  {
+    title: 'Sample Dashboards',
+    items: [
+      { name: 'Dashboard Gallery',   slug: 'dashboards' },
+      { name: 'SaaS Revenue',        slug: 'dashboards/saas-revenue' },
+      { name: 'E-commerce Ops',      slug: 'dashboards/ecommerce-ops' },
+      { name: 'Marketing',           slug: 'dashboards/marketing' },
+      { name: 'Financial P&L',       slug: 'dashboards/financial-pnl' },
+      { name: 'Trading Portfolio',   slug: 'dashboards/trading-portfolio' },
+      { name: 'Healthcare',          slug: 'dashboards/healthcare' },
+      { name: 'HR & People',         slug: 'dashboards/hr-people' },
+      { name: 'DevOps',              slug: 'dashboards/devops' },
+      { name: 'Supply Chain',        slug: 'dashboards/supply-chain' },
+      { name: 'Real Estate',         slug: 'dashboards/real-estate' },
+    ],
+  },
+  {
+    title: 'Sample Reports',
+    items: [
+      { name: 'Report Gallery',                slug: 'reports' },
+      { name: 'Annual Financial Statement',    slug: 'reports/annual-financial-statement' },
+      { name: 'Executive Business Review',     slug: 'reports/executive-business-review' },
+      { name: 'Patient Health Summary',        slug: 'reports/patient-health-summary' },
+      { name: 'Project Status Report',         slug: 'reports/project-status-report' },
+      { name: 'Sales Pipeline Report',         slug: 'reports/sales-pipeline-report' },
+      { name: 'Marketing Campaign Analysis',   slug: 'reports/marketing-campaign-analysis' },
+      { name: 'Supply Chain Operations',       slug: 'reports/supply-chain-ops-report' },
+      { name: 'Employee Performance',          slug: 'reports/employee-performance-review' },
+      { name: 'Security Incident Report',      slug: 'reports/security-incident-report' },
+      { name: 'ESG Sustainability Report',     slug: 'reports/esg-sustainability-report' },
+    ],
+  },
+  {
+    title: 'Sample Forms',
+    items: [
+      { name: 'Forms Gallery', slug: 'forms' },
+      { name: 'Contact & Inquiry', slug: 'forms/contact-inquiry' },
+      { name: 'User Profile Settings', slug: 'forms/user-profile' },
+      { name: 'Support Ticket', slug: 'forms/support-ticket' },
+      { name: 'Appointment Booking', slug: 'forms/appointment-booking' },
+      { name: 'Job Application', slug: 'forms/job-application' },
+      { name: 'Financial Transaction', slug: 'forms/financial-transaction' },
+      { name: 'Create Product', slug: 'forms/create-product' },
+      { name: 'Project Kickoff', slug: 'forms/project-kickoff' },
+      { name: 'Search & Filter Panel', slug: 'forms/search-filter' },
+      { name: 'Employee Onboarding', slug: 'forms/employee-onboarding' },
+    ],
+  },
+  {
+    title: 'Feedback & Status',
+    items: [
+      { name: 'Color Tile', slug: 'feedback/color-tile' },
+      { name: 'Simple Badge', slug: 'feedback/simple-badge' },
+      { name: 'Bubble Badge', slug: 'feedback/bubble-badge' },
+      { name: 'Status Dot', slug: 'feedback/status-dot' },
+      { name: 'Simple Alert', slug: 'feedback/simple-alert' },
+      { name: 'Toast', slug: 'feedback/toasts' },
+      { name: 'Pro Badge', slug: 'feedback/pro-badge' },
+      { name: 'Unsaved Changes Bar', slug: 'feedback/unsaved-changes-bar' },
+      { name: 'Progress & Stepper', slug: 'feedback/progress' },
+      { name: 'Skeleton', slug: 'feedback/skeleton' },
+      { name: 'Rating', slug: 'feedback/rating' },
+    ],
+  },
+  {
+    title: 'Forms & Inputs',
+    items: [
+      { name: 'Button', slug: 'inputs/button' },
+      { name: 'Input', slug: 'inputs/input' },
+      { name: 'Input Group', slug: 'inputs/input-group' },
+      { name: 'Checkbox', slug: 'inputs/checkbox' },
+      { name: 'Radio Group', slug: 'inputs/radio-group' },
+      { name: 'Switch', slug: 'inputs/switch' },
+      { name: 'Select', slug: 'inputs/select' },
+      { name: 'Field', slug: 'inputs/field' },
+      { name: 'Combobox', slug: 'inputs/combobox' },
+      { name: 'Table Lookup', slug: 'inputs/table-lookup' },
+      { name: 'File Upload', slug: 'inputs/file-upload' },
+      { name: 'Rich Text Editor', slug: 'inputs/rich-text-editor' },
+      { name: 'Color Picker', slug: 'inputs/color-picker' },
+    ],
+  },
+  {
+    title: 'Date & Time',
+    items: [
+      { name: 'Calendar', slug: 'date/calendar' },
+      { name: 'Date Picker', slug: 'date/date-picker' },
+      { name: 'Date Range Picker', slug: 'date/date-range-picker' },
+    ],
+  },
+  {
+    title: 'Navigation',
+    items: [
+      { name: 'Anchor', slug: 'nav/anchor' },
+      { name: 'Nav', slug: 'nav/nav' },
+      { name: 'Nav Link', slug: 'nav/nav-link' },
+      { name: 'Header', slug: 'nav/header' },
+    ],
+  },
+  {
+    title: 'Overlays',
+    items: [
+      { name: 'Dialog', slug: 'overlay/dialog' },
+      { name: 'Sheet', slug: 'overlay/sheet' },
+      { name: 'Dropdown Menu', slug: 'overlay/dropdown-menu' },
+      { name: 'Tooltip', slug: 'overlay/tooltips' },
+      { name: 'Command Palette', slug: 'overlay/command-palette' },
+    ],
+  },
+  {
+    title: 'Reports',
+    items: [
+      { name: 'Report Header', slug: 'report-ui/report-header' },
+      { name: 'Report Document', slug: 'report-ui/report-document' },
+      { name: 'Report Content', slug: 'report-ui/report-content' },
+    ],
+  },
+  {
+    title: 'Charts',
+    items: [
+      { name: 'Chart Gallery', slug: 'charts' },
+      { name: 'Line Charts', slug: 'charts/line' },
+      { name: 'Area Charts', slug: 'charts/area' },
+      { name: 'Bar Charts', slug: 'charts/bar' },
+      { name: 'Pie & Donut', slug: 'charts/pie' },
+      { name: 'Radial & Gauge', slug: 'charts/radial' },
+      { name: 'Radar Charts', slug: 'charts/radar' },
+      { name: 'Scatter & Bubble', slug: 'charts/scatter' },
+      { name: 'Composed Charts', slug: 'charts/composed' },
+      { name: 'Treemap', slug: 'charts/treemap' },
+      { name: 'Histogram', slug: 'charts/histogram' },
+      { name: 'Candlestick', slug: 'charts/candlestick' },
+      { name: 'Chart Legend', slug: 'charts/chart-legend' },
+      { name: 'Chart Target Legend', slug: 'charts/chart-target-legend' },
+    ],
+  },
+  {
+    title: 'Tables & Data',
+    items: [
+      { name: 'Table', slug: 'data-table/table' },
+      { name: 'Empty State', slug: 'data-table/empty' },
+      { name: 'Data Table', slug: 'data-table' },
+      { name: 'Data Table Lab', slug: 'data-table-lab' },
+    ],
+  },
+  {
+    title: 'Layout',
+    items: [
+      { name: 'Layout Guide', slug: 'layout-guide' },
+      { name: 'Card', slug: 'layout/card' },
+      { name: 'Page Header', slug: 'layout/page-header' },
+      { name: 'Page Bar', slug: 'layout/page-bar' },
+      { name: 'Aside Content', slug: 'layout/aside-content' },
+      { name: 'Item', slug: 'layout/item' },
+    ],
+  },
+  {
+    title: 'Tabs',
+    items: [{ name: 'Tabs', slug: 'tabs' }],
+  },
+  {
+    title: 'Sidebar',
+    items: [{ name: 'Sidebar Menu', slug: 'sidebar-menu' }],
+  },
+  {
+    title: 'Utilities',
+    items: [
+      { name: 'Copy Text', slug: 'util/copy-text' },
+      { name: 'Name Avatar', slug: 'util/name-avatar' },
+      { name: 'Theme Toggle', slug: 'util/theme-toggle' },
+      { name: 'Pagination Button', slug: 'util/pagination-button' },
+      { name: 'Row Action Button', slug: 'util/row-action-button' },
+      { name: 'Scroll To Top', slug: 'util/scroll-to-top' },
+    ],
+  },
+];
