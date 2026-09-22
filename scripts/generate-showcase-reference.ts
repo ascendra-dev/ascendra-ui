@@ -1,5 +1,5 @@
 /**
- * Generates docs/showcase-reference.md — the comprehensive design guide and AI training
+ * Generates ascendra-ui/docs/showcase-reference.md — the comprehensive design guide and AI training
  * document for the Ascendra UI showcase.
  *
  * Sources:
@@ -12,10 +12,10 @@
  *   lib/dashboards-config.ts — dashboard patterns
  *   lib/reports-config.ts    — report patterns
  *
- * Run: npm run docs:generate
+ * Run: npm run gen:ui-docs
  */
 
-import { readFileSync, writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 import { join } from "path";
 import { dashboardsConfig } from "../lib/dashboards-config";
 import { dialogsConfig } from "../lib/dialogs-config";
@@ -27,11 +27,6 @@ import { reportsConfig } from "../lib/reports-config";
 import { sheetsConfig } from "../lib/sheets-config";
 import type { LayoutCell } from "../lib/types";
 
-const ascendraConfig = JSON.parse(
-  readFileSync(join(process.cwd(), "ascendra.json"), "utf8")
-) as { version: string; commit?: string };
-const uiVersion = ascendraConfig.version;
-const uiCommit = ascendraConfig.commit ?? "unknown";
 const today = new Date().toISOString().slice(0, 10);
 
 function esc(s: string) {
@@ -93,13 +88,11 @@ const formDomains = [...new Set(formsConfig.map((f) => f.domain))].join(", ");
 // ── Build document ─────────────────────────────────────────────────────────────
 
 const lines: string[] = [
-  `<!-- ascendra-ui-version: ${uiVersion} -->`,
-  `<!-- ascendra-ui-commit: ${uiCommit} -->`,
   "# Ascendra UI — Showcase Reference",
   "",
-  `> Auto-generated on ${today} · ascendra-ui v${uiVersion}`,
-  "> Run `npm run docs:generate` after any config or showcase change.",
-  "> For the component API reference (props, imports, types) see `docs/ui-reference.md`.",
+  `> Auto-generated on ${today}.`,
+  "> Run `npm run gen:ui-docs` after any config or showcase change.",
+  "> For the component API reference (props, imports, types) see `ascendra-ui/docs/ui-reference.md`.",
   "",
   "---",
   "",
@@ -114,7 +107,7 @@ const lines: string[] = [
   "- _What real-world scenarios does the showcase demonstrate?_",
   "- _How should I instruct an AI model to build a new feature using this library?_",
   "",
-  "For the technical API (props, import paths, TypeScript types) see `docs/ui-reference.md`.",
+  "For the technical API (props, import paths, TypeScript types) see `ascendra-ui/docs/ui-reference.md`.",
   "",
   "---",
   "",
@@ -1773,7 +1766,7 @@ const lines: string[] = [
   "",
   "## Showcase Gallery Entry Points",
   "",
-  `The showcase has ${showcasePageCount} pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern \`/showcase/{category}/{slug}\` — see \`docs/ui-reference.md\` for individual component showcase links.`,
+  `The showcase has ${showcasePageCount} pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern \`/showcase/{category}/{slug}\` — see \`ascendra-ui/docs/ui-reference.md\` for individual component showcase links.`,
   "",
   "| Section | Route |",
   "|---|---|",
@@ -1802,7 +1795,7 @@ const lines: string[] = [
   "- Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)",
   "- Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions",
   "- Use the code templates in **Structural Code Templates** as the starting point for each page type",
-  "- Always check `docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code",
+  "- Always check `ascendra-ui/docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code",
   "",
   "### Design System Gap Flagging",
   "",
@@ -1907,19 +1900,13 @@ const lines: string[] = [
   "",
   "---",
   "",
-  "## Versioning",
-  "",
-  `This reference was generated for **ascendra-ui v${uiVersion}**.`,
-  `Commit: \`${uiCommit}\``,
-  "",
-  "Run `npm run docs:generate` to regenerate after any change.",
-  "Run `npm run release` to cut a new version.",
+  "Run `npm run gen:ui-docs` to regenerate after any change.",
   "",
 ];
 
-const outPath = join(process.cwd(), "docs", "showcase-reference.md");
+const outPath = join(process.cwd(), "ascendra-ui", "docs", "showcase-reference.md");
 writeFileSync(outPath, lines.join("\n"), "utf8");
 
 console.log(
-  `✓ Generated docs/showcase-reference.md · ascendra-ui v${uiVersion} (${showcasePageCount} showcase pages, ${formsConfig.length} forms, ${dashboardsConfig.length} dashboards, ${reportsConfig.length} reports)`
+  `✓ Generated ascendra-ui/docs/showcase-reference.md (${showcasePageCount} showcase pages, ${formsConfig.length} forms, ${dashboardsConfig.length} dashboards, ${reportsConfig.length} reports)`
 );

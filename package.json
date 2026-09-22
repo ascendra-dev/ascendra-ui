@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "docs:generate": "npx tsx scripts/generate-ui-reference.ts && npx tsx scripts/generate-showcase-reference.ts",
-    "release": "node scripts/release.js",
+    "gen:ui-docs": "npx tsx scripts/generate-ui-reference.ts && npx tsx scripts/generate-showcase-reference.ts",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

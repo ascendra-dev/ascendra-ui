@@ -360,8 +360,7 @@ export default function GuidelinesPage() {
         <p className="border-t pt-6 text-xs text-muted-foreground">
           These guidelines reflect decisions made in the project. When a new
           component is added, update this page with its decision criteria before
-          shipping. Breaking changes should also be recorded in{" "}
-          <code className="rounded bg-muted px-1 font-mono">CHANGELOG.md</code>.
+          shipping.
         </p>
       </div>
     </>

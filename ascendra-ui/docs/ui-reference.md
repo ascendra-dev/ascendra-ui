@@ -1,9 +1,7 @@
-<!-- ascendra-ui-version: 1.4.0 -->
-<!-- ascendra-ui-commit: 2fb5614182f4bb11b93695abfe1b99a06a0fada0 -->
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-10 · ascendra-ui v1.4.0
-> Run `npm run docs:generate` after any registry or config change.
+> Auto-generated on 2026-09-22.
+> Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
@@ -1054,7 +1052,7 @@ _No custom props — accepts standard HTML attributes._
 
 ## Part 2 — Composite Patterns
 
-> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `docs/showcase-reference.md`.
+> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `ascendra-ui/docs/showcase-reference.md`.
 
 > Full-page patterns built from the primitives above. Each showcases a realistic domain scenario.
 > Use the **Components used** lists to understand which primitives to reach for.

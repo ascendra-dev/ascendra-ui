@@ -1,14 +1,14 @@
 # CLAUDE.md
 
-> **This file is yours.** It was created when your project was bootstrapped from Ascendra UI and will not be overwritten by `npm run upgrade`. Claude Code reads it automatically — add project-specific conventions, API contracts, domain terminology, team preferences, and anything else Claude should know about your codebase here.
+> **This file is yours.** It was created when this project was set up from Ascendra UI and is never touched automatically again. Claude Code reads it automatically — add project-specific conventions, API contracts, domain terminology, and team preferences here.
 
 ---
 
 ## What This Project Is
 
-This project is built on **Ascendra UI** — a full-stack Next.js design system. The `ascendra-ui/` folder is the component library. It is **managed**: never edit files inside it — `npm run upgrade` overwrites them entirely.
+This project is built on **Ascendra UI** — a full-stack Next.js design system. The `ascendra-ui/` folder is the component library. It is **managed**: never edit files inside it — running `npm run ascendra-ui:update` (right here, no arguments) pulls the latest version from the public repo over the network and replaces the whole folder.
 
-Check `.ascendra-ui/ascendra.json` for the current library version and the source repository URL.
+There is no version to track. An update always takes whatever is current in the source repo — review the diff after updating rather than relying on a changelog.
 
 ---
 
@@ -16,11 +16,10 @@ Check `.ascendra-ui/ascendra.json` for the current library version and the sourc
 
 **Before writing any UI code**, check whether the library already has what you need:
 
-1. **`docs/ui-reference.md`** — Complete component API: every importable component, its props, import path, and showcase URL. Read this before building any UI element.
-2. **`docs/showcase-reference.md`** — Page templates, design patterns, DataTable system, form patterns, chart usage, and import conventions. Read this before building any page.
-3. **`ASCENDRA.md`** — Managed file taxonomy: every file in this project, whether upgrade overwrites it, and how conflicts are handled. Read this before editing any file you're unsure about.
+1. **`ascendra-ui/docs/ui-reference.md`** — Complete component API: every importable component, its props, import path, and showcase URL. Read this before building any UI element.
+2. **`ascendra-ui/docs/showcase-reference.md`** — Page templates, design patterns, DataTable system, form patterns, chart usage, and import conventions. Read this before building any page.
 
-All three files are auto-updated by `npm run upgrade`.
+Both files are replaced whenever `ascendra-ui/` is updated.
 
 **If a needed pattern is absent from the library**, implement it minimally with Tailwind and mark it:
 
@@ -74,29 +73,21 @@ Everything below is pre-installed and pre-configured. **Do not add packages** wi
 ```
 app/
   layout.tsx              ← managed — root HTML shell + all providers (do not edit)
-  globals.css             ← managed — design tokens and base styles (do not edit)
-  (app)/
-    layout.tsx            ← managed — app shell: sidebar + header layout (do not edit)
-    page.tsx              ← ship-once — replace with your home page
-    sandbox/page.tsx      ← yours to edit (upgrade skips if modified)
-    {your-routes}/        ← your application pages go here
-components/               ← your custom components
-hooks/                    ← your custom hooks
-lib/                      ← config files, constants, utilities
-providers/                ← custom React context providers
-utils/                    ← pure stateless utility functions
-docs/                     ← managed — do not edit by hand
-  ui-reference.md         ← component API reference (auto-updated on upgrade)
-  showcase-reference.md   ← page patterns and templates (auto-updated on upgrade)
-ascendra-ui/              ← managed — do not edit (overwritten on upgrade)
-.ascendra-ui/             ← managed — do not edit
-  ascendra.json           ← version manifest (version, commit, source, deps)
-  CHANGELOG.md            ← ascendra-ui library release history
-CHANGELOG.md              ← your project changelog — update as you ship features
-BACKLOG.md                ← your project backlog — track planned and in-progress work
-CLAUDE.md                 ← this file — yours to update with project context
-README.md                 ← your project README — yours to update
-ASCENDRA.md               ← managed — file taxonomy reference (auto-updated on upgrade)
+  globals.css              ← managed — design tokens and base styles (do not edit)
+  starter/                 ← demo route — read it, then delete it
+  {your-routes}/            ← your application pages go here
+components/                ← your custom components
+hooks/                      ← your custom hooks
+lib/                        ← config files, constants, utilities
+providers/                  ← custom React context providers
+utils/                      ← pure stateless utility functions
+ascendra-ui/                ← managed — do not edit (replaced wholesale on update)
+  docs/
+    ui-reference.md         ← component API reference
+    showcase-reference.md   ← page patterns and templates
+ascendra.js                 ← run `npm run ascendra-ui:update` to pull the latest ascendra-ui/
+CLAUDE.md                   ← this file — yours to update with project context
+README.md                   ← your project README — yours to update
 ```
 
 ---
@@ -129,27 +120,25 @@ import { MyComponent } from "../../components/my-component"; // ✗
 
 **Server vs client:** Server components by default. Add `"use client"` only when the component uses hooks, event handlers, browser APIs, or local state.
 
-**New routes:** Create `app/(app)/{route}/page.tsx`. The `(app)` route group applies the app shell layout (sidebar + header) automatically — no extra wiring needed.
+**New routes:** Create `app/{route}/page.tsx`. Your `app/layout.tsx` already wires up theming and providers — no extra wiring needed per route.
 
 **Provider tree:** `QueryProvider`, `ThemeProvider`, and `TooltipProvider` are already in `app/layout.tsx`. Do not re-wrap pages in these providers.
 
 **HTTP / data fetching:** Use the pre-configured `apiClient` from `@/ascendra-ui/lib/api/client.ts` for all API calls. It injects the next-auth Bearer token automatically. Pair it with `useQuery` / `useMutation` from `@tanstack/react-query`.
 
-**Forms:** All forms use `react-hook-form` + `zod`. See `docs/showcase-reference.md` → Form Templates for complete copy-paste patterns.
+**Forms:** All forms use `react-hook-form` + `zod`. See `ascendra-ui/docs/showcase-reference.md` → Form Templates for complete copy-paste patterns.
 
 **DataTable:** Two providers — choose based on data source:
 - `DataTableWithQueryProvider` — data comes from the server via named queries; includes `QueryBar`, `QueryParamPanel`, React Query fetching, and saved-query persistence. Use this for any table that hits an API.
 - `DataTableProvider` — you supply data directly as a prop; handles sorting, filtering, pagination client-side only. Use for static or already-loaded data sets.
 
-See `docs/showcase-reference.md` → DataTable System for full wiring documentation.
+See `ascendra-ui/docs/showcase-reference.md` → DataTable System for full wiring documentation.
 
-**Charts:** Wrap all charts in `<ChartContainer config={chartConfig}>` from `@/ascendra-ui/shadcn`. See `docs/showcase-reference.md` → Chart Patterns.
+**Charts:** Wrap all charts in `<ChartContainer config={chartConfig}>` from `@/ascendra-ui/shadcn`. See `ascendra-ui/docs/showcase-reference.md` → Chart Patterns.
 
 ---
 
 ## Branching Workflow
-
-All feature work happens on branches. Main should always be in a releasable state.
 
 | Prefix | Use for |
 |---|---|
@@ -158,39 +147,7 @@ All feature work happens on branches. Main should always be in a releasable stat
 | `chore/` | Infra, config, dependency updates |
 | `docs/` | Documentation and content changes |
 
-Use **squash merges** — one clean commit per feature on main. Use `/prepare-release` to handle the squash-merge and changelog drafting together.
-
----
-
-## Release Workflow
-
-Use `/prepare-release` → `/release` to manage versioned releases.
-
-| Command | What it does |
-|---|---|
-| `/prepare-release` | Squash-merges your branch to main, collects commits since the last tag, proposes a semver bump, drafts `CHANGELOG.md` and `BACKLOG.md` entries, and commits — ready for `/release` |
-| `/release` | Pre-flight checks (branch, clean tree, type check), derives the version from the CHANGELOG top entry, stamps BACKLOG, bumps `package.json`, creates the release commit and tag — then prompts to push |
-
-The heading `## [x.y.z] — description` in `CHANGELOG.md` is the source of truth for the release version. Both commands show a preview at every step before making any irreversible change.
-
----
-
-## Available Commands
-
-Type these in Claude Code to scaffold common patterns. Each command reads the docs first and asks targeted questions before generating complete, working code.
-
-| Command | Generates |
-|---|---|
-| `/create-page` | New route in `app/(app)/` with correct layout variant |
-| `/create-form` | Full form: zod schema + react-hook-form + all field components |
-| `/create-table` | DataTable with the right provider (server or static) |
-| `/create-dashboard` | Dashboard page with stats, charts, and optional table |
-| `/create-report` | Report structure with sections and PDF export |
-| `/create-dialog` | Modal dialog with optional form and footer actions |
-| `/create-sheet` | Side-panel sheet with detail view or form |
-| `/create-component` | CVA component following library conventions |
-| `/prepare-release` | Squash-merge branch → draft CHANGELOG entry → commit |
-| `/release` | Pre-flight checks → bump version → create commit + tag → push |
+Squash-merge feature branches to main — one clean commit per feature.
 
 ---
 
@@ -247,17 +204,17 @@ export function StatusBadge({
 ## Dos and Don'ts
 
 ### Do
-- Check `docs/ui-reference.md` before building any UI element
-- Check `docs/showcase-reference.md` before building any page
+- Check `ascendra-ui/docs/ui-reference.md` before building any UI element
+- Check `ascendra-ui/docs/showcase-reference.md` before building any page
 - Use `apiClient` from `@/ascendra-ui/lib/api/client.ts` for all HTTP calls
 - Use `useQuery` / `useMutation` from `@tanstack/react-query` for client-side data
 - Import all icons from `react-icons/lu`
 - Mark any custom pattern that could be reusable with `{/* TODO: ascendra-ui candidate — ... */}`
 
 ### Don't
-- Edit any file inside `ascendra-ui/` — overwritten on upgrade
-- Edit `docs/ui-reference.md` or `docs/showcase-reference.md` — auto-generated
-- Edit `app/layout.tsx`, `app/globals.css`, or `app/(app)/layout.tsx` — managed files
+- Edit any file inside `ascendra-ui/` — replaced wholesale on the next update
+- Edit `ascendra-ui/docs/ui-reference.md` or `ascendra-ui/docs/showcase-reference.md` — managed, part of the library folder
+- Edit `app/layout.tsx` or `app/globals.css` — managed files
 - Re-wrap pages in `QueryProvider`, `ThemeProvider`, or `TooltipProvider` — already in root layout
 - Use relative imports (`../../`) — always use path aliases (`@/`)
 - Import from `lucide-react` directly — use `react-icons/lu`

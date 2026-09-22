@@ -1,5 +1,5 @@
 /**
- * Generates docs/ui-reference.md from all lib config files.
+ * Generates ascendra-ui/docs/ui-reference.md from all lib config files.
  *
  * Sources:
  *   lib/registry.ts          — primitive components (props, imports, examples)
@@ -10,11 +10,11 @@
  *   lib/dashboards-config.ts — dashboard patterns
  *   lib/nav-config.ts        — category ordering
  *
- * Run: npm run docs:generate
+ * Run: npm run gen:ui-docs
  * Re-run whenever any registry entry or config file is changed.
  */
 
-import { readFileSync, writeFileSync } from "fs";
+import { writeFileSync } from "fs";
 import { join } from "path";
 import { dashboardsConfig } from "../lib/dashboards-config";
 import { dialogsConfig } from "../lib/dialogs-config";
@@ -124,17 +124,11 @@ const KNOWN_NON_REGISTRY_SLUGS = new Set([
 const today = new Date().toISOString().slice(0, 10);
 const componentCount = Object.keys(registry).length;
 
-const ascendraConfig = JSON.parse(readFileSync(join(process.cwd(), "ascendra.json"), "utf8")) as { version: string; commit?: string };
-const uiVersion = ascendraConfig.version;
-const uiCommit = ascendraConfig.commit ?? "unknown";
-
 const lines: string[] = [
-  `<!-- ascendra-ui-version: ${uiVersion} -->`,
-  `<!-- ascendra-ui-commit: ${uiCommit} -->`,
   "# Ascendra UI — UI Reference",
   "",
-  `> Auto-generated on ${today} · ascendra-ui v${uiVersion}`,
-  "> Run `npm run docs:generate` after any registry or config change.",
+  `> Auto-generated on ${today}.`,
+  "> Run `npm run gen:ui-docs` after any registry or config change.",
   "",
   "---",
   "",
@@ -209,7 +203,7 @@ for (const category of navConfig) {
 lines.push(
   "## Part 2 — Composite Patterns",
   "",
-  "> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `docs/showcase-reference.md`.",
+  "> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `ascendra-ui/docs/showcase-reference.md`.",
   "",
   "> Full-page patterns built from the primitives above. Each showcases a realistic domain scenario.",
   "> Use the **Components used** lists to understand which primitives to reach for.",
@@ -396,7 +390,7 @@ if (warnings.length) {
 
 // ── Write file ────────────────────────────────────────────────────────────────
 
-const outPath = join(process.cwd(), "docs", "ui-reference.md");
+const outPath = join(process.cwd(), "ascendra-ui", "docs", "ui-reference.md");
 writeFileSync(outPath, lines.join("\n"), "utf8");
 
 const summary = [
@@ -408,7 +402,7 @@ const summary = [
   `${dashboardsConfig.length} dashboards`,
 ].join(", ");
 
-console.log(`✓ Generated docs/ui-reference.md · ascendra-ui v${uiVersion} (${summary})`);
+console.log(`✓ Generated ascendra-ui/docs/ui-reference.md (${summary})`);
 
 if (warnings.length) {
   console.warn(`\n⚠  ${warnings.length} validation warning${warnings.length > 1 ? "s" : ""}:`);

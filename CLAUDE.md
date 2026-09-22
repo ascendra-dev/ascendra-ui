@@ -6,14 +6,14 @@
 
 | Layer | Root | Purpose | Ships to consumers? |
 |---|---|---|---|
-| **Library** | `ascendra-ui/` | Components, hooks, libs, providers, utils | Yes — the whole folder |
-| **Showcase** | Everything else | Demos, previews, galleries, docs | `docs/` only |
+| **Library** | `ascendra-ui/` | Components, hooks, libs, providers, utils, docs | Yes — the whole folder, including `ascendra-ui/docs/` |
+| **Showcase** | Everything else | Demos, previews, galleries, the `/starter` dogfood route | No — never ships |
 
-The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/showcase/`, `components/previews/`, `lib/registry.ts`, galleries) is internal — it demonstrates and documents the library.
+The `ascendra-ui/` folder is what a scaffolded project gets. The showcase (`app/showcase/`, `components/previews/`, `lib/registry.ts`, galleries) is internal — it demonstrates and documents the library, and is deleted by `ascendra.js setup` when a new project is created.
 
 **Decision rule:** If it could be useful in a consumer project → put it in `ascendra-ui/`. If it's demo-specific → put it in the showcase layer.
 
-**Why the showcase matters:** `docs/ui-reference.md` is auto-generated from `lib/registry.ts` and shipped to consumer projects. Consumer AI assistants read it to understand how to build UIs. Registry accuracy and preview quality directly affects how well consumers can use the design system.
+**Why the showcase matters:** `ascendra-ui/docs/ui-reference.md` is auto-generated from `lib/registry.ts` and ships as part of `ascendra-ui/`. Consumer AI assistants read it to understand how to build UIs. Registry accuracy and preview quality directly affects how well consumers can use the design system.
 
 ---
 
@@ -41,12 +41,12 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 
 | Task | Files |
 |---|---|
-| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `app/showcase/layout.tsx` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` → **`npm run docs:generate`** |
+| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `app/showcase/layout.tsx` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` → **`npm run gen:ui-docs`** |
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
-| Change managed file taxonomy (what create-project ships or upgrade manages) | `create-project.js` + `ascendra-ui/template/scripts/upgrade.js` + **`ascendra-ui/template/ASCENDRA.md`** |
-| Release | `/prepare-release` skill (merges to main + drafts `CHANGELOG.md` entry) → `/release` skill → `git push && git push --tags` |
+| Change what `ascendra.js setup`/`update` does | `ascendra.js` + **`starter/README.md`** + **`starter/CLAUDE.md`** (the files it swaps in) |
+| Ship a change | Merge to main. No release step, no version bump — a project picks it up next time someone runs `npm run ascendra-ui:update` inside it. |
 
 ---
 
@@ -73,7 +73,7 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 | `hooks/` | Shared React hooks |
 | `lib/` | Utilities (cn, etc.) |
 | `shadcn/` | shadcn primitives — do not edit |
-| `template/` | Files shipped to consumer projects (scripts, app shell) |
+| `docs/` | Auto-generated reference docs (`ui-reference.md`, `showcase-reference.md`) — ships as part of `ascendra-ui/` |
 
 ### Component file pattern
 
@@ -141,10 +141,10 @@ Keep exports alphabetical within each category comment block.
 
 ### The core rule
 
-> **Reusable by a consumer project → `ascendra-ui/`** (it ships with the package)  
-> **Showcase-only → root-level folders** (stays in this repo)
+> **Reusable by a consumer project → `ascendra-ui/`** (it ships with the folder)  
+> **Showcase-only → root-level folders** (stays in this repo, never ships)
 
-Every folder inside `ascendra-ui/` is part of the package consumers install. Root-level folders (`app/`, `components/`, `lib/`, `hooks/`, `scripts/`) are showcase infrastructure and never ship.
+Every file inside `ascendra-ui/` — components, hooks, providers, utils, and `ascendra-ui/docs/` — is part of what a scaffolded project gets. Root-level folders (`app/showcase/`, `components/`, `lib/`, `hooks/`, `scripts/`) are showcase infrastructure and never ship; `app/starter/` is the exception — it's dogfooded here and copied as-is into a new project.
 
 ### `ascendra-ui/` — shipped folders
 
@@ -157,48 +157,19 @@ Every folder inside `ascendra-ui/` is part of the package consumers install. Roo
 | `utils/` | Pure stateless utility functions | No UI, no React — `formatDate`, `formatAmount`, `sleep` |
 | `preferences/` | localStorage preference management | Persisting user state across sessions (column visibility, query state) |
 | `shadcn/` | shadcn primitives | **Never touch** — extend via `components/ui/` only |
-| `template/` | Files shipped as app scaffolding | Scripts and config that consumer projects receive on install |
+| `docs/` | Auto-generated `ui-reference.md` / `showcase-reference.md` | Never edit by hand — regenerate with `npm run gen:ui-docs` |
 
-### Root-level — showcase only
+### Root-level — showcase only, never ships
 
 | Folder | Purpose |
 |---|---|
-| `app/` | Next.js showcase pages and layouts |
+| `app/showcase/` | Next.js showcase pages and layouts — deleted by `ascendra.js setup` |
+| `app/starter/` | Dogfooded demo route — copied as-is into a new project (not deleted by setup) |
 | `components/previews/` | Component doc/preview pages |
 | `lib/` | Showcase config files — `registry.ts`, `nav-config.ts`, `*-config.ts` |
 | `hooks/` | Showcase-specific hooks (mock data, UI-only state — not reusable by consumers) |
+| `providers/`, `utils/` | Empty here (`.gitkeep` only) — reset to empty by `setup` too, same as `components/`, `hooks/`, `lib/`, just with nothing to clear |
 | `scripts/` | Doc generation scripts |
-
-### File naming conventions
-
-| File type | Convention | Example |
-|---|---|---|
-| Component | `{name}.tsx` (kebab-case) | `simple-badge.tsx` |
-| Hook (standalone, in `ascendra-ui/hooks/`) | `use-{name}.ts` | `use-is-small-screen.ts` |
-| Hook (inside a provider folder) | `use-{name}.hook.ts` | `use-sort.hook.ts` |
-| Provider | `{name}.provider.tsx` | `data-table.provider.tsx` |
-| Types file | `{name}.types.ts` | `data-table.types.ts` |
-| Utility file | `{name}.util.ts` | `common.util.ts` |
-| Preference storage | `{name}.storage.ts` | `preferences.storage.ts` |
-
-### Provider folder structure
-
-Each provider system gets its own subfolder under `ascendra-ui/providers/`:
-
-```
-ascendra-ui/providers/{name}/
-  {name}.provider.tsx     ← React context + Provider component
-  {name}.types.ts         ← all TypeScript types and interfaces for this provider
-  use-{name}.hook.ts      ← hook(s) for consuming the context
-```
-
-Example: `ascendra-ui/providers/data-table/` contains `data-table.provider.tsx`, `data-table.types.ts`, `use-sort.hook.ts`, `use-filter.hook.ts`, `use-pagination.hook.ts`, etc.
-
-### Hook placement decision
-
-- **`ascendra-ui/hooks/`** — standalone, no context dependency. Works in any React project without provider setup (e.g. `useIsSmallScreen`). Export via `ascendra-ui/index.ts`.
-- **Provider subfolder** — hooks that call `useContext` for a specific provider. Must be used inside that provider's tree (e.g. `useDataTableSort` only works inside `DataTableProvider`). Export via `ascendra-ui/index.ts` alongside the provider.
-- **Root `hooks/`** — showcase-only. Uses mock data, showcase state, or is too demo-specific to ship (e.g. `useMockInvoiceList`). Never export from `ascendra-ui/index.ts`.
 
 ---
 
@@ -234,7 +205,7 @@ Example: `ascendra-ui/providers/data-table/` contains `data-table.provider.tsx`,
 },
 ```
 
-`importNames` drives both the import chip in the UI and the generated `docs/ui-reference.md`. List every public export.
+`importNames` drives both the import chip in the UI and the generated `ascendra-ui/docs/ui-reference.md`. List every public export.
 
 ### 2. `lib/nav-config.ts`
 
@@ -391,94 +362,40 @@ Use **squash merge** — one clean commit per feature on main. Intermediate bran
 
 - Never commit directly to main for feature work (exception: trivial single-line typo fixes in doc files)
 - Always delete the branch after merging
-- Release only from main — the `/release` skill enforces this
+- There is no release step — merging to main is the whole workflow. A project picks up the change the next time someone runs `npm run ascendra-ui:update` inside it.
+- **Before pushing any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file, run `npm run gen:ui-docs` and commit the regenerated `ascendra-ui/docs/*.md` in the same branch.** These files ship as-is — a stale doc reaching a consumer via `ascendra-ui:update` is a silent correctness bug, not a cosmetic one.
 - Squash commit message should use conventional commit format: `feat:`, `fix:`, `chore:`, `docs:`
 
-### BACKLOG.md structure and markers
-
-`BACKLOG.md` has two sections: **Unreleased** and **Completed**. Every item lives in Unreleased its entire life — it only moves to Completed when it is stamped with a version at release time (done automatically by `/release`).
-
-Add a **Category** label to each item using one of: `Component`, `Docs`, `Infra`, `Showcase`, `Consumer`.
-
-```
-- [ ] **Component** — description of planned work
-- [~] **Infra** — work in progress on a branch
-- [✓] **Docs** — merged to main, not yet released
-- [x] **Infra** — shipped description — v1.2.1   ← Completed section
-```
-
-| Marker | Meaning |
-|---|---|
-| `[ ]` | Planned — not yet started |
-| `[~]` | In progress — branch exists |
-| `[✓]` | Merged to main — not yet released |
-| `[x]` | Shipped — stamped with version in **Completed** section |
-
 ---
 
-## Release Process
+## `ascendra.js` — setup and update
 
-### Prerequisites (must be true before running release)
+`ascendra.js` (repo root) is the whole scaffolding/update system — one file, two commands, no version tracking. It's a **project-lifetime file**, not a source-repo-only tool: `setup` never deletes it, because `update` depends on it staying.
 
-1. All code changes are committed — working tree must be clean (`git status` shows nothing)
-2. `CHANGELOG.md` has a new entry at the very top (above the previous version). The version in this entry is the **source of truth** — `/release` derives the new version from it and refuses to release anything else. Use `/prepare-release` to merge to main and draft this entry from the commits since the last tag:
+- **`node ascendra.js setup`** — run once, in place, right after cloning or unzipping this repo into whatever folder is the new project (e.g. `ascendra-pay-web`). Works before `npm install` — it only touches Node built-ins. Deletes `app/showcase/` and `scripts/` (doc generation — nothing left in the project can run it), points `app/page.tsx` at `/starter`, resets `components/`, `hooks/`, `lib/`, `providers/`, `utils/` to empty, swaps in `starter/README.md` and `starter/CLAUDE.md` as the project's `README.md`/`CLAUDE.md`, drops the root `LICENSE` (kept at `ascendra-ui/LICENSE`), and writes a fresh `package.json` scripts block: `dev`/`build`/`start`/`lint`/`ascendra-ui:update`.
 
-```md
-## [1.0.6] — Add MyComponent
+  **Refuses to run a second time** — `alreadySetUp()` checks two independent signals (`starter/` gone, or `package.json` already has an `ascendra-ui:update` script) and refuses if *either* is true; a false-positive refusal is far cheaper than a false-negative that wipes real work. The `starter/`-gone marker is set as the very first thing `setup()` does — before any destructive step — specifically so that a crash or kill partway through still leaves a re-run refused, instead of letting a second run repeat the `components/`/`hooks/`/`lib/`/`providers/`/`utils/` wipe on top of whatever the consumer added in the meantime. Keep the marker-setting step first if you ever reorder `setup()`.
 
-### Added
-- `MyComponent`, `MyComponentTitle` — what it is and why it's useful.
-- Showcase preview at `/showcase/feedback/my-component` with N example sections.
-```
+  **Deliberately no `npm run setup` alias in this repo's own `package.json`.** This repo is the source of truth, not a copy waiting to become a project — a `setup` script sitting in its own `package.json` would be one `npm run setup` away from destroying it (deleting `app/showcase/`/`scripts/`, wiping `components/`/`hooks/`/`lib/`, which here hold real showcase infrastructure) for anyone actually working here. Never add that alias back to this repo's `package.json`.
 
-### Versioning Rules
+- **`npm run ascendra-ui:update`** (`node ascendra.js update`) — run from inside an already-set-up project, any time, no arguments. Clones `SOURCE_REPO` (the public URL, hardcoded in `ascendra.js`) to a temp directory over the network, replaces the project's own `ascendra-ui/` folder (docs included) with the one from that clone, deletes the temp directory. Never touches `package.json` — dependency syncing after an update is manual. This alias only exists in an already-set-up project — `setup()` writes it there itself; it is never present in this repo's own `package.json` either, for the same reason as `setup` above.
 
-| Bump | When to use |
-|---|---|
-| **patch** | Bug fixes; new props with default values; showcase/preview-only changes; script improvements; CLAUDE.md or skills updates. Consumer code requires no changes. |
-| **minor** | New components, hooks, providers, or utils added to `ascendra-ui/`; new optional props without defaults; new gallery pages; additive managed template file changes. No consumer migration needed. |
-| **major** | Removing or renaming component exports or props; breaking prop type changes; managed template restructuring that conflicts with consumer customizations; dependency major version bumps with consumer-facing API changes. Consumer must act after upgrading. |
+This is a pull model, not a push model: a consumer project updates itself by fetching from this public repo — nobody runs `update` from inside this repo pointed at someone else's path.
 
-Tie-breaker: when in doubt between two levels, use the higher one. Any major release CHANGELOG entry must include a **Breaking** note explaining what consumers must do.
-
-### Commands
-
-```bash
-printf "1.0.6\n" | npm run release   # release the exact version from the CHANGELOG top entry
-
-git push && git push --tags
-```
-
-The script also accepts `patch` / `minor` / `major`, but always pass the explicit version from the CHANGELOG entry — it guarantees the released version matches what the CHANGELOG documents.
-
-### What the script does automatically — do not do these manually
-
-- Bumps `package.json` version and `ascendra.json` (version + current commit hash + deps snapshot)
-- Regenerates `docs/ui-reference.md` and `docs/showcase-reference.md` with embedded version/commit markers
-- Validates markers match
-- Commits `"chore: release vX.Y.Z"` and creates tag `vX.Y.Z`
-
----
-
-## Available Commands
-
-| Command | What it does |
-|---|---|
-| `/create-component` | Full 9-step new component workflow (file → index.ts → registry → nav-config → layout → doc-components → preview → docs:generate) |
-| `/prepare-release` | Squash-merges feature branch to main, summarizes changes since the last tag, drafts the CHANGELOG entry + BACKLOG updates, commits after approval |
-| `/release` | Pre-flight checks (derives version from CHANGELOG top entry) + release script + push with tags |
-| `/verify-docs` | Runs docs:generate, audits registry completeness and nav/preview alignment |
+When changing what gets shipped or managed, update `ascendra.js` itself (including `SOURCE_REPO` if the repo ever moves) and the two swap files it copies: `starter/README.md` and `starter/CLAUDE.md`. Also keep `app/starter/page.tsx` and `app/starter/layout.tsx` (the dogfooded demo route, real files rendered live in this repo's own dev server) in sync with whatever `ascendra.js setup` actually does.
 
 ---
 
 ## Docs
 
-`docs/ui-reference.md` and `docs/showcase-reference.md` are **auto-generated** by the release script. They are the consumer-facing artifact.
+`ascendra-ui/docs/ui-reference.md` and `ascendra-ui/docs/showcase-reference.md` are **auto-generated** and ship as part of the `ascendra-ui/` folder — the consumer-facing artifact.
 
 - Generated from: `lib/registry.ts` + `lib/*-config.ts` files
-- Never edit by hand — overwritten on every release
+- Never edit by hand — overwritten by `npm run gen:ui-docs`
 - Keep `lib/registry.ts` accurate — it is the source of truth for the docs
-- **Run `npm run docs:generate`** after any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file — do not wait for release
+- **Run `npm run gen:ui-docs`** after any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file
+
+`ascendra-ui/docs/` also carries `hard-instructions.md` and `field-hint-guide.md` — real-world usage corrections observed in a consumer codebase, supplementing (never replacing) the generated reference.
 
 ### Registry description quality
 
@@ -524,11 +441,8 @@ The description should cover: what the component is, its primary use case, and a
 - **Do** use `'propName (SubComponentName)'` for sub-component props
 - **Don't** use relative paths in `importPath` — always `'@/ascendra-ui'`
 
-### Release
-- **Do** work on a `feat/`, `fix/`, `chore/`, or `docs/` branch and squash-merge to main before releasing
-- **Do** add the CHANGELOG entry before running the script (script validates it exists)
-- **Do** commit all code before running release (script requires clean tree)
-- **Do** push with `--tags` — the version tag must reach the remote
-- **Don't** run `/release` from a feature branch — the skill blocks it
-- **Don't** edit `docs/` files by hand — they are always overwritten
-- **Don't** manually bump `package.json` or `ascendra.json` — the release script owns those fields
+### Shipping changes
+- **Do** work on a `feat/`, `fix/`, `chore/`, or `docs/` branch and squash-merge to main
+- **Don't** edit `ascendra-ui/docs/` files by hand — they are always overwritten by `npm run gen:ui-docs`
+- **Don't** reintroduce version tracking (`ascendra.json`, changelogs, release scripts) without discussion — this was deliberately removed in favor of "update always takes current main"
+- **Don't** add a `setup` or `ascendra-ui:update` script to this repo's own `package.json` — this repo is the source of truth, not a copy waiting to become a project; either alias sitting here is one `npm run` away from destroying it. Invoke `node ascendra.js setup` explicitly instead.
