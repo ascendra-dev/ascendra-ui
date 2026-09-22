@@ -2,7 +2,7 @@
 
 > Auto-generated on 2026-09-22.
 > Run `npm run gen:ui-docs` after any config or showcase change.
-> For the component API reference (props, imports, types) see `ascendra-ui/docs/ui-reference.md`.
+> For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
 ---
 
@@ -17,7 +17,7 @@ It answers questions like:
 - _What real-world scenarios does the showcase demonstrate?_
 - _How should I instruct an AI model to build a new feature using this library?_
 
-For the technical API (props, import paths, TypeScript types) see `ascendra-ui/docs/ui-reference.md`.
+For the technical API (props, import paths, TypeScript types) see `docs/ui-reference.md`.
 
 ---
 
@@ -1847,7 +1847,7 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ## Showcase Gallery Entry Points
 
-The showcase has 111 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `ascendra-ui/docs/ui-reference.md` for individual component showcase links.
+The showcase has 111 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
 
 | Section | Route |
 |---|---|
@@ -1876,7 +1876,7 @@ Always follow these rules when building pages with Ascendra UI:
 - Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)
 - Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions
 - Use the code templates in **Structural Code Templates** as the starting point for each page type
-- Always check `ascendra-ui/docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code
+- Always check `docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code
 
 ### Design System Gap Flagging
 

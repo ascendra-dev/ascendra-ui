@@ -27,10 +27,7 @@ ascendra-ui/
 │   ├── hooks/                  # Shared hooks (useIsSmallScreen, …)
 │   ├── lib/                    # Utilities (cn, …)
 │   ├── providers/               # Context providers + state systems
-│   ├── LICENSE                  # MIT terms for the vendored code — travels with the folder
-│   └── docs/
-│       ├── ui-reference.md      # Auto-generated component API reference
-│       └── showcase-reference.md # Auto-generated design guide + AI reference
+│   └── LICENSE                  # MIT terms for the vendored code — travels with the folder
 │
 ├── app/
 │   ├── showcase/                # Documentation pages (this repo only — never ships)
@@ -40,6 +37,9 @@ ascendra-ui/
 │
 ├── components/, hooks/, lib/,     # Showcase-only infrastructure (registry, previews, nav) — never ships
 │   providers/, utils/            # (providers/, utils/ are just empty here — nothing showcase-only to hold)
+├── docs/                          # Auto-generated, showcase-only reference docs — never ships
+│   ├── ui-reference.md            # Component API reference
+│   └── showcase-reference.md      # Design guide + AI reference
 ├── scripts/                      # Doc generation
 │   ├── generate-ui-reference.ts
 │   └── generate-showcase-reference.ts
@@ -89,7 +89,7 @@ Open [http://localhost:3000/showcase](http://localhost:3000/showcase) to browse 
 | `npm run dev` | Start the development server |
 | `npm run build` | Production build |
 | `npm run lint` | Run ESLint |
-| `npm run gen:ui-docs` | Regenerate both reference docs in `ascendra-ui/docs/` |
+| `npm run gen:ui-docs` | Regenerate both reference docs in `docs/` |
 | `npm run analyze` | Bundle analyser |
 
 ---
@@ -109,7 +109,7 @@ npm run dev
 There's no `npm run setup` alias — deliberately. This repo's own `package.json` never carries a `setup` script, because this repo is the source of truth, not a copy waiting to become a project; a `setup` script sitting in its own `package.json` would be one `npm run setup` away from destroying it for anyone actually working here. `node ascendra.js setup` is the explicit, only way to invoke it.
 
 `ascendra.js setup`:
-- Removes `app/showcase/` (the 100+ documentation pages — internal to this repo, never shipped) and `scripts/` (doc-generation — nothing left in the project can run it once `lib/registry.ts` etc. are gone)
+- Removes `app/showcase/` (the 100+ documentation pages — internal to this repo, never shipped), `docs/` (generated reference docs — showcase-only, never shipped), and `scripts/` (doc-generation — nothing left in the project can run it once `lib/registry.ts` etc. are gone)
 - Points `app/page.tsx` at `/starter` — a short, real tour of the library built from actual components
 - Resets `components/`, `hooks/`, `lib/`, `providers/`, `utils/` to empty — all yours from here
 - Replaces `README.md` and `CLAUDE.md` with the project-facing versions
@@ -123,7 +123,7 @@ Open [http://localhost:3000/starter](http://localhost:3000/starter) after `npm r
 
 ## Updating a project's component library
 
-This is self-service, run from inside the project itself — not something pushed from this repo. There's no version to track — it always pulls whatever is currently on this repo's default branch, replacing the project's `ascendra-ui/` folder (docs included) wholesale. Nothing else is touched.
+This is self-service, run from inside the project itself — not something pushed from this repo. There's no version to track — it always pulls whatever is currently on this repo's default branch, replacing the project's `ascendra-ui/` folder wholesale. Nothing else is touched.
 
 From inside the project, any time — a week later, a month later:
 
@@ -139,7 +139,7 @@ Once confirmed, it clones the public repo to a temp directory over the network, 
 
 ## Generated documentation
 
-Both docs in `ascendra-ui/docs/` are auto-generated. Do not edit them by hand — regenerate instead:
+Both docs in `docs/` are auto-generated. Do not edit them by hand — regenerate instead:
 
 ```bash
 npm run gen:ui-docs
@@ -147,12 +147,10 @@ npm run gen:ui-docs
 
 | File | Source | Content |
 |---|---|---|
-| `ascendra-ui/docs/ui-reference.md` | `generate-ui-reference.ts` | Component API: props, variants, import paths, usage patterns |
-| `ascendra-ui/docs/showcase-reference.md` | `generate-showcase-reference.ts` | Design philosophy, layout guide, component selection tables, AI developer guide |
+| `docs/ui-reference.md` | `generate-ui-reference.ts` | Component API: props, variants, import paths, usage patterns |
+| `docs/showcase-reference.md` | `generate-showcase-reference.ts` | Design philosophy, layout guide, component selection tables, AI developer guide |
 
 Run this after any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file.
-
-`ascendra-ui/docs/` also carries two reference files on real-world usage corrections observed in a consumer codebase: `hard-instructions.md` and `field-hint-guide.md`.
 
 ---
 

@@ -1053,7 +1053,7 @@ _No custom props — accepts standard HTML attributes._
 
 ## Part 2 — Composite Patterns
 
-> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `ascendra-ui/docs/showcase-reference.md`.
+> **These are showcase-only reference patterns — they are not importable components.** Do not attempt to `import { ContactInquiryForm }` or any pattern name from `@/ascendra-ui`. These entries exist to show which primitives compose well together and at what scale. Build your own pages using those primitives directly, following the code templates in `docs/showcase-reference.md`.
 
 > Full-page patterns built from the primitives above. Each showcases a realistic domain scenario.
 > Use the **Components used** lists to understand which primitives to reach for.

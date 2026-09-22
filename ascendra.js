@@ -8,16 +8,17 @@
  *
  * setup has no npm script alias in THIS repo's package.json, deliberately — this repo is the
  * source of truth, not a copy waiting to become a project. A "setup" script sitting in its own
- * package.json would be one `npm run setup` away from deleting app/showcase/ and scripts/ and
- * wiping components/, hooks/, lib/ (which here hold real showcase infrastructure, not empty
- * placeholders) — for someone actually working in this repo, not someone who just cloned it to
- * start a new project. Invoke it explicitly: `node ascendra.js setup`.
+ * package.json would be one `npm run setup` away from deleting app/showcase/, scripts/, and
+ * docs/, and wiping components/, hooks/, lib/ (which here hold real showcase infrastructure, not
+ * empty placeholders) — for someone actually working in this repo, not someone who just cloned it
+ * to start a new project. Invoke it explicitly: `node ascendra.js setup`.
  *
  * setup runs once, in place, right after cloning or unzipping this repo into whatever folder is
- * your new project (e.g. ascendra-pay-web). It removes the showcase and the doc-generation
- * scripts/, points the app at the starter route, resets the showcase-only infra folders, swaps
- * in the consumer-facing README/CLAUDE.md, and drops the root LICENSE (the MIT terms for the
- * vendored code stay at ascendra-ui/LICENSE, since that folder is what's actually distributed).
+ * your new project (e.g. ascendra-pay-web). It removes the showcase, the generated docs/ (these
+ * are showcase-only reference docs, not part of what ships), and the doc-generation scripts/,
+ * points the app at the starter route, resets the showcase-only infra folders, swaps in the
+ * consumer-facing README/CLAUDE.md, and drops the root LICENSE (the MIT terms for the vendored
+ * code stay at ascendra-ui/LICENSE, since that folder is what's actually distributed).
  * ascendra.js is NOT deleted — update needs it to still be here. It also writes a fresh, trimmed
  * package.json scripts block that DOES include an "ascendra-ui:update" alias — that one is safe,
  * because by definition it only exists in a project that has already been set up, never in this
@@ -34,9 +35,9 @@
  * replaced, whether that path currently exists, a nudge to review the source repo's commit
  * history (there's no CHANGELOG to check instead), and a warning if the working tree has
  * uncommitted git changes. Only on "y"/"yes" does it clone the public source repo to a temp
- * directory, replace your project's ascendra-ui/ folder (docs included) with the one from that
- * clone, and delete the temp directory. There is no version to track — it always takes whatever
- * is currently on the source repo's default branch. It never touches package.json — install any
+ * directory, replace your project's ascendra-ui/ folder with the one from that clone, and delete
+ * the temp directory. There is no version to track — it always takes whatever is currently on
+ * the source repo's default branch. It never touches package.json — install any
  * new dependency yourself after reviewing the diff. Refuses to run non-interactively (no TTY),
  * since there'd be no way to confirm.
  */
@@ -111,6 +112,9 @@ function setup() {
 
   rm("scripts");
   console.log("  ✓ Removed scripts/ (doc-generation scripts — nothing left in this project can run them)");
+
+  rm("docs");
+  console.log("  ✓ Removed docs/ (showcase-only reference docs — never shipped)");
 
   fs.writeFileSync(
     path.join(ROOT, "app", "page.tsx"),

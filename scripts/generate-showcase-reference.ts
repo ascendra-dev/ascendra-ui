@@ -1,5 +1,5 @@
 /**
- * Generates ascendra-ui/docs/showcase-reference.md — the comprehensive design guide and AI training
+ * Generates docs/showcase-reference.md — the comprehensive design guide and AI training
  * document for the Ascendra UI showcase.
  *
  * Sources:
@@ -15,7 +15,7 @@
  * Run: npm run gen:ui-docs
  */
 
-import { writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import { dashboardsConfig } from "../lib/dashboards-config";
 import { dialogsConfig } from "../lib/dialogs-config";
@@ -92,7 +92,7 @@ const lines: string[] = [
   "",
   `> Auto-generated on ${today}.`,
   "> Run `npm run gen:ui-docs` after any config or showcase change.",
-  "> For the component API reference (props, imports, types) see `ascendra-ui/docs/ui-reference.md`.",
+  "> For the component API reference (props, imports, types) see `docs/ui-reference.md`.",
   "",
   "---",
   "",
@@ -107,7 +107,7 @@ const lines: string[] = [
   "- _What real-world scenarios does the showcase demonstrate?_",
   "- _How should I instruct an AI model to build a new feature using this library?_",
   "",
-  "For the technical API (props, import paths, TypeScript types) see `ascendra-ui/docs/ui-reference.md`.",
+  "For the technical API (props, import paths, TypeScript types) see `docs/ui-reference.md`.",
   "",
   "---",
   "",
@@ -1766,7 +1766,7 @@ const lines: string[] = [
   "",
   "## Showcase Gallery Entry Points",
   "",
-  `The showcase has ${showcasePageCount} pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern \`/showcase/{category}/{slug}\` — see \`ascendra-ui/docs/ui-reference.md\` for individual component showcase links.`,
+  `The showcase has ${showcasePageCount} pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern \`/showcase/{category}/{slug}\` — see \`docs/ui-reference.md\` for individual component showcase links.`,
   "",
   "| Section | Route |",
   "|---|---|",
@@ -1795,7 +1795,7 @@ const lines: string[] = [
   "- Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)",
   "- Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions",
   "- Use the code templates in **Structural Code Templates** as the starting point for each page type",
-  "- Always check `ascendra-ui/docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code",
+  "- Always check `docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code",
   "",
   "### Design System Gap Flagging",
   "",
@@ -1904,9 +1904,10 @@ const lines: string[] = [
   "",
 ];
 
-const outPath = join(process.cwd(), "ascendra-ui", "docs", "showcase-reference.md");
+const outPath = join(process.cwd(), "docs", "showcase-reference.md");
+mkdirSync(join(process.cwd(), "docs"), { recursive: true });
 writeFileSync(outPath, lines.join("\n"), "utf8");
 
 console.log(
-  `✓ Generated ascendra-ui/docs/showcase-reference.md (${showcasePageCount} showcase pages, ${formsConfig.length} forms, ${dashboardsConfig.length} dashboards, ${reportsConfig.length} reports)`
+  `✓ Generated docs/showcase-reference.md (${showcasePageCount} showcase pages, ${formsConfig.length} forms, ${dashboardsConfig.length} dashboards, ${reportsConfig.length} reports)`
 );

@@ -60,7 +60,7 @@ export default function StarterLayout({ children }: { children: ReactNode }) {
                 Project Structure
               </SideBarMenuItem>
               <SideBarMenuItem alternate="stand-alone" icon={LuBookOpen} path="/starter#docs">
-                Where The Docs Live
+                Check The Library First
               </SideBarMenuItem>
               <SideBarMenuItem alternate="stand-alone" icon={LuRefreshCw} path="/starter#update">
                 Staying Updated

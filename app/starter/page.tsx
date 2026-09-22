@@ -62,7 +62,7 @@ export default function StarterPage() {
                   ascendra-ui/ <SimpleBadge variant="secondary">managed</SimpleBadge>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  The component library and its docs. Replaced wholesale by <code>ascendra.js update</code> — never edit it directly.
+                  The component library. Replaced wholesale by <code>ascendra.js update</code> — never edit it directly.
                 </p>
               </div>
               <div className="space-y-1">
@@ -94,18 +94,16 @@ export default function StarterPage() {
         </section>
 
         <section id="docs" className="scroll-mt-20 space-y-4">
-          <h2 className="text-lg font-medium">Where the docs live</h2>
+          <h2 className="text-lg font-medium">Check the library first</h2>
           <p className="text-sm text-muted-foreground">
-            Before building any UI, check these two files — they&apos;re what your AI assistant reads too:
+            Before building any UI, check whether the library already has what you need — this is what your AI
+            assistant checks too:
           </p>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
-              <code className="rounded bg-muted px-1 font-mono">ascendra-ui/docs/ui-reference.md</code> — every component,
-              its props, and its import path.
-            </li>
-            <li>
-              <code className="rounded bg-muted px-1 font-mono">ascendra-ui/docs/showcase-reference.md</code> — page
-              patterns, layout guidance, and design tokens.
+              <code className="rounded bg-muted px-1 font-mono">ascendra-ui/components/</code> — browse by category, or
+              check <code className="rounded bg-muted px-1 font-mono">ascendra-ui/index.ts</code> for the full export
+              list. Props are plain TypeScript types on each component — read the source directly.
             </li>
             <li>
               <code className="rounded bg-muted px-1 font-mono">CLAUDE.md</code> — project conventions for Claude Code,
@@ -127,8 +125,8 @@ export default function StarterPage() {
             <code>npm run ascendra-ui:update</code>
           </pre>
           <p className="text-sm text-muted-foreground">
-            This replaces <code className="rounded bg-muted px-1 font-mono">ascendra-ui/</code> (docs included) and nothing
-            else. If the update adds a new dependency, install it yourself — check the library&apos;s{" "}
+            This replaces <code className="rounded bg-muted px-1 font-mono">ascendra-ui/</code> and nothing else. If the
+            update adds a new dependency, install it yourself — check the library&apos;s{" "}
             <code className="rounded bg-muted px-1 font-mono">package.json</code> against your own.
           </p>
         </section>

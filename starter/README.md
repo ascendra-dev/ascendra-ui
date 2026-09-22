@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000/starter](http://localhost:3000/starter) — a short, real tour of the library (built from actual `ascendra-ui` components, not a mockup) covering project structure, where the docs live, and how to update. Delete `app/starter/` whenever you're ready; it's a demo, not a dependency.
+Open [http://localhost:3000/starter](http://localhost:3000/starter) — a short, real tour of the library (built from actual `ascendra-ui` components, not a mockup) covering project structure and how to update. Delete `app/starter/` whenever you're ready; it's a demo, not a dependency.
 
 ---
 
@@ -23,9 +23,6 @@ ascendra-ui/                # The component library — managed, replaced wholes
   components/                # All UI components
   hooks/, lib/, providers/, utils/, shadcn/
   LICENSE                    # MIT terms for the vendored code
-  docs/
-    ui-reference.md         # Component API: props, import paths, usage
-    showcase-reference.md   # Page patterns, layout guide, design tokens
 app/
   layout.tsx                # Root shell — ThemeProvider, QueryProvider, Toaster
   globals.css                # Design tokens (Tailwind v4)
@@ -46,7 +43,7 @@ CLAUDE.md                    # Project conventions for Claude Code
 
 ## Updating the component library
 
-There's no version to track — an update just replaces the `ascendra-ui/` folder (docs included) with whatever is currently on the public repo's default branch. Nothing else in your project is touched.
+There's no version to track — an update just replaces the `ascendra-ui/` folder with whatever is currently on the public repo's default branch. Nothing else in your project is touched.
 
 Run this any time, right here in this project — a week later, a month later:
 
@@ -60,11 +57,9 @@ Once confirmed, it clones the public repo to a temp directory over the network, 
 
 ---
 
-## Docs — read before building UI
+## Before building UI
 
-1. **`ascendra-ui/docs/ui-reference.md`** — every importable component, its props, and its import path.
-2. **`ascendra-ui/docs/showcase-reference.md`** — page templates, layout patterns, DataTable system, form patterns, chart usage.
-3. **`CLAUDE.md`** — project conventions Claude Code reads automatically.
+Check whether `ascendra-ui/components/` already has what you need — browse by category, or check `ascendra-ui/index.ts` for the full export list. Props are plain TypeScript types on each component, so read the source directly rather than looking for separate docs. `CLAUDE.md` (which Claude Code reads automatically) has the project conventions.
 
 ---
 

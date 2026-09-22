@@ -12,14 +12,9 @@ There is no version to track. An update always takes whatever is current in the 
 
 ---
 
-## Reference Docs — Read These First
+## Check the Library First
 
-**Before writing any UI code**, check whether the library already has what you need:
-
-1. **`ascendra-ui/docs/ui-reference.md`** — Complete component API: every importable component, its props, import path, and showcase URL. Read this before building any UI element.
-2. **`ascendra-ui/docs/showcase-reference.md`** — Page templates, design patterns, DataTable system, form patterns, chart usage, and import conventions. Read this before building any page.
-
-Both files are replaced whenever `ascendra-ui/` is updated.
+**Before writing any UI code**, check whether `ascendra-ui/components/` already has what you need — browse by category, or check `ascendra-ui/index.ts` for the full export list. Props are plain TypeScript types on each component; read the source directly rather than looking for separate docs.
 
 **If a needed pattern is absent from the library**, implement it minimally with Tailwind and mark it:
 
@@ -82,9 +77,6 @@ lib/                        ← config files, constants, utilities
 providers/                  ← custom React context providers
 utils/                      ← pure stateless utility functions
 ascendra-ui/                ← managed — do not edit (replaced wholesale on update)
-  docs/
-    ui-reference.md         ← component API reference
-    showcase-reference.md   ← page patterns and templates
 ascendra.js                 ← run `npm run ascendra-ui:update` to pull the latest ascendra-ui/
 CLAUDE.md                   ← this file — yours to update with project context
 README.md                   ← your project README — yours to update
@@ -126,15 +118,15 @@ import { MyComponent } from "../../components/my-component"; // ✗
 
 **HTTP / data fetching:** Use the pre-configured `apiClient` from `@/ascendra-ui/lib/api/client.ts` for all API calls. It injects the next-auth Bearer token automatically. Pair it with `useQuery` / `useMutation` from `@tanstack/react-query`.
 
-**Forms:** All forms use `react-hook-form` + `zod`. See `ascendra-ui/docs/showcase-reference.md` → Form Templates for complete copy-paste patterns.
+**Forms:** All forms use `react-hook-form` + `zod`. See existing form components under `ascendra-ui/components/forms/` for the pattern.
 
 **DataTable:** Two providers — choose based on data source:
 - `DataTableWithQueryProvider` — data comes from the server via named queries; includes `QueryBar`, `QueryParamPanel`, React Query fetching, and saved-query persistence. Use this for any table that hits an API.
 - `DataTableProvider` — you supply data directly as a prop; handles sorting, filtering, pagination client-side only. Use for static or already-loaded data sets.
 
-See `ascendra-ui/docs/showcase-reference.md` → DataTable System for full wiring documentation.
+See `ascendra-ui/components/data-table/` for the underlying pieces.
 
-**Charts:** Wrap all charts in `<ChartContainer config={chartConfig}>` from `@/ascendra-ui/shadcn`. See `ascendra-ui/docs/showcase-reference.md` → Chart Patterns.
+**Charts:** Wrap all charts in `<ChartContainer config={chartConfig}>` from `@/ascendra-ui/shadcn`.
 
 ---
 
@@ -204,8 +196,7 @@ export function StatusBadge({
 ## Dos and Don'ts
 
 ### Do
-- Check `ascendra-ui/docs/ui-reference.md` before building any UI element
-- Check `ascendra-ui/docs/showcase-reference.md` before building any page
+- Check `ascendra-ui/components/` (or `ascendra-ui/index.ts`) for an existing component before building custom UI
 - Use `apiClient` from `@/ascendra-ui/lib/api/client.ts` for all HTTP calls
 - Use `useQuery` / `useMutation` from `@tanstack/react-query` for client-side data
 - Import all icons from `react-icons/lu`
@@ -213,7 +204,6 @@ export function StatusBadge({
 
 ### Don't
 - Edit any file inside `ascendra-ui/` — replaced wholesale on the next update
-- Edit `ascendra-ui/docs/ui-reference.md` or `ascendra-ui/docs/showcase-reference.md` — managed, part of the library folder
 - Edit `app/layout.tsx` or `app/globals.css` — managed files
 - Re-wrap pages in `QueryProvider`, `ThemeProvider`, or `TooltipProvider` — already in root layout
 - Use relative imports (`../../`) — always use path aliases (`@/`)

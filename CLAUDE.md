@@ -6,14 +6,14 @@
 
 | Layer | Root | Purpose | Ships to consumers? |
 |---|---|---|---|
-| **Library** | `ascendra-ui/` | Components, hooks, libs, providers, utils, docs | Yes — the whole folder, including `ascendra-ui/docs/` |
-| **Showcase** | Everything else | Demos, previews, galleries, the `/starter` dogfood route | No — never ships |
+| **Library** | `ascendra-ui/` | Components, hooks, libs, providers, utils | Yes — the whole folder |
+| **Showcase** | Everything else | Demos, previews, galleries, generated docs, the `/starter` dogfood route | No — never ships |
 
-The `ascendra-ui/` folder is what a scaffolded project gets. The showcase (`app/showcase/`, `components/previews/`, `lib/registry.ts`, galleries) is internal — it demonstrates and documents the library, and is deleted by `ascendra.js setup` when a new project is created.
+The `ascendra-ui/` folder is what a scaffolded project gets. The showcase (`app/showcase/`, `components/previews/`, `lib/registry.ts`, `docs/`, galleries) is internal — it demonstrates and documents the library, and is deleted by `ascendra.js setup` when a new project is created.
 
 **Decision rule:** If it could be useful in a consumer project → put it in `ascendra-ui/`. If it's demo-specific → put it in the showcase layer.
 
-**Why the showcase matters:** `ascendra-ui/docs/ui-reference.md` is auto-generated from `lib/registry.ts` and ships as part of `ascendra-ui/`. Consumer AI assistants read it to understand how to build UIs. Registry accuracy and preview quality directly affects how well consumers can use the design system.
+**Why the showcase matters:** `docs/ui-reference.md` is auto-generated from `lib/registry.ts` and is the design system reference used when building pages in this repo — including by an AI assistant working in it. It doesn't ship to consumer projects (see [Docs](#docs) below), but registry accuracy and preview quality still directly affect how well it documents the library for anyone working here.
 
 ---
 
@@ -73,7 +73,6 @@ The `ascendra-ui/` folder is what a scaffolded project gets. The showcase (`app/
 | `hooks/` | Shared React hooks |
 | `lib/` | Utilities (cn, etc.) |
 | `shadcn/` | shadcn primitives — do not edit |
-| `docs/` | Auto-generated reference docs (`ui-reference.md`, `showcase-reference.md`) — ships as part of `ascendra-ui/` |
 
 ### Component file pattern
 
@@ -144,7 +143,7 @@ Keep exports alphabetical within each category comment block.
 > **Reusable by a consumer project → `ascendra-ui/`** (it ships with the folder)  
 > **Showcase-only → root-level folders** (stays in this repo, never ships)
 
-Every file inside `ascendra-ui/` — components, hooks, providers, utils, and `ascendra-ui/docs/` — is part of what a scaffolded project gets. Root-level folders (`app/showcase/`, `components/`, `lib/`, `hooks/`, `scripts/`) are showcase infrastructure and never ship; `app/starter/` is the exception — it's dogfooded here and copied as-is into a new project.
+Every file inside `ascendra-ui/` — components, hooks, providers, utils — is part of what a scaffolded project gets. Root-level folders (`app/showcase/`, `components/`, `lib/`, `hooks/`, `scripts/`, `docs/`) are showcase infrastructure and never ship; `app/starter/` is the exception — it's dogfooded here and copied as-is into a new project.
 
 ### `ascendra-ui/` — shipped folders
 
@@ -157,7 +156,6 @@ Every file inside `ascendra-ui/` — components, hooks, providers, utils, and `a
 | `utils/` | Pure stateless utility functions | No UI, no React — `formatDate`, `formatAmount`, `sleep` |
 | `preferences/` | localStorage preference management | Persisting user state across sessions (column visibility, query state) |
 | `shadcn/` | shadcn primitives | **Never touch** — extend via `components/ui/` only |
-| `docs/` | Auto-generated `ui-reference.md` / `showcase-reference.md` | Never edit by hand — regenerate with `npm run gen:ui-docs` |
 
 ### Root-level — showcase only, never ships
 
@@ -169,6 +167,7 @@ Every file inside `ascendra-ui/` — components, hooks, providers, utils, and `a
 | `lib/` | Showcase config files — `registry.ts`, `nav-config.ts`, `*-config.ts` |
 | `hooks/` | Showcase-specific hooks (mock data, UI-only state — not reusable by consumers) |
 | `providers/`, `utils/` | Empty here (`.gitkeep` only) — reset to empty by `setup` too, same as `components/`, `hooks/`, `lib/`, just with nothing to clear |
+| `docs/` | Auto-generated `ui-reference.md` / `showcase-reference.md` — never edit by hand, regenerate with `npm run gen:ui-docs` — deleted by `ascendra.js setup` |
 | `scripts/` | Doc generation scripts |
 
 ---
@@ -205,7 +204,7 @@ Every file inside `ascendra-ui/` — components, hooks, providers, utils, and `a
 },
 ```
 
-`importNames` drives both the import chip in the UI and the generated `ascendra-ui/docs/ui-reference.md`. List every public export.
+`importNames` drives both the import chip in the UI and the generated `docs/ui-reference.md`. List every public export.
 
 ### 2. `lib/nav-config.ts`
 
@@ -363,7 +362,7 @@ Use **squash merge** — one clean commit per feature on main. Intermediate bran
 - Never commit directly to main for feature work (exception: trivial single-line typo fixes in doc files)
 - Always delete the branch after merging
 - There is no release step — merging to main is the whole workflow. A project picks up the change the next time someone runs `npm run ascendra-ui:update` inside it.
-- **Before pushing any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file, run `npm run gen:ui-docs` and commit the regenerated `ascendra-ui/docs/*.md` in the same branch.** These files ship as-is — a stale doc reaching a consumer via `ascendra-ui:update` is a silent correctness bug, not a cosmetic one.
+- **Before pushing any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file, run `npm run gen:ui-docs` and commit the regenerated `docs/*.md` in the same branch.** `docs/` doesn't ship to consumers, but it's the reference this repo (and any AI assistant working in it) relies on to build pages correctly — a stale doc here is still a correctness bug, not a cosmetic one.
 - Squash commit message should use conventional commit format: `feat:`, `fix:`, `chore:`, `docs:`
 
 ---
@@ -378,7 +377,7 @@ Use **squash merge** — one clean commit per feature on main. Intermediate bran
 
   **Deliberately no `npm run setup` alias in this repo's own `package.json`.** This repo is the source of truth, not a copy waiting to become a project — a `setup` script sitting in its own `package.json` would be one `npm run setup` away from destroying it (deleting `app/showcase/`/`scripts/`, wiping `components/`/`hooks/`/`lib/`, which here hold real showcase infrastructure) for anyone actually working here. Never add that alias back to this repo's `package.json`.
 
-- **`npm run ascendra-ui:update`** (`node ascendra.js update`) — run from inside an already-set-up project, any time, no arguments. Unlike `setup`, it has no re-run guard, so it prompts for confirmation every time: prints the exact path being replaced, whether it currently exists, a nudge to review the source repo's commit history (there's no CHANGELOG to point at instead), and a warning if the working tree has uncommitted git changes — then requires typing `y`/`yes`. Refuses to run at all without a TTY, since there'd be no way to confirm. Only after confirming does it clone `SOURCE_REPO` (the public URL, hardcoded in `ascendra.js`) to a temp directory over the network, replace the project's own `ascendra-ui/` folder (docs included) with the one from that clone, and delete the temp directory. Never touches `package.json` — dependency syncing after an update is manual. This alias only exists in an already-set-up project — `setup()` writes it there itself; it is never present in this repo's own `package.json` either, for the same reason as `setup` above.
+- **`npm run ascendra-ui:update`** (`node ascendra.js update`) — run from inside an already-set-up project, any time, no arguments. Unlike `setup`, it has no re-run guard, so it prompts for confirmation every time: prints the exact path being replaced, whether it currently exists, a nudge to review the source repo's commit history (there's no CHANGELOG to point at instead), and a warning if the working tree has uncommitted git changes — then requires typing `y`/`yes`. Refuses to run at all without a TTY, since there'd be no way to confirm. Only after confirming does it clone `SOURCE_REPO` (the public URL, hardcoded in `ascendra.js`) to a temp directory over the network, replace the project's own `ascendra-ui/` folder with the one from that clone, and delete the temp directory. Never touches `package.json` — dependency syncing after an update is manual. This alias only exists in an already-set-up project — `setup()` writes it there itself; it is never present in this repo's own `package.json` either, for the same reason as `setup` above.
 
 This is a pull model, not a push model: a consumer project updates itself by fetching from this public repo — nobody runs `update` from inside this repo pointed at someone else's path.
 
@@ -388,14 +387,12 @@ When changing what gets shipped or managed, update `ascendra.js` itself (includi
 
 ## Docs
 
-`ascendra-ui/docs/ui-reference.md` and `ascendra-ui/docs/showcase-reference.md` are **auto-generated** and ship as part of the `ascendra-ui/` folder — the consumer-facing artifact.
+`docs/ui-reference.md` and `docs/showcase-reference.md` are **auto-generated**, root-level, and showcase-only — they never ship to a consumer project (deleted by `ascendra.js setup`, not touched by `ascendra-ui:update`). They're the design-system reference used when building pages in this repo, including by an AI assistant working in it.
 
 - Generated from: `lib/registry.ts` + `lib/*-config.ts` files
 - Never edit by hand — overwritten by `npm run gen:ui-docs`
 - Keep `lib/registry.ts` accurate — it is the source of truth for the docs
 - **Run `npm run gen:ui-docs`** after any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file
-
-`ascendra-ui/docs/` also carries `hard-instructions.md` and `field-hint-guide.md` — real-world usage corrections observed in a consumer codebase, supplementing (never replacing) the generated reference.
 
 ### Registry description quality
 
@@ -443,6 +440,6 @@ The description should cover: what the component is, its primary use case, and a
 
 ### Shipping changes
 - **Do** work on a `feat/`, `fix/`, `chore/`, or `docs/` branch and squash-merge to main
-- **Don't** edit `ascendra-ui/docs/` files by hand — they are always overwritten by `npm run gen:ui-docs`
+- **Don't** edit `docs/` files by hand — they are always overwritten by `npm run gen:ui-docs`
 - **Don't** reintroduce version tracking (`ascendra.json`, changelogs, release scripts) without discussion — this was deliberately removed in favor of "update always takes current main"
 - **Don't** add a `setup` or `ascendra-ui:update` script to this repo's own `package.json` — this repo is the source of truth, not a copy waiting to become a project; either alias sitting here is one `npm run` away from destroying it. Invoke `node ascendra.js setup` explicitly instead.
