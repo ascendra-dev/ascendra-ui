@@ -28,17 +28,24 @@
  * later re-run is still refused instead of repeating the wipe on top of whatever was added since.
  *
  * update is run from inside your project, any time, with no arguments — a week later, a month
- * later, whenever. It clones the public source repo to a temp directory, replaces your project's
- * ascendra-ui/ folder (docs included) with the one from that clone, and deletes the temp
- * directory. There is no version to track — it always takes whatever is currently on the source
- * repo's default branch. It never touches package.json — install any new dependency yourself
- * after reviewing the diff.
+ * later, whenever. Unlike setup, it prompts for confirmation every time: it's a genuinely
+ * destructive, unguarded operation (no re-run check like setup has), so an accidental invocation
+ * shouldn't be able to silently wipe ascendra-ui/. Before prompting it prints the exact path being
+ * replaced, whether that path currently exists, a nudge to review the source repo's commit
+ * history (there's no CHANGELOG to check instead), and a warning if the working tree has
+ * uncommitted git changes. Only on "y"/"yes" does it clone the public source repo to a temp
+ * directory, replace your project's ascendra-ui/ folder (docs included) with the one from that
+ * clone, and delete the temp directory. There is no version to track — it always takes whatever
+ * is currently on the source repo's default branch. It never touches package.json — install any
+ * new dependency yourself after reviewing the diff. Refuses to run non-interactively (no TTY),
+ * since there'd be no way to confirm.
  */
 
 const { execSync } = require("child_process");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
+const readline = require("readline");
 
 const ROOT = path.resolve(__dirname);
 const SOURCE_REPO = "https://github.com/ascendra-dev/ascendra-ui.git";
@@ -51,6 +58,16 @@ function mkEmptyDir(relPath) {
   const full = path.join(ROOT, relPath);
   fs.mkdirSync(full, { recursive: true });
   fs.writeFileSync(path.join(full, ".gitkeep"), "");
+}
+
+function ask(question) {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise((resolve) => {
+    rl.question(question, (answer) => {
+      rl.close();
+      resolve(answer.trim().toLowerCase());
+    });
+  });
 }
 
 // Two independent signals, checked with OR: if EITHER looks like setup already ran, refuse.
@@ -129,8 +146,44 @@ function setup() {
   console.log("  Run `npm install && npm run dev`, then open http://localhost:3000/starter\n");
 }
 
-function update() {
-  console.log(`Fetching the latest ascendra-ui/ from ${SOURCE_REPO} ...`);
+async function update() {
+  const targetLib = path.join(ROOT, "ascendra-ui");
+  const targetExists = fs.existsSync(targetLib);
+  const commitsUrl = SOURCE_REPO.replace(/\.git$/, "") + "/commits";
+
+  console.log(`This will ${targetExists ? "DELETE AND REPLACE" : "CREATE"} ascendra-ui/ at:`);
+  console.log(`  ${targetLib}\n`);
+  if (targetExists) {
+    console.log("Everything currently inside that folder is deleted first. This cannot be undone");
+    console.log("unless it's tracked in git — commit first if you want an easy way back.\n");
+  }
+  console.log(`Pulling the current default branch from: ${SOURCE_REPO}`);
+  console.log("There's no version pinning, so this may include breaking changes. There's no");
+  console.log("CHANGELOG either — review recent commits on the source repo first:");
+  console.log(`  ${commitsUrl}\n`);
+
+  try {
+    const dirty = execSync("git status --porcelain", { cwd: ROOT, stdio: "pipe" }).toString().trim();
+    if (dirty) {
+      console.log("⚠ This directory has uncommitted git changes. Consider committing them first so");
+      console.log("  this update is easy to diff or revert.\n");
+    }
+  } catch {
+    // Not a git repo, or git unavailable — nothing to check.
+  }
+
+  if (!process.stdin.isTTY) {
+    console.error("Non-interactive input — refusing to run update without a confirmation prompt. Aborting.");
+    process.exit(1);
+  }
+
+  const answer = await ask("Continue? [y/N]: ");
+  if (answer !== "y" && answer !== "yes") {
+    console.log("Aborted — nothing was changed.");
+    process.exit(0);
+  }
+
+  console.log(`\nFetching the latest ascendra-ui/ from ${SOURCE_REPO} ...`);
 
   const tmpDir = path.join(os.tmpdir(), `ascendra-ui-update-${Date.now()}`);
   try {
@@ -142,8 +195,8 @@ function update() {
       process.exit(1);
     }
 
-    fs.rmSync(path.join(ROOT, "ascendra-ui"), { recursive: true, force: true });
-    fs.cpSync(srcLib, path.join(ROOT, "ascendra-ui"), { recursive: true });
+    fs.rmSync(targetLib, { recursive: true, force: true });
+    fs.cpSync(srcLib, targetLib, { recursive: true });
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
@@ -157,7 +210,10 @@ const [, , command] = process.argv;
 if (command === "setup") {
   setup();
 } else if (command === "update") {
-  update();
+  update().catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+  });
 } else {
   console.log("Usage:");
   console.log("  node ascendra.js setup     (sets up this cloned/unzipped repo as your project)");

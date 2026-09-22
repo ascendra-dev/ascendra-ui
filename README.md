@@ -131,7 +131,9 @@ From inside the project, any time — a week later, a month later:
 npm run ascendra-ui:update   # or: node ascendra.js update
 ```
 
-This clones the public repo to a temp directory over the network, copies out `ascendra-ui/`, and discards the rest — no separate local clone of this source repo is needed. If the update relies on a new dependency, install it yourself — `ascendra.js` never touches `package.json`; dependency syncing is manual by design.
+It prompts for confirmation before touching anything — shows the exact path being replaced, warns if there are uncommitted git changes, and points at the source repo's commit history (there's no CHANGELOG to check instead, since there's no versioning). Nothing happens until you answer `y`.
+
+Once confirmed, it clones the public repo to a temp directory over the network, copies out `ascendra-ui/`, and discards the rest — no separate local clone of this source repo is needed. If the update relies on a new dependency, install it yourself — `ascendra.js` never touches `package.json`; dependency syncing is manual by design.
 
 ---
 
