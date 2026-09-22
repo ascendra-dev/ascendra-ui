@@ -10,8 +10,8 @@ import {
   SideBarMenuItem,
   SideBarMenuSet,
   SideBarMenuSetTitle,
+  SideBarSearch,
 } from "@/ascendra-ui";
-import { SidebarSearch } from "@/components/sidebar-search";
 import { registry } from "@/lib/registry";
 import { LuUsers, LuFileText, LuLayoutDashboard } from "react-icons/lu";
 
@@ -145,16 +145,14 @@ export function SidebarMenuDocContent() {
           <p className="text-xs text-muted-foreground">
             Wrap your sidebar menu in{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">
-              SidebarSearch
+              SideBarSearch
             </code>{" "}
             to add a search input that filters items directly from the children
             tree — no separate data config required.
           </p>
           <ComponentPreview
             align="start"
-            code={`import { SidebarSearch } from "@/components/sidebar-search";
-
-<SidebarSearch>
+            code={`<SideBarSearch>
   <SideBarMenuSet>
     <SideBarMenuSetTitle>Management</SideBarMenuSetTitle>
     <SideBarMenu basePath="/merchant/parents">
@@ -171,10 +169,10 @@ export function SidebarMenuDocContent() {
       </SideBarMenuContent>
     </SideBarMenu>
   </SideBarMenuSet>
-</SidebarSearch>`}
+</SideBarSearch>`}
           >
             <div className="w-64 rounded-lg border bg-background overflow-hidden">
-              <SidebarSearch>
+              <SideBarSearch>
                 <div className="pb-2 pt-4">
                   <SideBarMenuSet>
                     <SideBarMenuSetTitle>Management</SideBarMenuSetTitle>
@@ -203,7 +201,7 @@ export function SidebarMenuDocContent() {
                     </SideBarMenu>
                   </SideBarMenuSet>
                 </div>
-              </SidebarSearch>
+              </SideBarSearch>
             </div>
           </ComponentPreview>
         </div>

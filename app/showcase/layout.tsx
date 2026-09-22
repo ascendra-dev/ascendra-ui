@@ -24,11 +24,11 @@ import {
   SideBarMenuSet,
   SideBarMenuSetTitle,
   SideBarOverlay,
+  SideBarSearch,
   SideBarToggle,
   SimpleBadge,
   ThemeToggle,
 } from "@/ascendra-ui";
-import { SidebarSearch } from "@/components/sidebar-search";
 import {
   LuBookOpen,
   LuCalendar,
@@ -87,7 +87,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <MainContainer>
         <SideBarToggle />
         <SideBar>
-          <SidebarSearch>
+          <SideBarSearch>
             <SideBarMain>
               {/* Getting Started */}
               <SideBarMenuSet>
@@ -559,7 +559,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </SideBarMenu>
               </SideBarMenuSet>
             </SideBarMain>
-          </SidebarSearch>
+          </SideBarSearch>
           {/* <SideBarFooter /> */}
         </SideBar>
         <ContentArea>{children}</ContentArea>

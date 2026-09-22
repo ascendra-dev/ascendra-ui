@@ -444,10 +444,10 @@ export const registry: Record<string, ComponentMeta> = {
   'sidebar-menu': {
     slug: 'sidebar-menu',
     name: 'Sidebar Menu',
-    description: 'Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.',
+    description: 'Expandable sidebar navigation with grouped menu sets, icon headers, active link detection, and an optional SideBarSearch wrapper that filters menu items by name as you type.',
     importPath: '@/ascendra-ui',
     importNames: [
-      'SideBar', 'useSideBar', 'SideBarFooter', 'SideBarHeader', 'SideBarMain', 'SideBarOverlay', 'SideBarToggle',
+      'SideBar', 'useSideBar', 'SideBarFooter', 'SideBarHeader', 'SideBarMain', 'SideBarOverlay', 'SideBarSearch', 'SideBarToggle',
       'SideBarMenu', 'SideBarMenuHeader', 'SideBarMenuContent', 'SideBarMenuItem', 'SideBarMenuItemGroup', 'SideBarMenuSet', 'SideBarMenuSetTitle',
     ],
     props: [
@@ -455,6 +455,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'icon', type: 'IconType', description: 'Icon for the menu header (on SideBarMenuHeader).' },
       { name: 'path', type: 'string', description: 'Link path for the menu item (on SideBarMenuItem).' },
       { name: 'alternate', type: "'default' | 'stand-alone'", default: "'default'", description: 'Layout variant for the menu item.' },
+      { name: 'children (SideBarSearch)', type: 'ReactNode', description: 'The menu tree to search — SideBarSearch walks it to extract searchable SideBarMenuItem entries; renders a filtered flat result list in place of the tree while a query is active.' },
     ],
   },
 

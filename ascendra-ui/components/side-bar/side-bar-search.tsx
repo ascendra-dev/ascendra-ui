@@ -80,7 +80,7 @@ function extractNavItems(
   return items;
 }
 
-export function SidebarSearch({ children }: { children: React.ReactNode }) {
+export function SideBarSearch({ children }: { children: React.ReactNode }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
@@ -104,7 +104,7 @@ export function SidebarSearch({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <div className="px-3 pt-3 pb-1">
+      <div data-slot="side-bar-search-input" className="px-3 pt-3 pb-1">
         <InputGroup>
           <InputGroupAddon align="inline-start">
             <InputGroupText>
@@ -135,9 +135,12 @@ export function SidebarSearch({ children }: { children: React.ReactNode }) {
       </div>
 
       {isSearching ? (
-        <div className="mt-1 px-1.5">
+        <div data-slot="side-bar-search-results" className="mt-1 px-1.5">
           {results.length === 0 ? (
-            <p className="px-3 py-6 text-center text-xs text-muted-foreground">
+            <p
+              data-slot="side-bar-search-empty"
+              className="px-3 py-6 text-center text-xs text-muted-foreground"
+            >
               No results for &ldquo;{query}&rdquo;
             </p>
           ) : (
@@ -147,6 +150,7 @@ export function SidebarSearch({ children }: { children: React.ReactNode }) {
                 return (
                   <Link
                     key={result.href}
+                    data-slot="side-bar-search-result"
                     href={result.href}
                     onClick={handleResultClick}
                     className={cn(

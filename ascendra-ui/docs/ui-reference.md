@@ -942,9 +942,9 @@ Tabbed navigation with dirty-state dot indicator and disabled tab support.
 
 #### Sidebar Menu
 
-Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.
+Expandable sidebar navigation with grouped menu sets, icon headers, active link detection, and an optional SideBarSearch wrapper that filters menu items by name as you type.
 
-- **Import:** `import { SideBar, useSideBar, SideBarFooter, SideBarHeader, SideBarMain, SideBarOverlay, SideBarToggle, SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui"`
+- **Import:** `import { SideBar, useSideBar, SideBarFooter, SideBarHeader, SideBarMain, SideBarOverlay, SideBarSearch, SideBarToggle, SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/sidebar-menu](/showcase/sidebar-menu)
 
 **Props**
@@ -955,6 +955,7 @@ Expandable sidebar navigation with grouped menu sets, icon headers, and active l
 | `icon` | `IconType` | — | Icon for the menu header (on SideBarMenuHeader). |
 | `path` | `string` | — | Link path for the menu item (on SideBarMenuItem). |
 | `alternate` | `'default' \| 'stand-alone'` | `'default'` | Layout variant for the menu item. |
+| `children (SideBarSearch)` | `ReactNode` | — | The menu tree to search — SideBarSearch walks it to extract searchable SideBarMenuItem entries; renders a filtered flat result list in place of the tree while a query is active. |
 
 ---
 
