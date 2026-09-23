@@ -2,7 +2,7 @@ export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-GB', {
+  return new Date(iso).toLocaleDateString('en-US', {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
