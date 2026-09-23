@@ -154,6 +154,21 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'kpi-tile': {
+    slug: 'kpi-tile',
+    name: 'KPI Tile',
+    description: 'Composable single-metric card for dashboard/report KPI rows — a label, a value, and an optional trend indicator or caption. Not a full Card replacement: wrap in Card/CardPanel for the bordered look, or use bare (no wrapper) for a hero-style oversized metric.',
+    importPath: '@/ascendra-ui',
+    importNames: ['KpiTile', 'KpiLabel', 'KpiValue', 'KpiTrend', 'KpiCaption'],
+    props: [
+      { name: 'size (KpiValue)', type: "'xl' | '2xl' | '3xl' | '4xl'", default: "'2xl'", description: 'Value text size.' },
+      { name: 'variant (KpiValue)', type: "'default' | 'warning'", default: "'default'", description: 'Set to warning to color the value amber when a metric breaches a threshold.' },
+      { name: 'direction (KpiTrend)', type: "'up' | 'down'", description: 'Drives both the trend icon and its color (green/emerald for up, red/rose for down).' },
+      { name: 'variant (KpiTrend)', type: "'badge' | 'text'", default: "'badge'", description: 'badge renders a SimpleBadge pill (dashboard style); text renders an inline colored label with no pill background (report-hero style).' },
+      { name: 'className (KpiTile)', type: 'string', description: 'Additional CSS classes on the padded flex-col shell — apply mt-auto to a child to pin it (and everything after it) to the bottom.' },
+    ],
+  },
+
   'simple-alert': {
     slug: 'simple-alert',
     name: 'Simple Alert',

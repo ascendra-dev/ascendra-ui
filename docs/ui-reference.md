@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-09-22.
+> Auto-generated on 2026-09-23.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 57  
+**Primitive components:** 58  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -21,7 +21,7 @@
 |---|---|
 | Reports | Report Header, Report Document, Report Content |
 | Charts | Chart Legend, Chart Target Legend |
-| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
+| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
@@ -103,6 +103,25 @@ Tiny status indicator dot with a halo shadow ring, available in semantic colors.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `variant` | `'orange' \| 'emerald' \| 'sky' \| 'violet' \| 'rose' \| 'amber' \| 'red' \| 'primary' \| 'gray' \| 'warning' \| 'positive' \| 'info'` | `'gray'` | Color variant. |
+
+---
+
+#### KPI Tile
+
+Composable single-metric card for dashboard/report KPI rows — a label, a value, and an optional trend indicator or caption. Not a full Card replacement: wrap in Card/CardPanel for the bordered look, or use bare (no wrapper) for a hero-style oversized metric.
+
+- **Import:** `import { KpiTile, KpiLabel, KpiValue, KpiTrend, KpiCaption } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/kpi-tile](/showcase/feedback/kpi-tile)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size (KpiValue)` | `'xl' \| '2xl' \| '3xl' \| '4xl'` | `'2xl'` | Value text size. |
+| `variant (KpiValue)` | `'default' \| 'warning'` | `'default'` | Set to warning to color the value amber when a metric breaches a threshold. |
+| `direction (KpiTrend)` | `'up' \| 'down'` | — | Drives both the trend icon and its color (green/emerald for up, red/rose for down). |
+| `variant (KpiTrend)` | `'badge' \| 'text'` | `'badge'` | badge renders a SimpleBadge pill (dashboard style); text renders an inline colored label with no pill background (report-hero style). |
+| `className (KpiTile)` | `string` | — | Additional CSS classes on the padded flex-col shell — apply mt-auto to a child to pin it (and everything after it) to the bottom. |
 
 ---
 

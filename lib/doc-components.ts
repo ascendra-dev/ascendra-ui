@@ -9,6 +9,7 @@ import { ColorTileDocContent } from "@/components/previews/color-tile-preview";
 import { SimpleBadgeDocContent } from "@/components/previews/simple-badge-preview";
 import { BubbleBadgeDocContent } from "@/components/previews/bubble-badge-preview";
 import { StatusDotDocContent } from "@/components/previews/status-dot-preview";
+import { KpiTileDocContent } from "@/components/previews/kpi-tile-preview";
 import { SimpleAlertDocContent } from "@/components/previews/simple-alert-preview";
 import { ProBadgeDocContent } from "@/components/previews/pro-badge-preview";
 import { InputDocContent } from "@/components/previews/input-preview";
@@ -70,6 +71,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "simple-badge": SimpleBadgeDocContent,
   "bubble-badge": BubbleBadgeDocContent,
   "status-dot": StatusDotDocContent,
+  "kpi-tile": KpiTileDocContent,
   "simple-alert": SimpleAlertDocContent,
   "pro-badge": ProBadgeDocContent,
   input: InputDocContent,

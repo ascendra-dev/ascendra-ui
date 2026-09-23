@@ -83,6 +83,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Simple Badge', slug: 'feedback/simple-badge' },
       { name: 'Bubble Badge', slug: 'feedback/bubble-badge' },
       { name: 'Status Dot', slug: 'feedback/status-dot' },
+      { name: 'KPI Tile', slug: 'feedback/kpi-tile' },
       { name: 'Simple Alert', slug: 'feedback/simple-alert' },
       { name: 'Toast', slug: 'feedback/toasts' },
       { name: 'Pro Badge', slug: 'feedback/pro-badge' },

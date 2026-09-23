@@ -278,6 +278,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/feedback/status-dot">
                       Status Dot
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/feedback/kpi-tile">
+                      KPI Tile
+                    </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/feedback/color-tile">
                       Color Tile
                     </SideBarMenuItem>
