@@ -37,6 +37,11 @@ import {
   ColorTileSubTitle,
   ChartLegend,
   ChartLegendGroup,
+  KpiCaption,
+  KpiLabel,
+  KpiTile,
+  KpiTrend,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -244,12 +249,20 @@ export default function EsgSustainabilityReportPage() {
           {kpis.map((k) => (
             <Card key={k.label}>
               <CardPanel>
-                <div className="flex h-full flex-col p-5">
-                  <p className="text-xs text-muted-foreground">{k.label}</p>
-                  <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{k.value}</p>
-                  <p className="mt-auto text-xs font-semibold text-emerald-600 dark:text-emerald-400 pt-2">{k.delta}</p>
-                  <p className="mt-0.5 text-[0.6875rem] text-muted-foreground/70">{k.toward}</p>
-                </div>
+                <KpiTile>
+                  <KpiLabel>{k.label}</KpiLabel>
+                  <KpiValue className="mt-1.5">{k.value}</KpiValue>
+                  <KpiTrend
+                    direction={k.positive ? "up" : "down"}
+                    variant="text"
+                    className="mt-auto pt-2"
+                  >
+                    {k.delta}
+                  </KpiTrend>
+                  <KpiCaption className="mt-0.5 text-[0.6875rem] text-muted-foreground/70">
+                    {k.toward}
+                  </KpiCaption>
+                </KpiTile>
               </CardPanel>
             </Card>
           ))}
@@ -455,11 +468,11 @@ export default function EsgSustainabilityReportPage() {
             ].map((s) => (
               <Card key={s.label}>
                 <CardPanel>
-                  <div className="p-5">
-                    <p className="text-xs text-muted-foreground">{s.label}</p>
-                    <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{s.value}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{s.sub}</p>
-                  </div>
+                  <KpiTile>
+                    <KpiLabel>{s.label}</KpiLabel>
+                    <KpiValue className="mt-1.5">{s.value}</KpiValue>
+                    <KpiCaption className="mt-0.5">{s.sub}</KpiCaption>
+                  </KpiTile>
                 </CardPanel>
               </Card>
             ))}
@@ -523,13 +536,20 @@ export default function EsgSustainabilityReportPage() {
             ].map((p) => (
               <Card key={p.label}>
                 <CardPanel>
-                  <div className="flex h-full flex-col p-4">
-                    <p className="text-[0.6875rem] text-muted-foreground mb-2">{p.label}</p>
-                    <p className="mt-auto text-xl font-bold tracking-tight text-foreground mb-2">{p.value}</p>
-                    <SimpleBadge className="self-start" variant={p.status === "Compliant" ? "green" : "amber"}>
+                  <KpiTile className="p-4">
+                    <KpiLabel className="text-[0.6875rem] mb-2">
+                      {p.label}
+                    </KpiLabel>
+                    <KpiValue size="xl" className="mt-auto mb-2">
+                      {p.value}
+                    </KpiValue>
+                    <SimpleBadge
+                      className="self-start"
+                      variant={p.status === "Compliant" ? "green" : "amber"}
+                    >
                       {p.status}
                     </SimpleBadge>
-                  </div>
+                  </KpiTile>
                 </CardPanel>
               </Card>
             ))}

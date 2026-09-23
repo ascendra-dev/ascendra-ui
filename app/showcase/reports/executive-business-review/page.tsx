@@ -34,6 +34,11 @@ import {
   ReportSectionHeader,
   ChartLegend,
   ChartLegendGroup,
+  KpiCaption,
+  KpiLabel,
+  KpiTile,
+  KpiTrend,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -42,7 +47,6 @@ import {
   type ChartConfig,
 } from "@/ascendra-ui/shadcn";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
 
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
@@ -176,25 +180,16 @@ export default function ExecutiveBusinessReviewPage() {
           </ReportSectionHeader>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
             {kpis.map((k) => (
-              <div key={k.label} className="flex flex-col gap-1.5">
-                <p className="text-xs text-muted-foreground">{k.label}</p>
-                <p className="text-4xl font-bold tracking-tight text-foreground">
-                  {k.value}
-                </p>
+              <KpiTile key={k.label} className="gap-1.5 p-0">
+                <KpiLabel>{k.label}</KpiLabel>
+                <KpiValue size="4xl">{k.value}</KpiValue>
                 <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span
-                    className={`flex items-center gap-0.5 font-semibold ${k.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
-                  >
-                    {k.up ? (
-                      <LuTrendingUp className="size-3" />
-                    ) : (
-                      <LuTrendingDown className="size-3" />
-                    )}
+                  <KpiTrend direction={k.up ? "up" : "down"} variant="text">
                     {k.delta}
-                  </span>
-                  <span className="text-muted-foreground">vs {k.py}</span>
+                  </KpiTrend>
+                  <KpiCaption>vs {k.py}</KpiCaption>
                 </div>
-              </div>
+              </KpiTile>
             ))}
           </div>
         </div>

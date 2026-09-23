@@ -33,6 +33,10 @@ import {
   ReportSectionHeader,
   ChartLegend,
   ChartLegendGroup,
+  KpiCaption,
+  KpiLabel,
+  KpiTile,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -214,11 +218,13 @@ export default function MarketingCampaignAnalysisPage() {
           {kpis.map((k) => (
             <Card key={k.label}>
               <CardPanel>
-                <div className="p-5">
-                  <p className="text-xs text-muted-foreground">{k.label}</p>
-                  <p className="mt-1.5 text-3xl font-bold tracking-tight text-foreground">{k.value}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{k.sub}</p>
-                </div>
+                <KpiTile>
+                  <KpiLabel>{k.label}</KpiLabel>
+                  <KpiValue size="3xl" className="mt-1.5">
+                    {k.value}
+                  </KpiValue>
+                  <KpiCaption className="mt-1">{k.sub}</KpiCaption>
+                </KpiTile>
               </CardPanel>
             </Card>
           ))}

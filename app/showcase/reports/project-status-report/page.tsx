@@ -40,6 +40,9 @@ import {
   ReportSectionHeader,
   ChartLegend,
   ChartLegendGroup,
+  KpiLabel,
+  KpiTile,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -313,12 +316,12 @@ export default function ProjectStatusReportPage() {
           {kpis.map((k) => (
             <Card key={k.label}>
               <CardPanel>
-                <div className="p-5">
-                  <p className="text-xs text-muted-foreground">{k.label}</p>
-                  <p className="mt-3 text-3xl font-bold tracking-tight text-foreground">
+                <KpiTile>
+                  <KpiLabel>{k.label}</KpiLabel>
+                  <KpiValue size="3xl" className="mt-3">
                     {k.value}
-                  </p>
-                </div>
+                  </KpiValue>
+                </KpiTile>
               </CardPanel>
             </Card>
           ))}

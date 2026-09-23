@@ -32,6 +32,9 @@ import {
   ReportNoteHeader,
   ReportNotes,
   ReportNoteText,
+  KpiLabel,
+  KpiTile,
+  KpiValue,
 } from "@/ascendra-ui";
 
 // ─── Patient data ──────────────────────────────────────────────────────────────
@@ -184,20 +187,20 @@ export default function PatientHealthSummaryPage() {
               {vitals.map((v) => (
                 <Card key={v.label}>
                   <CardPanel>
-                    <div className="flex h-full flex-col gap-2 p-4">
-                      <span className="text-[0.6875rem] text-muted-foreground">
+                    <KpiTile className="gap-2 p-4">
+                      <KpiLabel className="text-[0.6875rem]">
                         {v.label}
-                      </span>
-                      <span className="text-xl font-bold leading-tight tracking-tight text-foreground">
+                      </KpiLabel>
+                      <KpiValue size="xl" className="leading-tight">
                         {v.value}
-                      </span>
+                      </KpiValue>
                       <SimpleBadge
                         className="mt-auto self-start"
                         variant={v.status === "normal" ? "green" : "amber"}
                       >
                         {v.status === "normal" ? "Normal" : "Borderline"}
                       </SimpleBadge>
-                    </div>
+                    </KpiTile>
                   </CardPanel>
                 </Card>
               ))}

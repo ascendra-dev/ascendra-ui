@@ -33,6 +33,9 @@ import {
   ReportSectionHeader,
   ChartLegend,
   ChartLegendGroup,
+  KpiCaption,
+  KpiLabel,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -179,11 +182,15 @@ export default function SupplyChainOpsReportPage() {
               key={k.label}
               className={`rounded-lg border bg-card p-5 ${k.warn ? "border-amber-300/60 dark:border-amber-700/40" : ""}`}
             >
-              <p className="text-xs text-muted-foreground">{k.label}</p>
-              <p className={`mt-1.5 text-3xl font-bold tracking-tight ${k.warn ? "text-amber-600 dark:text-amber-400" : "text-foreground"}`}>
+              <KpiLabel>{k.label}</KpiLabel>
+              <KpiValue
+                size="3xl"
+                variant={k.warn ? "warning" : "default"}
+                className="mt-1.5"
+              >
                 {k.value}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">{k.sub}</p>
+              </KpiValue>
+              <KpiCaption className="mt-1">{k.sub}</KpiCaption>
             </div>
           ))}
         </div>

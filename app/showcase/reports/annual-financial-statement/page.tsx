@@ -30,6 +30,11 @@ import {
   ReportSectionHeader,
   ChartLegend,
   ChartLegendGroup,
+  KpiCaption,
+  KpiLabel,
+  KpiTile,
+  KpiTrend,
+  KpiValue,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -594,22 +599,16 @@ export default function AnnualFinancialStatementPage() {
             {highlights.map((h) => (
               <Card key={h.label}>
                 <CardPanel>
-                  <div className="p-5">
-                    <p className="text-xs text-muted-foreground">{h.label}</p>
-                    <p className="mt-3 text-2xl font-bold tracking-tight text-foreground">
-                      {h.fy24}
-                    </p>
+                  <KpiTile>
+                    <KpiLabel>{h.label}</KpiLabel>
+                    <KpiValue className="mt-3">{h.fy24}</KpiValue>
                     <div className="mt-2 flex items-center gap-2">
-                      <span
-                        className={`text-xs font-medium ${h.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
-                      >
+                      <KpiTrend direction={h.up ? "up" : "down"} variant="text">
                         {h.delta}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        vs {h.fy23}
-                      </span>
+                      </KpiTrend>
+                      <KpiCaption>vs {h.fy23}</KpiCaption>
                     </div>
-                  </div>
+                  </KpiTile>
                 </CardPanel>
               </Card>
             ))}
