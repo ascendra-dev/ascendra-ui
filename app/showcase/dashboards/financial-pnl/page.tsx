@@ -1,6 +1,6 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, KpiLabel, KpiTile, KpiTrend, KpiValue, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -10,10 +10,6 @@ import {
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 import { useState } from "react";
-import {
-  LuTrendingDown,
-  LuTrendingUp,
-} from "react-icons/lu";
 import {
   Area,
   AreaChart,
@@ -280,22 +276,15 @@ export default function FinancialPnlPage() {
           {kpis.map((kpi) => (
             <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="flex flex-1 flex-col p-5 ">
-                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                <KpiTile>
+                  <KpiLabel>{kpi.label}</KpiLabel>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
-                    <span className="text-2xl font-semibold tracking-tight">
-                      {kpi.value}
-                    </span>
-                    <SimpleBadge variant={kpi.up ? "green" : "red"}>
-                      {kpi.up ? (
-                        <LuTrendingUp className="size-3" />
-                      ) : (
-                        <LuTrendingDown className="size-3" />
-                      )}
+                    <KpiValue>{kpi.value}</KpiValue>
+                    <KpiTrend direction={kpi.up ? "up" : "down"}>
                       {kpi.delta}
-                    </SimpleBadge>
+                    </KpiTrend>
                   </div>
-                </div>
+                </KpiTile>
               </CardPanel>
             </Card>
           ))}
