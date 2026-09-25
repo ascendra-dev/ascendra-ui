@@ -91,6 +91,8 @@ export const navConfig: NavCategory[] = [
       { name: 'Progress & Stepper', slug: 'feedback/progress' },
       { name: 'Skeleton', slug: 'feedback/skeleton' },
       { name: 'Rating', slug: 'feedback/rating' },
+      { name: 'With State', slug: 'feedback/with-state' },
+      { name: 'With Skeleton', slug: 'feedback/with-skeleton' },
     ],
   },
   {

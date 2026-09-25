@@ -305,6 +305,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/feedback/rating">
                       Rating
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/feedback/with-state">
+                      With State
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/feedback/with-skeleton">
+                      With Skeleton
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
                 <SideBarMenu basePath="/showcase/inputs">

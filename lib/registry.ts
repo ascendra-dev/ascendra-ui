@@ -760,6 +760,47 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'with-state': {
+    slug: 'with-state',
+    name: 'With State',
+    description: 'Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithState', 'LoadingState', 'ErrorState', 'EmptyState', 'NormalState'],
+    props: [
+      { name: 'if', type: 'boolean', description: 'Gates whether this branch renders. Required on every state component.' },
+      { name: 'children (WithState)', type: 'React.ReactNode', description: 'The sibling state components to render together — WithState itself is a decorative wrapper with no logic.' },
+      { name: 'children (LoadingState)', type: 'React.ReactNode', description: 'Optional. When given, fully overrides the default loading UI — title/description/icon/className are then ignored.' },
+      { name: 'title (LoadingState)', type: 'string', default: "'Loading…'", description: 'Heading shown in the default loading UI.' },
+      { name: 'description (LoadingState)', type: 'string', default: "'Please wait while we load your data.'", description: 'Body text shown in the default loading UI.' },
+      { name: 'icon (LoadingState)', type: 'React.ReactNode', default: "<LuLoaderCircle className=\"animate-spin\" />", description: 'Icon shown in the default loading UI.' },
+      { name: 'children (ErrorState)', type: 'React.ReactNode', description: 'Optional. When given, fully overrides the default error UI.' },
+      { name: 'error (ErrorState)', type: 'Error | null', description: 'Source error. Its message becomes the default description when description is not explicitly set.' },
+      { name: 'title (ErrorState)', type: 'string', default: "'Failed to load data'", description: 'Heading shown in the default error UI.' },
+      { name: 'description (ErrorState)', type: 'string', default: "error?.message ?? 'Something went wrong.'", description: 'Body text shown in the default error UI.' },
+      { name: 'icon (ErrorState)', type: 'React.ReactNode', default: '<LuCircleAlert />', description: 'Icon shown in the default error UI.' },
+      { name: 'onRetry (ErrorState)', type: '() => void', description: 'When given, renders a Retry button beneath the message.' },
+      { name: 'children (EmptyState)', type: 'React.ReactNode', description: 'Optional. When given, fully overrides the default empty UI.' },
+      { name: 'title (EmptyState)', type: 'string', default: "'No results found'", description: 'Heading shown in the default empty UI.' },
+      { name: 'description (EmptyState)', type: 'string', default: "'There are no items to display right now.'", description: 'Body text shown in the default empty UI.' },
+      { name: 'icon (EmptyState)', type: 'React.ReactNode', default: '<LuTextSearch />', description: 'Icon shown in the default empty UI.' },
+      { name: 'className (LoadingState / ErrorState / EmptyState)', type: 'string', description: 'Additional classes on the outer Empty container. Only applies to the default UI — dropped along with the rest of the default when children override it.' },
+      { name: 'children (NormalState)', type: 'React.ReactNode', description: 'Required — there is no generic "success" UI, so real content must always be supplied.' },
+    ],
+  },
+
+  'with-skeleton': {
+    slug: 'with-skeleton',
+    name: 'With Skeleton',
+    description: 'Minimal pair for "real content vs. skeleton" — pair SkeletonState with NormalState (from With State) to swap in a loading skeleton without a ternary. Deliberately has no built-in skeleton UI: a skeleton\'s shape (KPI tile vs. bar chart vs. table row) is always specific to what it\'s replacing, so both branches\' content is supplied by the caller.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithSkeleton', 'SkeletonState'],
+    props: [
+      { name: 'if', type: 'boolean', description: 'Gates whether this branch renders.' },
+      { name: 'children (WithSkeleton)', type: 'React.ReactNode', description: 'The SkeletonState/NormalState pair to render together — WithSkeleton itself is a decorative wrapper with no logic.' },
+      { name: 'children (SkeletonState)', type: 'React.ReactNode', description: 'Required — the skeleton markup to show while loading. Pair with NormalState (see With State) for the real-content branch.' },
+    ],
+  },
+
   'command-palette': {
     slug: 'command-palette',
     name: 'Command Palette',

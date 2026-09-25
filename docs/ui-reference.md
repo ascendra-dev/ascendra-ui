@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-09-23.
+> Auto-generated on 2026-09-25.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 58  
+**Primitive components:** 60  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -21,7 +21,7 @@
 |---|---|
 | Reports | Report Header, Report Document, Report Content |
 | Charts | Chart Legend, Chart Target Legend |
-| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
+| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, With State, With Skeleton, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
@@ -252,6 +252,55 @@ Star rating display and input with half-star precision, multiple sizes, and sema
 | `showValue` | `boolean` | `false` | Show numeric value label next to the stars. |
 | `onChange` | `(value: number) => void` | — | When provided, enables click-to-rate interaction. |
 | `readOnly` | `boolean` | `false` | Disables interaction even when onChange is present. |
+
+---
+
+#### With State
+
+Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself.
+
+- **Import:** `import { WithState, LoadingState, ErrorState, EmptyState, NormalState } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/with-state](/showcase/feedback/with-state)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `if` | `boolean` | — | Gates whether this branch renders. Required on every state component. |
+| `children (WithState)` | `React.ReactNode` | — | The sibling state components to render together — WithState itself is a decorative wrapper with no logic. |
+| `children (LoadingState)` | `React.ReactNode` | — | Optional. When given, fully overrides the default loading UI — title/description/icon/className are then ignored. |
+| `title (LoadingState)` | `string` | `'Loading…'` | Heading shown in the default loading UI. |
+| `description (LoadingState)` | `string` | `'Please wait while we load your data.'` | Body text shown in the default loading UI. |
+| `icon (LoadingState)` | `React.ReactNode` | `<LuLoaderCircle className="animate-spin" />` | Icon shown in the default loading UI. |
+| `children (ErrorState)` | `React.ReactNode` | — | Optional. When given, fully overrides the default error UI. |
+| `error (ErrorState)` | `Error \| null` | — | Source error. Its message becomes the default description when description is not explicitly set. |
+| `title (ErrorState)` | `string` | `'Failed to load data'` | Heading shown in the default error UI. |
+| `description (ErrorState)` | `string` | `error?.message ?? 'Something went wrong.'` | Body text shown in the default error UI. |
+| `icon (ErrorState)` | `React.ReactNode` | `<LuCircleAlert />` | Icon shown in the default error UI. |
+| `onRetry (ErrorState)` | `() => void` | — | When given, renders a Retry button beneath the message. |
+| `children (EmptyState)` | `React.ReactNode` | — | Optional. When given, fully overrides the default empty UI. |
+| `title (EmptyState)` | `string` | `'No results found'` | Heading shown in the default empty UI. |
+| `description (EmptyState)` | `string` | `'There are no items to display right now.'` | Body text shown in the default empty UI. |
+| `icon (EmptyState)` | `React.ReactNode` | `<LuTextSearch />` | Icon shown in the default empty UI. |
+| `className (LoadingState / ErrorState / EmptyState)` | `string` | — | Additional classes on the outer Empty container. Only applies to the default UI — dropped along with the rest of the default when children override it. |
+| `children (NormalState)` | `React.ReactNode` | — | Required — there is no generic "success" UI, so real content must always be supplied. |
+
+---
+
+#### With Skeleton
+
+Minimal pair for "real content vs. skeleton" — pair SkeletonState with NormalState (from With State) to swap in a loading skeleton without a ternary. Deliberately has no built-in skeleton UI: a skeleton's shape (KPI tile vs. bar chart vs. table row) is always specific to what it's replacing, so both branches' content is supplied by the caller.
+
+- **Import:** `import { WithSkeleton, SkeletonState } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/with-skeleton](/showcase/feedback/with-skeleton)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `if` | `boolean` | — | Gates whether this branch renders. |
+| `children (WithSkeleton)` | `React.ReactNode` | — | The SkeletonState/NormalState pair to render together — WithSkeleton itself is a decorative wrapper with no logic. |
+| `children (SkeletonState)` | `React.ReactNode` | — | Required — the skeleton markup to show while loading. Pair with NormalState (see With State) for the real-content branch. |
 
 ---
 
