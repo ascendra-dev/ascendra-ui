@@ -15,6 +15,14 @@ export function WithState({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+export function WithLoading({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+
+export function WithError({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+
 export function NormalState({
   if: condition,
   children,

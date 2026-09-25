@@ -93,6 +93,8 @@ export const navConfig: NavCategory[] = [
       { name: 'Rating', slug: 'feedback/rating' },
       { name: 'With State', slug: 'feedback/with-state' },
       { name: 'With Skeleton', slug: 'feedback/with-skeleton' },
+      { name: 'With Loading', slug: 'feedback/with-loading' },
+      { name: 'With Error', slug: 'feedback/with-error' },
     ],
   },
   {

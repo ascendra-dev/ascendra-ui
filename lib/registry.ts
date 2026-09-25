@@ -801,6 +801,34 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'with-loading': {
+    slug: 'with-loading',
+    name: 'With Loading',
+    description: 'Narrower entry point into With State for a section where loading/normal are the only two states possible — no error, no empty. Pairs LoadingState with NormalState. Same components as With State, reused here so the wrapper\'s name itself tells a reader not to look for error/empty handling in this block.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithLoading', 'LoadingState', 'NormalState'],
+    props: [
+      { name: 'if', type: 'boolean', description: 'Gates whether this branch renders.' },
+      { name: 'children (WithLoading)', type: 'React.ReactNode', description: 'The LoadingState/NormalState pair to render together — WithLoading itself is a decorative wrapper with no logic, identical to WithState/WithSkeleton/WithError.' },
+      { name: 'children (LoadingState)', type: 'React.ReactNode', description: 'Optional — see With State for LoadingState\'s full prop reference (title/description/icon/className defaults).' },
+      { name: 'children (NormalState)', type: 'React.ReactNode', description: 'Required — there is no generic "success" UI, so real content must always be supplied.' },
+    ],
+  },
+
+  'with-error': {
+    slug: 'with-error',
+    name: 'With Error',
+    description: 'Narrower entry point into With State for a section where error/normal are the only two states possible — no loading, no empty (e.g. a value that\'s always already available except when a background action fails). Pairs ErrorState with NormalState. Same components as With State, reused here so the wrapper\'s name itself tells a reader not to look for loading/empty handling in this block.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithError', 'ErrorState', 'NormalState'],
+    props: [
+      { name: 'if', type: 'boolean', description: 'Gates whether this branch renders.' },
+      { name: 'children (WithError)', type: 'React.ReactNode', description: 'The ErrorState/NormalState pair to render together — WithError itself is a decorative wrapper with no logic, identical to WithState/WithSkeleton/WithLoading.' },
+      { name: 'children (ErrorState)', type: 'React.ReactNode', description: 'Optional — see With State for ErrorState\'s full prop reference (error/title/description/icon/onRetry/className defaults).' },
+      { name: 'children (NormalState)', type: 'React.ReactNode', description: 'Required — there is no generic "success" UI, so real content must always be supplied.' },
+    ],
+  },
+
   'command-palette': {
     slug: 'command-palette',
     name: 'Command Palette',

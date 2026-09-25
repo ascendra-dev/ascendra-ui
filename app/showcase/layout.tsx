@@ -311,6 +311,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/feedback/with-skeleton">
                       With Skeleton
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/feedback/with-loading">
+                      With Loading
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/feedback/with-error">
+                      With Error
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
                 <SideBarMenu basePath="/showcase/inputs">

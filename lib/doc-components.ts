@@ -53,6 +53,8 @@ import { ProgressDocContent } from "@/components/previews/progress-preview";
 import { SkeletonDocContent } from "@/components/previews/skeleton-preview";
 import { WithStateDocContent } from "@/components/previews/with-state-preview";
 import { WithSkeletonDocContent } from "@/components/previews/with-skeleton-preview";
+import { WithLoadingDocContent } from "@/components/previews/with-loading-preview";
+import { WithErrorDocContent } from "@/components/previews/with-error-preview";
 import { CommandPaletteDocContent } from "@/components/previews/command-palette-preview";
 import { FileUploadDocContent } from "@/components/previews/file-upload-preview";
 import { RichTextEditorDocContent } from "@/components/previews/rich-text-editor-preview";
@@ -117,6 +119,8 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   skeleton: SkeletonDocContent,
   "with-state": WithStateDocContent,
   "with-skeleton": WithSkeletonDocContent,
+  "with-loading": WithLoadingDocContent,
+  "with-error": WithErrorDocContent,
   "command-palette": CommandPaletteDocContent,
   "file-upload": FileUploadDocContent,
   "rich-text-editor": RichTextEditorDocContent,

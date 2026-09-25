@@ -7,7 +7,7 @@
 
 ## Overview
 
-**Primitive components:** 60  
+**Primitive components:** 62  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -21,7 +21,7 @@
 |---|---|
 | Reports | Report Header, Report Document, Report Content |
 | Charts | Chart Legend, Chart Target Legend |
-| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, With State, With Skeleton, Toast |
+| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, With State, With Skeleton, With Loading, With Error, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
@@ -301,6 +301,42 @@ Minimal pair for "real content vs. skeleton" — pair SkeletonState with NormalS
 | `if` | `boolean` | — | Gates whether this branch renders. |
 | `children (WithSkeleton)` | `React.ReactNode` | — | The SkeletonState/NormalState pair to render together — WithSkeleton itself is a decorative wrapper with no logic. |
 | `children (SkeletonState)` | `React.ReactNode` | — | Required — the skeleton markup to show while loading. Pair with NormalState (see With State) for the real-content branch. |
+
+---
+
+#### With Loading
+
+Narrower entry point into With State for a section where loading/normal are the only two states possible — no error, no empty. Pairs LoadingState with NormalState. Same components as With State, reused here so the wrapper's name itself tells a reader not to look for error/empty handling in this block.
+
+- **Import:** `import { WithLoading, LoadingState, NormalState } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/with-loading](/showcase/feedback/with-loading)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `if` | `boolean` | — | Gates whether this branch renders. |
+| `children (WithLoading)` | `React.ReactNode` | — | The LoadingState/NormalState pair to render together — WithLoading itself is a decorative wrapper with no logic, identical to WithState/WithSkeleton/WithError. |
+| `children (LoadingState)` | `React.ReactNode` | — | Optional — see With State for LoadingState's full prop reference (title/description/icon/className defaults). |
+| `children (NormalState)` | `React.ReactNode` | — | Required — there is no generic "success" UI, so real content must always be supplied. |
+
+---
+
+#### With Error
+
+Narrower entry point into With State for a section where error/normal are the only two states possible — no loading, no empty (e.g. a value that's always already available except when a background action fails). Pairs ErrorState with NormalState. Same components as With State, reused here so the wrapper's name itself tells a reader not to look for loading/empty handling in this block.
+
+- **Import:** `import { WithError, ErrorState, NormalState } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/with-error](/showcase/feedback/with-error)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `if` | `boolean` | — | Gates whether this branch renders. |
+| `children (WithError)` | `React.ReactNode` | — | The ErrorState/NormalState pair to render together — WithError itself is a decorative wrapper with no logic, identical to WithState/WithSkeleton/WithLoading. |
+| `children (ErrorState)` | `React.ReactNode` | — | Optional — see With State for ErrorState's full prop reference (error/title/description/icon/onRetry/className defaults). |
+| `children (NormalState)` | `React.ReactNode` | — | Required — there is no generic "success" UI, so real content must always be supplied. |
 
 ---
 
