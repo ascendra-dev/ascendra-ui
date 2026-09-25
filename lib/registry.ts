@@ -763,9 +763,9 @@ export const registry: Record<string, ComponentMeta> = {
   'with-state': {
     slug: 'with-state',
     name: 'With State',
-    description: 'Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself.',
+    description: 'Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself. LoadingMessage/ErrorMessage/EmptyMessage are the gate-free default content each *State delegates to — use them directly when you need that default content nested inside your own wrapper (e.g. a Card) under a separately-gated *State, rather than nesting a *State inside itself.',
     importPath: '@/ascendra-ui',
-    importNames: ['WithState', 'LoadingState', 'ErrorState', 'EmptyState', 'NormalState'],
+    importNames: ['WithState', 'LoadingState', 'ErrorState', 'EmptyState', 'NormalState', 'LoadingMessage', 'ErrorMessage', 'EmptyMessage'],
     props: [
       { name: 'if', type: 'boolean', description: 'Gates whether this branch renders. Required on every state component.' },
       { name: 'children (WithState)', type: 'React.ReactNode', description: 'The sibling state components to render together — WithState itself is a decorative wrapper with no logic.' },
@@ -785,6 +785,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'icon (EmptyState)', type: 'React.ReactNode', default: '<LuTextSearch />', description: 'Icon shown in the default empty UI.' },
       { name: 'className (LoadingState / ErrorState / EmptyState)', type: 'string', description: 'Additional classes on the outer Empty container. Only applies to the default UI — dropped along with the rest of the default when children override it.' },
       { name: 'children (NormalState)', type: 'React.ReactNode', description: 'Required — there is no generic "success" UI, so real content must always be supplied.' },
+      { name: 'LoadingMessage / ErrorMessage / EmptyMessage', type: 'component', description: 'No `if` and no `children` prop — always render. Take the same title/description/icon/className props as their *State counterpart (plus error/onRetry on ErrorMessage), and are exactly what each *State renders internally when given no children. Use one directly when you need the default content wrapped in something (e.g. Card/CardPanel) while a separate *State (or any other condition) controls whether it shows at all.' },
     ],
   },
 

@@ -9,6 +9,7 @@ import {
   Card,
   CardPanel,
   EmptyState,
+  ErrorMessage,
   ErrorState,
   LoadingState,
   NormalState,
@@ -173,6 +174,62 @@ export function WithStateDocContent() {
                 <ErrorState if={true} title="Access denied" onRetry={() => {}} />
               </CardPanel>
             </Card>
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Default content nested inside a separately-gated wrapper
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              ErrorMessage
+            </code>{" "}
+            (also{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              LoadingMessage
+            </code>
+            /
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              EmptyMessage
+            </code>
+            ) is the same default content{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              ErrorState
+            </code>{" "}
+            renders internally, with no{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              if
+            </code>{" "}
+            of its own. Reach for it when you need that default content
+            wrapped in something of your own (a Card, a specific height) while
+            a real condition still controls whether the whole thing shows —
+            nesting an <code className="rounded bg-muted px-1 font-mono text-xs">if</code>-bearing{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              ErrorState
+            </code>{" "}
+            inside another one to get the same effect is confusing and
+            unnecessary.
+          </p>
+          <ComponentPreview
+            code={`<ErrorState if={query.isError}>
+  <Card>
+    <CardPanel>
+      <ErrorMessage error={query.error} onRetry={query.refetch} />
+    </CardPanel>
+  </Card>
+</ErrorState>`}
+          >
+            <ErrorState if={true}>
+              <Card className="w-full max-w-sm">
+                <CardPanel>
+                  <ErrorMessage
+                    error={new Error("Request timed out")}
+                    onRetry={() => {}}
+                  />
+                </CardPanel>
+              </Card>
+            </ErrorState>
           </ComponentPreview>
         </div>
       </div>

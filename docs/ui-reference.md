@@ -257,9 +257,9 @@ Star rating display and input with half-star precision, multiple sizes, and sema
 
 #### With State
 
-Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself.
+Self-guarding sibling components for a loading/error/empty/normal branch, without a ternary chain or nested `DataTable*Body` trio. Each state checks its own `if` prop independently — usable standalone anywhere, not just inside WithState, and nothing enforces the four are mutually exclusive, so pass non-overlapping conditions yourself. LoadingMessage/ErrorMessage/EmptyMessage are the gate-free default content each *State delegates to — use them directly when you need that default content nested inside your own wrapper (e.g. a Card) under a separately-gated *State, rather than nesting a *State inside itself.
 
-- **Import:** `import { WithState, LoadingState, ErrorState, EmptyState, NormalState } from "@/ascendra-ui"`
+- **Import:** `import { WithState, LoadingState, ErrorState, EmptyState, NormalState, LoadingMessage, ErrorMessage, EmptyMessage } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/feedback/with-state](/showcase/feedback/with-state)
 
 **Props**
@@ -284,6 +284,7 @@ Self-guarding sibling components for a loading/error/empty/normal branch, withou
 | `icon (EmptyState)` | `React.ReactNode` | `<LuTextSearch />` | Icon shown in the default empty UI. |
 | `className (LoadingState / ErrorState / EmptyState)` | `string` | — | Additional classes on the outer Empty container. Only applies to the default UI — dropped along with the rest of the default when children override it. |
 | `children (NormalState)` | `React.ReactNode` | — | Required — there is no generic "success" UI, so real content must always be supplied. |
+| `LoadingMessage / ErrorMessage / EmptyMessage` | `component` | — | No `if` and no `children` prop — always render. Take the same title/description/icon/className props as their *State counterpart (plus error/onRetry on ErrorMessage), and are exactly what each *State renders internally when given no children. Use one directly when you need the default content wrapped in something (e.g. Card/CardPanel) while a separate *State (or any other condition) controls whether it shows at all. |
 
 ---
 
