@@ -616,6 +616,22 @@ export const registry: Record<string, ComponentMeta> = {
     props: [],
   },
 
+  'date-time': {
+    slug: 'date-time',
+    name: 'Date Time',
+    description: 'Renders formatDateTime(value, options) as text, with an optional hover tooltip revealing the original timestamp as a full ISO string.',
+    importPath: '@/ascendra-ui',
+    importNames: ['DateTime'],
+    props: [
+      { name: 'value', type: 'string | Date', description: 'The timestamp to format and display.' },
+      { name: 'style', type: "'short' | 'medium' | 'long' | 'relative'", default: "'medium'", description: 'Same as formatDateTime\'s style option.' },
+      { name: 'time', type: 'boolean', default: 'false', description: 'Append time-of-day. Ignored when style is \'relative\'.' },
+      { name: 'relativeFallbackDays', type: 'number', default: '7', description: 'Beyond this age, \'relative\' falls back to an absolute \'medium\' date.' },
+      { name: 'showTooltip', type: 'boolean', default: 'false', description: 'Show a hover tooltip with the original timestamp as a full ISO string.' },
+      { name: 'className', type: 'string', description: 'Applied to the rendered span.' },
+    ],
+  },
+
   'calendar': {
     slug: 'calendar',
     name: 'Calendar',

@@ -125,7 +125,6 @@ export * from './components/data-table/save-query-dialog';
 export * from './components/date/calendar';
 export * from './components/date/date-picker';
 export * from './components/date/date-range-picker';
-export * from './components/date/date-time';
 
 // Tabs
 export * from './components/tabs/tab-content';
@@ -151,6 +150,7 @@ export * from './components/side-bar/side-bar-toggle';
 
 // Utility
 export * from './components/util/copy-text';
+export * from './components/util/date-time';
 export * from './components/util/scroll-to-top';
 export * from './components/util/theme-toggle';
 

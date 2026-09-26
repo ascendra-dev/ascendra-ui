@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-09-25.
+> Auto-generated on 2026-09-26.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 62  
+**Primitive components:** 63  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top |
+| Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -1082,6 +1082,26 @@ Inline copy-to-clipboard trigger with icon feedback and an optional tooltip conf
 | `timeout` | `number` | `1200` | Duration in ms before resetting the copied state. |
 | `showTooltip` | `boolean` | `false` | Show a "Copied" tooltip confirmation on click. |
 | `onClick` | `(e: MouseEvent) => void \| Promise<string>` | — | Custom click handler; return a string to override what gets copied. |
+
+---
+
+#### Date Time
+
+Renders formatDateTime(value, options) as text, with an optional hover tooltip revealing the original timestamp as a full ISO string.
+
+- **Import:** `import { DateTime } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/date-time](/showcase/util/date-time)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string \| Date` | — | The timestamp to format and display. |
+| `style` | `'short' \| 'medium' \| 'long' \| 'relative'` | `'medium'` | Same as formatDateTime's style option. |
+| `time` | `boolean` | `false` | Append time-of-day. Ignored when style is 'relative'. |
+| `relativeFallbackDays` | `number` | `7` | Beyond this age, 'relative' falls back to an absolute 'medium' date. |
+| `showTooltip` | `boolean` | `false` | Show a hover tooltip with the original timestamp as a full ISO string. |
+| `className` | `string` | — | Applied to the rendered span. |
 
 ---
 
