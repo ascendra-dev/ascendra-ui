@@ -3,20 +3,20 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { CopyText } from "@/ascendra-ui";
+import { WithCopyText, WithTooltip } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
-const meta = registry["copy-text"];
+const meta = registry["with-copy-text"];
 
-export function CopyTextDocContent() {
+export function WithCopyTextDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { CopyText } from "@/ascendra-ui";
+        code={`import { WithCopyText } from "@/ascendra-ui";
 
-<CopyText value="INV-00124">INV-00124</CopyText>`}
+<WithCopyText value="INV-00124">INV-00124</WithCopyText>`}
       >
-        <CopyText value="INV-00124">INV-00124</CopyText>
+        <WithCopyText value="INV-00124">INV-00124</WithCopyText>
       </ComponentPreview>
 
       <div className="space-y-8">
@@ -30,9 +30,9 @@ export function CopyTextDocContent() {
             The copy icon is hidden by default and reveals on hover.
           </p>
           <ComponentPreview
-            code={`<CopyText value="user_abc123">user_abc123</CopyText>`}
+            code={`<WithCopyText value="user_abc123">user_abc123</WithCopyText>`}
           >
-            <CopyText value="user_abc123">user_abc123</CopyText>
+            <WithCopyText value="user_abc123">user_abc123</WithCopyText>
           </ComponentPreview>
         </div>
 
@@ -46,11 +46,11 @@ export function CopyTextDocContent() {
             to always show the copy icon without hover.
           </p>
           <ComponentPreview
-            code={`<CopyText value="pk_live_abc123" opaque>pk_live_abc123</CopyText>`}
+            code={`<WithCopyText value="pk_live_abc123" opaque>pk_live_abc123</WithCopyText>`}
           >
-            <CopyText value="pk_live_abc123" opaque>
+            <WithCopyText value="pk_live_abc123" opaque>
               pk_live_abc123
-            </CopyText>
+            </WithCopyText>
           </ComponentPreview>
         </div>
 
@@ -64,13 +64,13 @@ export function CopyTextDocContent() {
             .
           </p>
           <ComponentPreview
-            code={`<CopyText value="admin@beacon.edu.pk" showTooltip opaque>
+            code={`<WithCopyText value="admin@beacon.edu.pk" showTooltip opaque>
   admin@beacon.edu.pk
-</CopyText>`}
+</WithCopyText>`}
           >
-            <CopyText value="admin@beacon.edu.pk" showTooltip opaque>
+            <WithCopyText value="admin@beacon.edu.pk" showTooltip opaque>
               admin@beacon.edu.pk
-            </CopyText>
+            </WithCopyText>
           </ComponentPreview>
         </div>
 
@@ -82,9 +82,42 @@ export function CopyTextDocContent() {
             Omit children to render the value text automatically.
           </p>
           <ComponentPreview
-            code={`<CopyText value="https://pay.ascendra.pk/invoice/INV-042" opaque />`}
+            code={`<WithCopyText value="https://pay.ascendra.pk/invoice/INV-042" opaque />`}
           >
-            <CopyText value="https://pay.ascendra.pk/invoice/INV-042" opaque />
+            <WithCopyText
+              value="https://pay.ascendra.pk/invoice/INV-042"
+              opaque
+            />
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Composed with WithTooltip
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Both are children-first wrapper components, so they nest freely —
+            here <code className="rounded bg-muted px-1 font-mono text-xs">
+              WithTooltip
+            </code>{" "}
+            explains what the value is, and{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              WithCopyText
+            </code>{" "}
+            makes it click-to-copy, each unaware of the other.
+          </p>
+          <ComponentPreview
+            code={`<WithTooltip tooltip="Full live secret key — click to copy">
+  <WithCopyText value="sk_live_51H8x9k2eZvKYlo2C" opaque>
+    sk_live_••••••••••••lo2C
+  </WithCopyText>
+</WithTooltip>`}
+          >
+            <WithTooltip tooltip="Full live secret key — click to copy">
+              <WithCopyText value="sk_live_51H8x9k2eZvKYlo2C" opaque>
+                sk_live_••••••••••••lo2C
+              </WithCopyText>
+            </WithTooltip>
           </ComponentPreview>
         </div>
       </div>
