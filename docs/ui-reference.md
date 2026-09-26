@@ -7,7 +7,7 @@
 
 ## Overview
 
-**Primitive components:** 63  
+**Primitive components:** 64  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time |
+| Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Tooltip |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -1173,6 +1173,23 @@ Behavior-only component that scrolls the window to the top on every route change
 **Props**
 
 _No custom props — accepts standard HTML attributes._
+
+---
+
+#### With Tooltip
+
+Wraps any children — plain text, multiple elements, a custom component — in a hoverable tooltip, without callers needing to worry about asChild's single-element requirement.
+
+- **Import:** `import { WithTooltip } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/with-tooltip](/showcase/util/with-tooltip)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tooltip` | `React.ReactNode` | — | Content shown inside the tooltip on hover/focus. |
+| `children` | `React.ReactNode` | — | What gets wrapped — any shape, any number of nodes. |
+| `className` | `string` | — | Applied to the wrapping span. |
 
 ---
 

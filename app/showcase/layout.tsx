@@ -573,6 +573,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/util/scroll-to-top">
                       Scroll To Top
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/util/with-tooltip">
+                      With Tooltip
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
               </SideBarMenuSet>

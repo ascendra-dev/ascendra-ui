@@ -632,6 +632,19 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'with-tooltip': {
+    slug: 'with-tooltip',
+    name: 'With Tooltip',
+    description: 'Wraps any children — plain text, multiple elements, a custom component — in a hoverable tooltip, without callers needing to worry about asChild\'s single-element requirement.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithTooltip'],
+    props: [
+      { name: 'tooltip', type: 'React.ReactNode', description: 'Content shown inside the tooltip on hover/focus.' },
+      { name: 'children', type: 'React.ReactNode', description: 'What gets wrapped — any shape, any number of nodes.' },
+      { name: 'className', type: 'string', description: 'Applied to the wrapping span.' },
+    ],
+  },
+
   'calendar': {
     slug: 'calendar',
     name: 'Calendar',
