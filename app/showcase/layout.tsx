@@ -555,6 +555,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/util/copy-text">
                       Copy Text
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/util/date-time">
+                      Date Time
+                    </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/util/name-avatar">
                       Name Avatar
                     </SideBarMenuItem>
