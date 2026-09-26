@@ -31,7 +31,7 @@ import { PageBarDocContent } from "@/components/previews/page-bar-preview";
 import { AsideContentDocContent } from "@/components/previews/aside-content-preview";
 import { TabsDocContent } from "@/components/previews/tabs-preview";
 import { SidebarMenuDocContent } from "@/components/previews/sidebar-menu-preview";
-import { CopyTextDocContent } from "@/components/previews/copy-text-preview";
+import { WithCopyTextDocContent } from "@/components/previews/with-copy-text-preview";
 import { DateTimeDocContent } from "@/components/previews/date-time-preview";
 import { NameAvatarDocContent } from "@/components/previews/name-avatar-preview";
 import { ThemeToggleDocContent } from "@/components/previews/theme-toggle-preview";
@@ -100,7 +100,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "aside-content": AsideContentDocContent,
   tabs: TabsDocContent,
   "sidebar-menu": SidebarMenuDocContent,
-  "copy-text": CopyTextDocContent,
+  "with-copy-text": WithCopyTextDocContent,
   "date-time": DateTimeDocContent,
   "name-avatar": NameAvatarDocContent,
   "theme-toggle": ThemeToggleDocContent,

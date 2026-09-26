@@ -474,12 +474,12 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
-  'copy-text': {
-    slug: 'copy-text',
-    name: 'Copy Text',
+  'with-copy-text': {
+    slug: 'with-copy-text',
+    name: 'With Copy Text',
     description: 'Inline copy-to-clipboard trigger with icon feedback and an optional tooltip confirmation.',
     importPath: '@/ascendra-ui',
-    importNames: ['CopyText'],
+    importNames: ['WithCopyText'],
     props: [
       { name: 'value', type: 'string', description: 'Text to copy to the clipboard.' },
       { name: 'opaque', type: 'boolean', default: 'false', description: 'Show the copy icon without hover (always visible).' },

@@ -1095,7 +1095,7 @@ RIGHT:  stroke="var(--border)"
 
 | Need | Component | Notes |
 |---|---|---|
-| Copy to clipboard | `CopyText` | wrap any element; `showTooltip` for confirmation |
+| Copy to clipboard | `WithCopyText` | wrap any element; `showTooltip` for confirmation |
 | User avatar | `NameAvatar` | deterministic color from name; optional `href` |
 | Theme switcher | `ThemeToggle` | places in `HeaderActions` |
 | Page navigation | `PaginationButton` | prev/next bordered buttons |

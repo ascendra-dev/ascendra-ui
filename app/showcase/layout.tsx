@@ -552,8 +552,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     Utilities
                   </SideBarMenuHeader>
                   <SideBarMenuContent>
-                    <SideBarMenuItem path="/showcase/util/copy-text">
-                      Copy Text
+                    <SideBarMenuItem path="/showcase/util/with-copy-text">
+                      With Copy Text
                     </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/util/date-time">
                       Date Time

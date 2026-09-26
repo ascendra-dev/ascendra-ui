@@ -66,7 +66,7 @@ The `ascendra-ui/` folder is what a scaffolded project gets. The showcase (`app/
 | `components/tabs/` | Tab variants |
 | `components/side-bar/` | Sidebar components |
 | `components/forms/` | Form helpers (not showcase form pages) |
-| `components/util/` | Utility display — ThemeToggle, CopyText, etc. |
+| `components/util/` | Utility display — ThemeToggle, WithCopyText, etc. |
 | `components/stepper/` | Stepper/progress |
 | `components/reports/` | Report-specific display |
 | `components/header/` | Header variants |

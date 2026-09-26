@@ -200,7 +200,7 @@ export const navConfig: NavCategory[] = [
   {
     title: 'Utilities',
     items: [
-      { name: 'Copy Text', slug: 'util/copy-text' },
+      { name: 'With Copy Text', slug: 'util/with-copy-text' },
       { name: 'Date Time', slug: 'util/date-time' },
       { name: 'Name Avatar', slug: 'util/name-avatar' },
       { name: 'Theme Toggle', slug: 'util/theme-toggle' },

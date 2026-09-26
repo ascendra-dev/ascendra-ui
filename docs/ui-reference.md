@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Tooltip |
+| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Tooltip |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -1066,12 +1066,12 @@ Expandable sidebar navigation with grouped menu sets, icon headers, active link 
 
 ### Utilities
 
-#### Copy Text
+#### With Copy Text
 
 Inline copy-to-clipboard trigger with icon feedback and an optional tooltip confirmation.
 
-- **Import:** `import { CopyText } from "@/ascendra-ui"`
-- **Showcase:** [/showcase/util/copy-text](/showcase/util/copy-text)
+- **Import:** `import { WithCopyText } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/with-copy-text](/showcase/util/with-copy-text)
 
 **Props**
 
