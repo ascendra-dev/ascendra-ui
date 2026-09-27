@@ -158,14 +158,14 @@ function FieldInfo({
 }: React.ComponentProps<"p"> & {
   breakPoint?: "sm" | "md" | "lg" | "xl" | "2xl";
 }) {
-  if (!children && breakPoint) {
+  if (!children) {
     return (
       <p
         aria-hidden
         data-slot="field-info"
         className={cn(
           "mt-0.5 text-xs",
-          fieldInfoBreakpointClasses[breakPoint],
+          breakPoint && fieldInfoBreakpointClasses[breakPoint],
           className,
         )}
         {...props}
