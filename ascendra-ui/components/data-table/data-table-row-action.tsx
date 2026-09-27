@@ -35,7 +35,11 @@ export function DataTableRowAction({
 }: DataTableRowActionProps) {
   return (
     <RowActionContext.Provider value={{ onAction }}>
-      <td data-slot="table-cell" className="px-5 py-4 last:pr-6 w-12">
+      <td
+        data-slot="table-cell"
+        className="px-5 py-4 last:pr-6 w-12"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
