@@ -717,6 +717,7 @@ export const registry: Record<string, ComponentMeta> = {
       'DataTableManageColumnsHeadAction', 'DataTableBulkExportHeadAction', 'DataTableBulkDeleteHeadAction',
       'DataTableRowAction', 'DataTableRowActionItem',
       'DataTableEditRowAction', 'DataTableDuplicateRowAction', 'DataTableDeleteRowAction', 'DataTableViewRowAction',
+      'DataTableCopyRowAction',
       'BatchNavigator', 'ManageQueriesDialog', 'QueryBar', 'QueryFieldRenderer', 'QueryParamPanel', 'SaveQueryDialog',
     ],
     props: [

@@ -126,6 +126,32 @@ export function DataTableDuplicateRowAction(
   );
 }
 
+export interface DataTableCopyRowActionProps {
+  /** Menu item label. */
+  title: string;
+  /** Copied to the clipboard when selected. */
+  value: string;
+  icon?: React.ReactNode;
+  disabled?: boolean;
+}
+
+export function DataTableCopyRowAction({
+  title,
+  value,
+  icon = <LuCopy />,
+  disabled,
+}: DataTableCopyRowActionProps) {
+  return (
+    <DropdownMenuItem
+      disabled={disabled}
+      onSelect={() => navigator.clipboard.writeText(value)}
+    >
+      {icon}
+      {title}
+    </DropdownMenuItem>
+  );
+}
+
 export function DataTableDeleteRowAction(
   props: Partial<DataTableRowActionItemProps>,
 ) {

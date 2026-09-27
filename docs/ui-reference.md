@@ -1,6 +1,6 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-09-26.
+> Auto-generated on 2026-09-27.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
@@ -919,7 +919,7 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 
 Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
 
-- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, DataTableCopyRowAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table](/showcase/data-table)
 
 **Props**
