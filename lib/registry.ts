@@ -625,7 +625,7 @@ export const registry: Record<string, ComponentMeta> = {
     props: [
       { name: 'data', type: 'T[]', description: 'Rows to export. Columns are the first row\'s own keys.' },
       { name: 'exclude', type: '(keyof T)[]', description: 'Keys to omit from the exported columns.' },
-      { name: 'filename', type: 'string', description: 'Defaults to a timestamped name, e.g. "export-2026-09-27T05-42-10.csv".' },
+      { name: 'filename', type: 'string', description: 'Base name — defaults to "export.csv". Either way, a timestamp is always inserted before the extension, e.g. "audit-events-2026-09-27T05-42-10.csv".' },
       { name: 'title', type: 'string', default: "'Export CSV'", description: 'Button label. Ignored (used as the accessible name instead) when iconOnly is true.' },
       { name: 'iconOnly', type: 'boolean', default: 'false', description: 'Show only the icon, no visible label.' },
       { name: 'icon', type: 'React.ReactNode', description: 'Overrides the default download icon.' },

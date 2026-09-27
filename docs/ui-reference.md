@@ -1118,7 +1118,7 @@ Button that downloads an array of objects as a CSV file on click, via the downlo
 |---|---|---|---|
 | `data` | `T[]` | — | Rows to export. Columns are the first row's own keys. |
 | `exclude` | `(keyof T)[]` | — | Keys to omit from the exported columns. |
-| `filename` | `string` | — | Defaults to a timestamped name, e.g. "export-2026-09-27T05-42-10.csv". |
+| `filename` | `string` | — | Base name — defaults to "export.csv". Either way, a timestamp is always inserted before the extension, e.g. "audit-events-2026-09-27T05-42-10.csv". |
 | `title` | `string` | `'Export CSV'` | Button label. Ignored (used as the accessible name instead) when iconOnly is true. |
 | `iconOnly` | `boolean` | `false` | Show only the icon, no visible label. |
 | `icon` | `React.ReactNode` | — | Overrides the default download icon. |
