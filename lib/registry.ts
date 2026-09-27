@@ -632,6 +632,19 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'with-empty-value': {
+    slug: 'with-empty-value',
+    name: 'With Empty Value',
+    description: 'Renders children when value is non-empty, or a fallback (default an em dash) when value is null, undefined, or an empty string. Use for a table cell or detail field whose data may be missing — not for loading/error states, see WithState.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithEmptyValue'],
+    props: [
+      { name: 'value', type: 'unknown', description: 'Tested for emptiness — null, undefined, and an empty string all count as empty.' },
+      { name: 'fallback', type: 'React.ReactNode', default: "'—'", description: 'Rendered when value is empty.' },
+      { name: 'children', type: 'React.ReactNode', description: 'Rendered when value is non-empty.' },
+    ],
+  },
+
   'with-tooltip': {
     slug: 'with-tooltip',
     name: 'With Tooltip',

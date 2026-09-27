@@ -66,6 +66,7 @@ import { ChartTargetLegendDocContent } from "@/components/previews/chart-target-
 import { ReportHeaderDocContent } from "@/components/previews/report-header-preview";
 import { ReportDocumentDocContent } from "@/components/previews/report-document-preview";
 import { ReportContentDocContent } from "@/components/previews/report-content-preview";
+import { WithEmptyValueDocContent } from "@/components/previews/with-empty-value-preview";
 import { WithTooltipDocContent } from "@/components/previews/with-tooltip-preview";
 
 export type DocComponent = React.ComponentType;
@@ -134,5 +135,6 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "report-header": ReportHeaderDocContent,
   "report-document": ReportDocumentDocContent,
   "report-content": ReportContentDocContent,
+  "with-empty-value": WithEmptyValueDocContent,
   "with-tooltip": WithTooltipDocContent,
 };

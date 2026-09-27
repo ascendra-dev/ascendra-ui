@@ -207,6 +207,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Pagination Button', slug: 'util/pagination-button' },
       { name: 'Row Action Button', slug: 'util/row-action-button' },
       { name: 'Scroll To Top', slug: 'util/scroll-to-top' },
+      { name: 'With Empty Value', slug: 'util/with-empty-value' },
       { name: 'With Tooltip', slug: 'util/with-tooltip' },
     ],
   },

@@ -25,14 +25,14 @@ For the technical API (props, import paths, TypeScript types) see `docs/ui-refer
 
 | Stat | Count |
 |---|---|
-| Primitive components | 64 |
+| Primitive components | 65 |
 | Composite form patterns | 10 |
 | Dialog patterns | 12 |
 | Sheet patterns | 10 |
 | Drawer patterns | 8 |
 | Dashboard demos | 10 |
 | Report demos | 10 |
-| Showcase pages total | 118 |
+| Showcase pages total | 119 |
 
 ---
 
@@ -1847,7 +1847,7 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ## Showcase Gallery Entry Points
 
-The showcase has 118 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
+The showcase has 119 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
 
 | Section | Route |
 |---|---|

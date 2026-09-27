@@ -7,7 +7,7 @@
 
 ## Overview
 
-**Primitive components:** 64  
+**Primitive components:** 65  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Tooltip |
+| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Empty Value, With Tooltip |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -1173,6 +1173,23 @@ Behavior-only component that scrolls the window to the top on every route change
 **Props**
 
 _No custom props — accepts standard HTML attributes._
+
+---
+
+#### With Empty Value
+
+Renders children when value is non-empty, or a fallback (default an em dash) when value is null, undefined, or an empty string. Use for a table cell or detail field whose data may be missing — not for loading/error states, see WithState.
+
+- **Import:** `import { WithEmptyValue } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/with-empty-value](/showcase/util/with-empty-value)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `unknown` | — | Tested for emptiness — null, undefined, and an empty string all count as empty. |
+| `fallback` | `React.ReactNode` | `'—'` | Rendered when value is empty. |
+| `children` | `React.ReactNode` | — | Rendered when value is non-empty. |
 
 ---
 
