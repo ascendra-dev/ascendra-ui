@@ -33,6 +33,7 @@ import { TabsDocContent } from "@/components/previews/tabs-preview";
 import { SidebarMenuDocContent } from "@/components/previews/sidebar-menu-preview";
 import { WithCopyTextDocContent } from "@/components/previews/with-copy-text-preview";
 import { DateTimeDocContent } from "@/components/previews/date-time-preview";
+import { ExportCsvButtonDocContent } from "@/components/previews/export-csv-button-preview";
 import { NameAvatarDocContent } from "@/components/previews/name-avatar-preview";
 import { ThemeToggleDocContent } from "@/components/previews/theme-toggle-preview";
 import { PaginationButtonDocContent } from "@/components/previews/pagination-button-preview";
@@ -103,6 +104,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "sidebar-menu": SidebarMenuDocContent,
   "with-copy-text": WithCopyTextDocContent,
   "date-time": DateTimeDocContent,
+  "export-csv-button": ExportCsvButtonDocContent,
   "name-avatar": NameAvatarDocContent,
   "theme-toggle": ThemeToggleDocContent,
   "pagination-button": PaginationButtonDocContent,

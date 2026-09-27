@@ -202,6 +202,7 @@ export const navConfig: NavCategory[] = [
     items: [
       { name: 'With Copy Text', slug: 'util/with-copy-text' },
       { name: 'Date Time', slug: 'util/date-time' },
+      { name: 'Export CSV Button', slug: 'util/export-csv-button' },
       { name: 'Name Avatar', slug: 'util/name-avatar' },
       { name: 'Theme Toggle', slug: 'util/theme-toggle' },
       { name: 'Pagination Button', slug: 'util/pagination-button' },

@@ -7,7 +7,7 @@
 
 ## Overview
 
-**Primitive components:** 65  
+**Primitive components:** 66  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Date Time, With Empty Value, With Tooltip |
+| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Tooltip |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -1102,6 +1102,27 @@ Renders formatDateTime(value, options) as text, with an optional hover tooltip r
 | `relativeFallbackDays` | `number` | `7` | Beyond this age, 'relative' falls back to an absolute 'medium' date. |
 | `showTooltip` | `boolean` | `false` | Show a hover tooltip with the original timestamp as a full ISO string. |
 | `className` | `string` | — | Applied to the rendered span. |
+
+---
+
+#### Export CSV Button
+
+Button that downloads an array of objects as a CSV file on click, via the downloadCsv utility (@/ascendra-ui/utils/common.util). For a fully custom trigger, call downloadCsv (or the pure objectsToCsv, which just returns CSV text) directly instead of using this component.
+
+- **Import:** `import { ExportCsvButton } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/export-csv-button](/showcase/util/export-csv-button)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `data` | `T[]` | — | Rows to export. Columns are the first row's own keys. |
+| `exclude` | `(keyof T)[]` | — | Keys to omit from the exported columns. |
+| `filename` | `string` | — | Defaults to a timestamped name, e.g. "export-2026-09-27T05-42-10.csv". |
+| `title` | `string` | `'Export CSV'` | Button label. Ignored (used as the accessible name instead) when iconOnly is true. |
+| `iconOnly` | `boolean` | `false` | Show only the icon, no visible label. |
+| `icon` | `React.ReactNode` | — | Overrides the default download icon. |
+| `variant` | `'primary' \| 'secondary' \| 'destructive' \| 'ghost' \| 'link'` | `'secondary'` | Same variant prop as Button. |
 
 ---
 

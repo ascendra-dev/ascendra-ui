@@ -616,6 +616,23 @@ export const registry: Record<string, ComponentMeta> = {
     props: [],
   },
 
+  'export-csv-button': {
+    slug: 'export-csv-button',
+    name: 'Export CSV Button',
+    description: 'Button that downloads an array of objects as a CSV file on click, via the downloadCsv utility (@/ascendra-ui/utils/common.util). For a fully custom trigger, call downloadCsv (or the pure objectsToCsv, which just returns CSV text) directly instead of using this component.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ExportCsvButton'],
+    props: [
+      { name: 'data', type: 'T[]', description: 'Rows to export. Columns are the first row\'s own keys.' },
+      { name: 'exclude', type: '(keyof T)[]', description: 'Keys to omit from the exported columns.' },
+      { name: 'filename', type: 'string', description: 'Defaults to a timestamped name, e.g. "export-2026-09-27T05-42-10.csv".' },
+      { name: 'title', type: 'string', default: "'Export CSV'", description: 'Button label. Ignored (used as the accessible name instead) when iconOnly is true.' },
+      { name: 'iconOnly', type: 'boolean', default: 'false', description: 'Show only the icon, no visible label.' },
+      { name: 'icon', type: 'React.ReactNode', description: 'Overrides the default download icon.' },
+      { name: 'variant', type: "'primary' | 'secondary' | 'destructive' | 'ghost' | 'link'", default: "'secondary'", description: 'Same variant prop as Button.' },
+    ],
+  },
+
   'date-time': {
     slug: 'date-time',
     name: 'Date Time',
