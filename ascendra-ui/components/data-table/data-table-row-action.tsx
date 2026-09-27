@@ -126,7 +126,7 @@ export function DataTableDuplicateRowAction(
   );
 }
 
-export interface DataTableCopyRowActionProps {
+export interface DataTableCopyValueActionProps {
   /** Menu item label. */
   title: string;
   /** Copied to the clipboard when selected. */
@@ -135,12 +135,12 @@ export interface DataTableCopyRowActionProps {
   disabled?: boolean;
 }
 
-export function DataTableCopyRowAction({
+export function DataTableCopyValueAction({
   title,
   value,
   icon = <LuCopy />,
   disabled,
-}: DataTableCopyRowActionProps) {
+}: DataTableCopyValueActionProps) {
   return (
     <DropdownMenuItem
       disabled={disabled}
