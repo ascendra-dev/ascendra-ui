@@ -210,6 +210,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Scroll To Top', slug: 'util/scroll-to-top' },
       { name: 'With Empty Value', slug: 'util/with-empty-value' },
       { name: 'With Tooltip', slug: 'util/with-tooltip' },
+      { name: 'Id Text', slug: 'util/id-text' },
     ],
   },
 ];

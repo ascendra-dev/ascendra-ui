@@ -69,6 +69,7 @@ import { ReportDocumentDocContent } from "@/components/previews/report-document-
 import { ReportContentDocContent } from "@/components/previews/report-content-preview";
 import { WithEmptyValueDocContent } from "@/components/previews/with-empty-value-preview";
 import { WithTooltipDocContent } from "@/components/previews/with-tooltip-preview";
+import { IdTextDocContent } from "@/components/previews/id-text-preview";
 
 export type DocComponent = React.ComponentType;
 
@@ -139,4 +140,5 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "report-content": ReportContentDocContent,
   "with-empty-value": WithEmptyValueDocContent,
   "with-tooltip": WithTooltipDocContent,
+  "id-text": IdTextDocContent,
 };

@@ -582,6 +582,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/util/with-tooltip">
                       With Tooltip
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/util/id-text">
+                      Id Text
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
               </SideBarMenuSet>

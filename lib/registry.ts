@@ -675,6 +675,22 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'id-text': {
+    slug: 'id-text',
+    name: 'Id Text',
+    description: 'Fixed-monospace, truncated display for a uuid/id-shaped value ("head…tail"), with copy-to-clipboard and a full-value hover tooltip on by default. Composes WithCopyText and WithTooltip rather than reimplementing either.',
+    importPath: '@/ascendra-ui',
+    importNames: ['IdText'],
+    props: [
+      { name: 'value', type: 'string', description: 'The full, untruncated id/uuid value — copied and shown in the tooltip in full, regardless of size.' },
+      { name: 'size', type: "'full' | 'sm' | 'md' | 'lg'", default: "'full'", description: '\'full\' shows the value as-is; \'sm\'/\'md\'/\'lg\' truncate to "head…tail" with progressively more characters.' },
+      { name: 'copyable', type: 'boolean', default: 'true', description: 'Copy-to-clipboard on click, with icon feedback.' },
+      { name: 'showTooltip', type: 'boolean', default: 'true', description: 'Hover tooltip showing the full value.' },
+      { name: 'className', type: 'string', description: 'Applied to the text span — the monospace font itself is fixed.' },
+      { name: 'style', type: 'React.CSSProperties', description: 'Applied to the text span, e.g. to override font-size.' },
+    ],
+  },
+
   'calendar': {
     slug: 'calendar',
     name: 'Calendar',
