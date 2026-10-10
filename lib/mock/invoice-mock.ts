@@ -1,3 +1,5 @@
+import type { PageListResponse } from '@/ascendra-ui';
+
 export type InvoiceStatus = 'Paid' | 'Pending' | 'Overdue' | 'Cancelled';
 
 export interface Invoice {
@@ -13,18 +15,6 @@ export interface Invoice {
   status: InvoiceStatus;
   issuedAt: string;
   paidAt?: string;
-}
-
-export interface PaginationMeta {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
-
-export interface InvoiceListData {
-  data: Invoice[];
-  meta: PaginationMeta;
 }
 
 // ─── Dataset ──────────────────────────────────────────────────────────────────
@@ -156,7 +146,7 @@ export async function fetchMockInvoices(
   queryId: string,
   batch = 1,
   pageSize = PAGE_SIZE,
-): Promise<InvoiceListData> {
+): Promise<PageListResponse<Invoice>> {
   await delay(700 + Math.random() * 600);
 
   if (Math.random() < ERROR_RATE) {
@@ -171,7 +161,7 @@ export async function fetchMockInvoices(
 
   return {
     data: pageRows,
-    meta: { page: safeBatch, limit: pageSize, total: allRows.length, totalPages },
+    meta: { page: safeBatch, perPage: pageSize, total: allRows.length, totalPages },
   };
 }
 

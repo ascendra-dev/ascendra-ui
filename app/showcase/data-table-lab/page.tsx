@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, type ColumnDef, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableBulkDeleteHeadAction, DataTableBulkExportHeadAction, DataTableCell, DataTableCheckboxCell, DataTableCheckboxHead, DataTableColumnManager, DataTableCopyValueAction, DataTableDeleteRowAction, DataTableDuplicateRowAction, DataTableEditRowAction, DataTableEmptyBody, DataTableErrorBody, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeadAction, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableRow, DataTableRowAction, DataTableRowActionItem, DataTableSearchInput, DataTableSortDropdown, DataTableViewRowAction, DataTableWithQueryProvider, DataTableWrapper, DropdownMenuLabel, DropdownMenuSeparator, type FieldOptionsMap, MainContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, QueryBar, type QueryFunctionMap, QueryParamPanel, SimpleBadge, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
+import { Button, type ColumnDef, createPageQueryFn, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableBulkDeleteHeadAction, DataTableBulkExportHeadAction, DataTableCell, DataTableCheckboxCell, DataTableCheckboxHead, DataTableColumnManager, DataTableCopyValueAction, DataTableDeleteRowAction, DataTableDuplicateRowAction, DataTableEditRowAction, DataTableEmptyBody, DataTableErrorBody, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeadAction, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableRow, DataTableRowAction, DataTableRowActionItem, DataTableSearchInput, DataTableSortDropdown, DataTableViewRowAction, DataTableWithQueryProvider, DataTableWrapper, DropdownMenuLabel, DropdownMenuSeparator, type FieldOptionsMap, MainContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, QueryBar, type QueryFunctionMap, QueryParamPanel, SimpleBadge, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
 import {
   PRESET_QUERIES,
   fetchMockInvoices,
@@ -37,15 +37,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 ];
 
 const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
-  PRESET_QUERIES.map((q) => [
-    q.id,
-    async (params, batch) => {
-      console.log("params are: ", params, "batch:", batch);
-      const result = await fetchMockInvoices(q.id, batch);
-      console.log("result is: ", result);
-      return { data: result.data, totalBatches: result.meta.totalPages };
-    },
-  ]),
+  PRESET_QUERIES.map((q) => [q.id, createPageQueryFn((_params, page) => fetchMockInvoices(q.id, page))]),
 );
 
 // Demonstrates dynamic fieldOptions — overrides static options in PRESET_QUERIES

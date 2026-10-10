@@ -1,10 +1,11 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { fetchMockInvoices, type InvoiceListData } from '@/lib/mock/invoice-mock';
+import type { PageListResponse } from '@/ascendra-ui';
+import { fetchMockInvoices, type Invoice } from '@/lib/mock/invoice-mock';
 
 export function   useMockInvoiceList(queryId: string) {
-  return useQuery<InvoiceListData, Error>({
+  return useQuery<PageListResponse<Invoice>, Error>({
     queryKey: ['mock-invoices', queryId],
     queryFn: () => fetchMockInvoices(queryId),
     staleTime: 0,
