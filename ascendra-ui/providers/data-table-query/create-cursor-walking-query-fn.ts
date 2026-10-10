@@ -31,6 +31,7 @@ export function createCursorWalkingQueryFn<T>(
     return {
       data: response.data,
       totalBatches: response.meta.nextCursor ? batch + 1 : batch,
+      totalBatchesExact: false,
     };
   };
 }
