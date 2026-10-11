@@ -98,13 +98,16 @@ function DateRangePicker({
         <EditableDateField
           id={id}
           slot="date-range-picker-trigger"
+          label={label}
+          placeholder={placeholder ?? 'Pick a date range'}
           committedText={formatRangeText(value, dateFormat)}
+          editPlaceholder={`${formatHint(dateFormat)} – ${formatHint(dateFormat)}`}
+          editLabel="Type date range"
           onCommitText={(text) => {
             const parsed = parseRangeText(text, dateFormat);
             if (parsed !== 'invalid') onChange?.(parsed);
           }}
           onBlur={onBlur}
-          placeholder={placeholder ?? `${formatHint(dateFormat)} – ${formatHint(dateFormat)}`}
           disabled={disabled}
           readOnly={readOnly}
           invalid={invalid}

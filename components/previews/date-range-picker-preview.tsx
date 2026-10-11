@@ -76,14 +76,14 @@ const [range, setRange] = useState<DateRange | undefined>(undefined);
           <h3 className="text-sm font-medium text-foreground">Editable</h3>
           <p className="text-xs text-muted-foreground">
             Pass{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to type the range as well as pick it,
-            in one field — e.g. 14/07/2026 – 11/10/2026. Any text between
-            the two dates works (14-7-2026 to 11-10-2026 too). It&apos;s read on
-            blur or Enter: one date is a start-only range, an end typed first
-            is swapped, unreadable text reverts and empty text clears. The
-            calendar button opens the picker.{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the day/month order (default
-            dd/MM/yyyy).
+            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to add a pencil button. The field still
+            looks and opens the calendar like any range picker; the pencil — or
+            typing a digit on the focused field — switches it to a text box in
+            dd/mm/yyyy where the whole range is typed at once (14/07/2026 –
+            11/10/2026; any text between the dates works). Blur or Enter reads
+            it: one date is a start-only range, an end typed first is swapped,
+            unreadable text reverts, empty clears. Escape cancels.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the typed day/month order.
           </p>
           <ComponentPreview
             code={`<DateRangePicker value={range} onChange={setRange} editable showClear />`}

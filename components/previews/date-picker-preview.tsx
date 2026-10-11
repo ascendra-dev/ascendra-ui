@@ -39,13 +39,13 @@ const [date, setDate] = useState<Date | undefined>(undefined);
           <h3 className="text-sm font-medium text-foreground">Editable</h3>
           <p className="text-xs text-muted-foreground">
             Pass{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to type the date as well as pick it
-            (dd/mm/yyyy; /, - or . all work). It&apos;s read on blur or Enter;
-            unreadable text reverts to the last value and empty text clears.
-            The calendar button opens the picker, so typing is never
-            interrupted.{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the day/month order (default
-            dd/MM/yyyy).
+            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to add a pencil button. The field still
+            looks and opens the calendar like any date picker; the pencil — or
+            typing a digit on the focused field — switches it to a text box in
+            dd/mm/yyyy (/, - or . all work). Blur or Enter reads it and returns
+            to the normal display; unreadable text reverts, empty clears, Escape
+            cancels.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the typed day/month order.
           </p>
           <ComponentPreview
             code={`<DatePicker value={date} onChange={setDate} editable showClear />`}

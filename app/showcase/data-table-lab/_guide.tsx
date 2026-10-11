@@ -887,7 +887,7 @@ function QuerySystemSection() {
           <PropRow name="maxItems" type="number" description="multiselect: most items that may be selected." />
           <PropRow name="minDate / maxDate" type="DateExpr" description="date / daterange: earliest / latest allowed day, inclusive. 'today', a signed offset ('-90d', '+1d', '-2w', '-6m', '-1y') or 'YYYY-MM-DD' — resolved when the form opens, so it never goes stale. Out-of-range days are disabled in the picker and rejected with a message." />
           <PropRow name="maxRangeDays" type="number" description="daterange: longest allowed range, counting both ends. Once a start is picked, days beyond it are disabled; a longer range is rejected with a message. A required daterange also needs both ends." />
-          <PropRow name="editable" type="boolean" description="date / daterange: type the date (dd/mm/yyyy) as well as pick it — a range in one field. Read on blur/Enter; unreadable text reverts, empty clears." />
+          <PropRow name="editable" type="boolean" description="date / daterange: adds a pencil that switches the field to a dd/mm/yyyy text box (a range in one field), read on blur/Enter; unreadable text reverts, empty clears. Clicking the field still opens the calendar." />
           <PropRow name="defaultValue" type="FieldDefaultValue" description="Starting value, and what Reset restores — a value of the field's own type; date takes a DateExpr, daterange { from: DateExpr; to?: DateExpr }. A saved draft for the query wins over it." />
         </PropTable>
       </div>

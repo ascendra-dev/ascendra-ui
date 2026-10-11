@@ -77,13 +77,16 @@ function DatePicker({
         <EditableDateField
           id={id}
           slot="date-picker-trigger"
+          label={value ? format(value, 'PPP') : null}
+          placeholder={placeholder ?? 'Pick a date'}
           committedText={value ? formatDateText(value, dateFormat) : ''}
+          editPlaceholder={formatHint(dateFormat)}
+          editLabel="Type date"
           onCommitText={(text) => {
             const parsed = parseDateText(text, dateFormat);
             if (parsed !== 'invalid') onChange?.(parsed);
           }}
           onBlur={onBlur}
-          placeholder={placeholder ?? formatHint(dateFormat)}
           disabled={disabled}
           readOnly={readOnly}
           invalid={invalid}
