@@ -803,7 +803,7 @@ export const registry: Record<string, ComponentMeta> = {
     slug: 'tooltips',
     name: 'Tooltip',
     description: 'Floating label that appears on hover or focus. Wraps Radix UI Tooltip with TooltipProvider, all four placements, and rich content support.',
-    importPath: '@/ascendra-ui/shadcn',
+    importPath: '@/ascendra-ui',
     importNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'TooltipProvider'],
     props: [
       { name: 'side', type: "'top' | 'right' | 'bottom' | 'left'", default: "'top'", description: 'Which side the tooltip appears on (on TooltipContent).' },

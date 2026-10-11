@@ -1962,8 +1962,9 @@ All code templates in this document assume the following stack. If your project 
 // All ascendra-ui components (buttons, inputs, cards, tables, charts legends, sheets, etc.)
 import { Button, Input, Field, Card, ChartLegend, ChartLegendGroup, ... } from '@/ascendra-ui'
 
-// These three groups come from the shadcn layer — NOT from @/ascendra-ui:
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/ascendra-ui/shadcn'
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/ascendra-ui'
+
+// These two groups come from the shadcn layer — NOT from @/ascendra-ui:
 import { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerFooter } from '@/ascendra-ui/shadcn'
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/ascendra-ui/shadcn'
 

@@ -53,6 +53,7 @@ import {
   QueryBar,
   type QueryFunctionMap,
   QueryParamPanel,
+  IdText,
   Sheet,
   SheetBody,
   SheetContent,
@@ -331,6 +332,10 @@ export default function DataTableLabPage() {
                       <SheetBody>
                         <SheetSection>
                           <SheetProperties>
+                            <SheetKey>Invoice id</SheetKey>
+                            <SheetValue>
+                              <IdText value={selected.id} size="md" />
+                            </SheetValue>
                             <SheetKey>Client</SheetKey>
                             <SheetValue>{selected.clientName}</SheetValue>
                             <SheetKey>Amount</SheetKey>

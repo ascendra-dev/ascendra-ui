@@ -774,7 +774,7 @@ Full-featured dropdown with items, separators, checkboxes, radio groups, and sub
 
 Floating label that appears on hover or focus. Wraps Radix UI Tooltip with TooltipProvider, all four placements, and rich content support.
 
-- **Import:** `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/ascendra-ui/shadcn"`
+- **Import:** `import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/overlay/tooltips](/showcase/overlay/tooltips)
 
 **Props**

@@ -4,12 +4,12 @@ import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import {
+  Button,
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/ascendra-ui/shadcn";
-import { Button } from "@/ascendra-ui";
+} from "@/ascendra-ui";
 import {
   LuInfo,
   LuSettings,
@@ -22,7 +22,7 @@ export function TooltipDocContent() {
     <TooltipProvider delayDuration={200}>
       <div className="space-y-10">
         <ComponentPreview
-          code={`import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/ascendra-ui/shadcn";
+          code={`import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/ascendra-ui";
 
 <TooltipProvider delayDuration={200}>
   <Tooltip>
