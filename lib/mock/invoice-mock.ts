@@ -407,7 +407,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: true,
         optional: true,
         span: 'full',
-        info: 'Optional date window',
+        maxRangeDays: 30,
+        info: 'Optional date window, up to 30 days',
         description: 'Optionally narrow results by due date window',
       },
 
