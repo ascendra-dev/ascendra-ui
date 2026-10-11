@@ -600,6 +600,7 @@ Full-featured calendar built on react-day-picker. Supports single, multiple, and
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `fixedWeeks` | `boolean` | `true` | Always draw 6 week rows (padding with next-month days), so the height never changes while paging months — a popover opened above its field keeps its arrows under the cursor. Also on in DatePicker and DateRangePicker. |
 | `mode` | `'single' \| 'multiple' \| 'range'` | — | Selection mode. |
 | `selected` | `Date \| Date[] \| DateRange \| undefined` | — | Controlled selected value. |
 | `onSelect` | `function` | — | Called when the selection changes. |

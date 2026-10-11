@@ -704,6 +704,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['Calendar'],
     props: [
+      { name: 'fixedWeeks', type: 'boolean', default: 'true', description: 'Always draw 6 week rows (padding with next-month days), so the height never changes while paging months — a popover opened above its field keeps its arrows under the cursor. Also on in DatePicker and DateRangePicker.' },
       { name: 'mode', type: "'single' | 'multiple' | 'range'", description: 'Selection mode.' },
       { name: 'selected', type: 'Date | Date[] | DateRange | undefined', description: 'Controlled selected value.' },
       { name: 'onSelect', type: 'function', description: 'Called when the selection changes.' },
