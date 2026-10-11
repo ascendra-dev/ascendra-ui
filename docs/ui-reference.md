@@ -737,13 +737,17 @@ Modal dialog with header, body, and footer slots. Centered overlay with max-w-sm
 
 Slide-out drawer panel that opens from any edge of the screen.
 
-- **Import:** `import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose } from "@/ascendra-ui"`
+- **Import:** `import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose, SheetNavigator } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/overlay/sheet](/showcase/overlay/sheet)
 
 **Props**
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `index (SheetNavigator)` | `number` | — | Zero-based position of the item the sheet shows. Renders "‹ 3 of 10 ›" beside the close button. |
+| `count (SheetNavigator)` | `number` | — | Number of navigable items. Previous/next disable at either end. |
+| `onIndexChange (SheetNavigator)` | `(index: number) => void` | — | Called with index ± 1. |
+| `keyboard (SheetNavigator)` | `boolean` | `true` | ArrowUp/ArrowDown step while mounted (ignored inside inputs). For a DataTable, use DataTableSheetNavigator (selectedId, onSelect) — it steps through the rows the table is showing. |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Edge the sheet slides in from (on SheetContent). |
 | `showCloseButton` | `boolean` | `true` | Show the × close button (on SheetContent). |
 
@@ -920,7 +924,7 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 
 Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
 
-- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableExportButton, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, DataTableCopyValueAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableExportButton, DataTableSheetNavigator, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, DataTableCopyValueAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table](/showcase/data-table)
 
 **Props**

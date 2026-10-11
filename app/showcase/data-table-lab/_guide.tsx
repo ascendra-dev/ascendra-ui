@@ -474,6 +474,11 @@ function ToolbarSection() {
               "Renders one chip per active filter. Each chip is a dashed-border button that opens a value picker. Includes a 'Clear filters' link. Hides itself when there are no active filters.",
           },
           {
+            name: "DataTableSheetNavigator",
+            description:
+              "Place inside a detail Sheet's SheetContent (rendered within the table's provider, which needs getRowId) to step previous/next through the rows the table is showing — the loaded batch with search, filters and sort applied — via selectedId and onSelect(row). ArrowUp/ArrowDown work too. Stops at the page's first/last row and hides once the selected row leaves the page. Pair with <DataTableRow active> to highlight the open row. The list-agnostic SheetNavigator (index, count, onIndexChange) does the same for any array.",
+          },
+          {
             name: "DataTableExportButton",
             description:
               "Exports every record matching the confirmed query — not just the loaded batch — via exportFn(params, queryId) => Promise<ExportResult>. Opens a confirmation dialog first; while exporting, the icon becomes a spinner and both buttons disable. Toasts success, a warning when the server truncated at its row cap, or the error message. Disabled until a query has run with at least one row, and while a filter panel is open. For an api-contract Rule 9 endpoint, exportFn is just fetchExport('/x.csv', params) from @/ascendra-ui/lib/api. Filename: the response's Content-Disposition, else the filename prop (default 'export.csv') with a timestamp inserted. title sets the label (default 'Export CSV'). Client-side search and column filters are not applied.",

@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
+
 import {
-  Button,
   type ColumnDef,
   createPageQueryFn,
   DataTable,
@@ -35,6 +36,7 @@ import {
   DataTableRowAction,
   DataTableRowActionItem,
   DataTableSearchInput,
+  DataTableSheetNavigator,
   DataTableSortDropdown,
   DataTableViewRowAction,
   DataTableWithQueryProvider,
@@ -51,6 +53,16 @@ import {
   QueryBar,
   type QueryFunctionMap,
   QueryParamPanel,
+  Sheet,
+  SheetBody,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetKey,
+  SheetProperties,
+  SheetSection,
+  SheetTitle,
+  SheetValue,
   SimpleBadge,
   TabContent,
   TabList,
@@ -127,6 +139,8 @@ const INVOICE_FIELD_OPTIONS: FieldOptionsMap = {
 };
 
 export default function DataTableLabPage() {
+  const [selected, setSelected] = useState<Invoice | null>(null);
+
   return (
     <>
       <PageHeader>
@@ -201,7 +215,7 @@ export default function DataTableLabPage() {
                     </DataTableHeader>
                     <DataTableBody>
                       {(row: Invoice) => (
-                        <DataTableRow key={row.id}>
+                        <DataTableRow key={row.id} active={row.id === selected?.id}>
                           <DataTableCheckboxCell rowId={String(row.id)} />
                           <DataTableCell column="invoiceNumber">
                             <div>
@@ -255,7 +269,9 @@ export default function DataTableLabPage() {
                           <DataTableRowAction
                             variant="visible"
                             onAction={(id) =>
-                              console.log("row action:", id, row.id)
+                              id === "view"
+                                ? setSelected(row)
+                                : console.log("row action:", id, row.id)
                             }
                           >
                             <DropdownMenuLabel>
@@ -301,6 +317,34 @@ export default function DataTableLabPage() {
                   <DataTableEmptyBody />
                   <DataTableFoot />
                 </DataTableWrapper>
+                {selected && (
+                  <Sheet open onOpenChange={(open) => !open && setSelected(null)}>
+                    <SheetContent>
+                      <DataTableSheetNavigator<Invoice>
+                        selectedId={String(selected.id)}
+                        onSelect={setSelected}
+                      />
+                      <SheetHeader>
+                        <SheetTitle>{selected.invoiceNumber}</SheetTitle>
+                        <SheetDescription>{selected.title}</SheetDescription>
+                      </SheetHeader>
+                      <SheetBody>
+                        <SheetSection>
+                          <SheetProperties>
+                            <SheetKey>Client</SheetKey>
+                            <SheetValue>{selected.clientName}</SheetValue>
+                            <SheetKey>Amount</SheetKey>
+                            <SheetValue>{formatAmount(selected.amount)}</SheetValue>
+                            <SheetKey>Status</SheetKey>
+                            <SheetValue>{selected.status}</SheetValue>
+                            <SheetKey>Due</SheetKey>
+                            <SheetValue>{formatDate(selected.dueDate)}</SheetValue>
+                          </SheetProperties>
+                        </SheetSection>
+                      </SheetBody>
+                    </SheetContent>
+                  </Sheet>
+                )}
               </DataTableWithQueryProvider>
             </MainContent>
           </TabContent>
