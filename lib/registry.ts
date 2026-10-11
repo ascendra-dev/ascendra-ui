@@ -342,6 +342,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'keyboard (SheetNavigator)', type: 'boolean', default: 'true', description: 'ArrowUp/ArrowDown step while mounted (ignored inside inputs). For a DataTable, use DataTableSheetNavigator (selectedId, onSelect) — it steps through the rows the table is showing.' },
       { name: 'side', type: "'top' | 'right' | 'bottom' | 'left'", default: "'right'", description: 'Edge the sheet slides in from (on SheetContent).' },
       { name: 'showCloseButton', type: 'boolean', default: 'true', description: 'Show the × close button (on SheetContent).' },
+      { name: 'lockScroll', type: 'boolean', default: 'true', description: 'false keeps the page behind scrollable (on Sheet). An outside click still only closes the sheet — a transparent layer takes it, so the row/button underneath never fires. Use for inspector-style detail sheets; keep the default for forms.' },
     ],
   },
 

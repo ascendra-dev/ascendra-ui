@@ -318,7 +318,7 @@ export default function DataTableLabPage() {
                   <DataTableFoot />
                 </DataTableWrapper>
                 {selected && (
-                  <Sheet open onOpenChange={(open) => !open && setSelected(null)}>
+                  <Sheet open lockScroll={false} onOpenChange={(open) => !open && setSelected(null)}>
                     <SheetContent>
                       <DataTableSheetNavigator<Invoice>
                         selectedId={String(selected.id)}

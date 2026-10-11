@@ -750,6 +750,7 @@ Slide-out drawer panel that opens from any edge of the screen.
 | `keyboard (SheetNavigator)` | `boolean` | `true` | ArrowUp/ArrowDown step while mounted (ignored inside inputs). For a DataTable, use DataTableSheetNavigator (selectedId, onSelect) — it steps through the rows the table is showing. |
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Edge the sheet slides in from (on SheetContent). |
 | `showCloseButton` | `boolean` | `true` | Show the × close button (on SheetContent). |
+| `lockScroll` | `boolean` | `true` | false keeps the page behind scrollable (on Sheet). An outside click still only closes the sheet — a transparent layer takes it, so the row/button underneath never fires. Use for inspector-style detail sheets; keep the default for forms. |
 
 ---
 
