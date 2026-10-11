@@ -296,7 +296,7 @@ function QueryParamPanelInner() {
                 disabled={!canCancelPending}
                 onClick={cancelPending}
               >
-                <XIcon className="size-4" />
+                <XIcon className="size-3.5" />
               </Button>
             </div>
           </div>
