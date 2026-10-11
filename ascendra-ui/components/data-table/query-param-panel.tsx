@@ -293,7 +293,6 @@ function QueryParamPanelInner() {
                 size="sm"
                 className="text-muted-foreground hover:text-foreground size-7 shrink-0 px-0"
                 aria-label="Close filter and return to the previous results"
-                title={canCancelPending ? "Close" : "No previous results to return to"}
                 disabled={!canCancelPending}
                 onClick={cancelPending}
               >
