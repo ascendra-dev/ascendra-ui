@@ -1,4 +1,5 @@
-import type { PageListResponse } from '@/ascendra-ui';
+import { objectsToCsv } from '@/ascendra-ui/utils/common.util';
+import type { ExportResult, PageListResponse } from '@/ascendra-ui';
 
 export type InvoiceStatus = 'Paid' | 'Pending' | 'Overdue' | 'Cancelled';
 
@@ -162,6 +163,27 @@ export async function fetchMockInvoices(
   return {
     data: pageRows,
     meta: { page: safeBatch, perPage: pageSize, total: allRows.length, totalPages },
+  };
+}
+
+/** Mimics an api-contract Rule 9 export route — the whole filtered result, capped at EXPORT_LIMIT rows. */
+const EXPORT_LIMIT = 10;
+
+export async function exportMockInvoices(queryId: string): Promise<ExportResult> {
+  await delay(1500 + Math.random() * 1000);
+
+  if (Math.random() < ERROR_RATE) {
+    throw new Error('Export failed. The mock service rolled a bad number.');
+  }
+
+  const allRows = filterByQuery(queryId);
+  const rows = allRows.slice(0, EXPORT_LIMIT);
+  return {
+    blob: new Blob([objectsToCsv(rows)], { type: 'text/csv' }),
+    filename: `invoices-${queryId}.csv`,
+    rowCount: rows.length,
+    truncated: allRows.length > EXPORT_LIMIT,
+    limit: EXPORT_LIMIT,
   };
 }
 

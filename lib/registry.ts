@@ -758,7 +758,7 @@ export const registry: Record<string, ComponentMeta> = {
       'DataTableSearchInput', 'DataTableColumnManager', 'DataTableSortDropdown',
       'DataTableFilterDropdown', 'DataTableFilterBar', 'DataTableFilterItem',
       'DataTableSortIcon', 'DataTableCheckboxCell', 'DataTableCheckboxHead',
-      'DataTableErrorBody', 'DataTableBar', 'DataTableBarAction', 'DataTableBarContent',
+      'DataTableErrorBody', 'DataTableBar', 'DataTableBarAction', 'DataTableBarContent', 'DataTableExportButton',
       'DataTableHeadAction', 'DataTableHeadActionItem',
       'DataTableExportHeadAction', 'DataTableRefreshHeadAction',
       'DataTableManageColumnsHeadAction', 'DataTableBulkExportHeadAction', 'DataTableBulkDeleteHeadAction',

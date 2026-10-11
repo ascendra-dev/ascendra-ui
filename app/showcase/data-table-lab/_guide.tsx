@@ -440,6 +440,7 @@ function ToolbarSection() {
     <DataTableFilterDropdown />   ← add filter chips
   </DataTableBarContent>
   <DataTableBarAction>
+    <DataTableExportButton exportFn={exportFn} />  ← full-query export
     <Button size="sm">+ Add Item</Button>
   </DataTableBarAction>
 </DataTableBar>
@@ -471,6 +472,11 @@ function ToolbarSection() {
             name: "DataTableFilterBar",
             description:
               "Renders one chip per active filter. Each chip is a dashed-border button that opens a value picker. Includes a 'Clear filters' link. Hides itself when there are no active filters.",
+          },
+          {
+            name: "DataTableExportButton",
+            description:
+              "Exports every record matching the confirmed query — not just the loaded batch — via exportFn(params, queryId) => Promise<ExportResult>. Opens a confirmation dialog first; while exporting, the icon becomes a spinner and both buttons disable. Toasts success, a warning when the server truncated at its row cap, or the error message. Disabled until a query has run with at least one row, and while a filter panel is open. For an api-contract Rule 9 endpoint, exportFn is just fetchExport('/x.csv', params) from @/ascendra-ui/lib/api. Filename: the response's Content-Disposition, else the filename prop (default 'export.csv') with a timestamp inserted. title sets the label (default 'Export CSV'). Client-side search and column filters are not applied.",
           },
         ].map(({ name, description }) => (
           <div key={name} className="flex flex-col gap-1">

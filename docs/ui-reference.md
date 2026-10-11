@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-09-27.
+> Auto-generated on 2026-10-11.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 66  
+**Primitive components:** 67  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -29,7 +29,7 @@
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Tooltip |
+| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Tooltip, Id Text |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -460,6 +460,7 @@ Custom select dropdown with scroll buttons and size variants.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `size` | `'sm' \| 'default'` | `'default'` | Size of the trigger (on SelectTrigger). |
+| `showClear` | `boolean` | `false` | Show the × clear button in place of the chevron while a value is selected (on SelectTrigger). Backspace/Delete on the focused trigger also clears. |
 | `position` | `'popper' \| 'item-aligned'` | `'popper'` | Positioning strategy of the dropdown (on SelectContent). |
 
 ---
@@ -919,7 +920,7 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 
 Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
 
-- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, DataTableCopyValueAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableExportButton, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, DataTableCopyValueAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table](/showcase/data-table)
 
 **Props**
@@ -1228,6 +1229,26 @@ Wraps any children — plain text, multiple elements, a custom component — in 
 | `tooltip` | `React.ReactNode` | — | Content shown inside the tooltip on hover/focus. |
 | `children` | `React.ReactNode` | — | What gets wrapped — any shape, any number of nodes. |
 | `className` | `string` | — | Applied to the wrapping span. |
+
+---
+
+#### Id Text
+
+Fixed-monospace, truncated display for a uuid/id-shaped value ("head…tail"), with copy-to-clipboard and a full-value hover tooltip on by default. Composes WithCopyText and WithTooltip rather than reimplementing either.
+
+- **Import:** `import { IdText } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/id-text](/showcase/util/id-text)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | The full, untruncated id/uuid value — copied and shown in the tooltip in full, regardless of size. |
+| `size` | `'full' \| 'sm' \| 'md' \| 'lg'` | `'full'` | 'full' shows the value as-is; 'sm'/'md'/'lg' truncate to "head…tail" with progressively more characters. |
+| `copyable` | `boolean` | `true` | Copy-to-clipboard on click, with icon feedback. |
+| `showTooltip` | `boolean` | `true` | Hover tooltip showing the full value. |
+| `className` | `string` | — | Applied to the text span — the monospace font itself is fixed. |
+| `style` | `React.CSSProperties` | — | Applied to the text span, e.g. to override font-size. |
 
 ---
 
