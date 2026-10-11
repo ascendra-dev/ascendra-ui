@@ -47,21 +47,24 @@ export interface ApiResponse<T> {
   meta?: PaginationMeta;
 }
 
+/** api-contract.md Rule 1 — every error response body, flat. */
 export interface ApiErrorPayload {
-  success: false;
-  error: {
-    code: string;
-    message: string;
-    details?: Record<string, string[]>;
-  };
+  statusCode: number;
+  /** The HTTP reason phrase, e.g. "Unprocessable Entity". */
+  error: string;
+  /** An array only when several fields fail validation at once. */
+  message: string | string[];
+  /** Set only for a typed business-rule violation (Rule 2) — branch on this, never on message. */
+  code: string | null;
+  path: string;
 }
 
 export class ApiError extends Error {
   constructor(
+    /** The server's Rule 1 `code`, else `HTTP_<status>`, `TIMEOUT` or `NETWORK_ERROR`. */
     public readonly code: string,
     message: string,
-    public readonly status: number,
-    public readonly details?: Record<string, string[]>
+    public readonly status: number
   ) {
     super(message);
     this.name = 'ApiError';

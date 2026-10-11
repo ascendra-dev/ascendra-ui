@@ -11,18 +11,13 @@ function toApiError(err: AxiosError): ApiError {
     return new ApiError(code, 'Network request failed. Please check your connection.', status);
   }
 
-  const payload = err.response.data as ApiErrorPayload | undefined;
-
-  if (payload && payload.success === false) {
-    return new ApiError(
-      payload.error.code,
-      payload.error.message,
-      status,
-      payload.error.details
-    );
+  const payload = err.response.data as Partial<ApiErrorPayload> | undefined;
+  const message = Array.isArray(payload?.message) ? payload.message.join('; ') : payload?.message;
+  if (message) {
+    return new ApiError(payload?.code ?? `HTTP_${status}`, message, status);
   }
 
-  // Fallback for non-standard error shapes
+  // No Rule 1 body (e.g. a proxy's HTML error page)
   const fallbackMessages: Record<number, string> = {
     400: 'Bad request.',
     401: 'You are not authenticated.',
