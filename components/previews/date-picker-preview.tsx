@@ -12,6 +12,7 @@ const meta = registry["date-picker"];
 export function DatePickerDocContent() {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [dateDropdown, setDateDropdown] = useState<Date | undefined>(undefined);
+  const [clearableDate, setClearableDate] = useState<Date | undefined>(() => new Date());
 
   return (
     <div className="space-y-10">
@@ -31,6 +32,32 @@ const [date, setDate] = useState<Date | undefined>(undefined);
       {/* Examples */}
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>
+
+        {/* Clearable */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Clearable</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              showClear
+            </code>{" "}
+            to show a × while a value is set. Clicking it, or pressing
+            Backspace/Delete on the focused trigger, clears the value without
+            opening the calendar. The query filter panel turns it on for every
+            optional date field.
+          </p>
+          <ComponentPreview
+            code={`<DatePicker value={date} onChange={setDate} showClear />`}
+          >
+            <div className="w-64">
+              <DatePicker
+                value={clearableDate}
+                onChange={setClearableDate}
+                showClear
+              />
+            </div>
+          </ComponentPreview>
+        </div>
 
         {/* With year/month dropdown */}
         <div className="space-y-3">

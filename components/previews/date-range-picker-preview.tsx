@@ -15,6 +15,12 @@ export function DateRangePickerDocContent() {
   const [singleRange, setSingleRange] = useState<DateRange | undefined>(
     undefined
   );
+  const [clearableRange, setClearableRange] = useState<DateRange | undefined>(
+    () => {
+      const to = new Date();
+      return { from: new Date(to.getFullYear(), to.getMonth(), to.getDate() - 6), to };
+    }
+  );
 
   return (
     <div className="space-y-10">
@@ -59,6 +65,32 @@ const [range, setRange] = useState<DateRange | undefined>(undefined);
                 value={singleRange}
                 onChange={setSingleRange}
                 numberOfMonths={1}
+              />
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Clearable */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Clearable</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              showClear
+            </code>{" "}
+            to show a × while a value is set. Clicking it, or pressing
+            Backspace/Delete on the focused trigger, clears the value without
+            opening the calendar. The query filter panel turns it on for every
+            optional date field.
+          </p>
+          <ComponentPreview
+            code={`<DateRangePicker value={range} onChange={setRange} showClear />`}
+          >
+            <div className="w-72">
+              <DateRangePicker
+                value={clearableRange}
+                onChange={setClearableRange}
+                showClear
               />
             </div>
           </ComponentPreview>

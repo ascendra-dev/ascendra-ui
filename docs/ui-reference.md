@@ -629,6 +629,8 @@ Popover-based single date picker with a trigger button and an embedded Calendar.
 | `invalid` | `boolean` | `false` | Applies destructive outline to the trigger. |
 | `fromYear` | `number` | — | Enables year/month dropdown starting from this year. |
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
+| `showClear` | `boolean` | `false` | Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields. |
+| `minDate / maxDate` | `Date` | — | Earliest / latest selectable day — days outside are disabled. |
 | `captionLayout` | `CalendarProps['captionLayout']` | — | Caption style passed to the inner Calendar. |
 
 ---
@@ -652,6 +654,9 @@ Popover-based date range picker with configurable month count and an embedded ra
 | `invalid` | `boolean` | `false` | Applies destructive outline to the trigger. |
 | `fromYear` | `number` | — | Enables year/month dropdown starting from this year. |
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
+| `showClear` | `boolean` | `false` | Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields. |
+| `minDate / maxDate` | `Date` | — | Earliest / latest selectable day — days outside are disabled. |
+| `maxRangeDays` | `number` | — | Longest range, counting both ends — once a start is picked, days beyond it are disabled. |
 
 ---
 

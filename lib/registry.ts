@@ -729,6 +729,8 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies destructive outline to the trigger.' },
       { name: 'fromYear', type: 'number', description: 'Enables year/month dropdown starting from this year.' },
       { name: 'toYear', type: 'number', description: 'Enables year/month dropdown ending at this year.' },
+      { name: 'showClear', type: 'boolean', default: 'false', description: 'Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields.' },
+      { name: 'minDate / maxDate', type: 'Date', description: 'Earliest / latest selectable day — days outside are disabled.' },
       { name: 'captionLayout', type: "CalendarProps['captionLayout']", description: 'Caption style passed to the inner Calendar.' },
     ],
   },
@@ -748,6 +750,9 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies destructive outline to the trigger.' },
       { name: 'fromYear', type: 'number', description: 'Enables year/month dropdown starting from this year.' },
       { name: 'toYear', type: 'number', description: 'Enables year/month dropdown ending at this year.' },
+      { name: 'showClear', type: 'boolean', default: 'false', description: 'Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields.' },
+      { name: 'minDate / maxDate', type: 'Date', description: 'Earliest / latest selectable day — days outside are disabled.' },
+      { name: 'maxRangeDays', type: 'number', description: 'Longest range, counting both ends — once a start is picked, days beyond it are disabled.' },
     ],
   },
 

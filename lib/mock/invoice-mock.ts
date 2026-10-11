@@ -404,7 +404,6 @@ export const PRESET_QUERIES: QueryDef[] = [
         name: 'dueDateRange',
         label: 'Due Date Range',
         type: 'daterange',
-        required: true,
         optional: true,
         span: 'full',
         maxRangeDays: 30,
