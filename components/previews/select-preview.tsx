@@ -43,6 +43,52 @@ export function SelectDocContent() {
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>
 
+        {/* With clear button */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            With clear button
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Set{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              showClear
+            </code>{" "}
+            on{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SelectTrigger
+            </code>{" "}
+            to replace the chevron with a × button while a value is selected —
+            the same behavior as{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              ComboboxInput
+            </code>
+            . Backspace or Delete on the focused trigger also clears it.
+          </p>
+          <ComponentPreview
+            code={`<Select>
+  <SelectTrigger showClear>
+    <SelectValue placeholder="Select status" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="paid">Paid</SelectItem>
+    <SelectItem value="pending">Pending</SelectItem>
+    <SelectItem value="overdue">Overdue</SelectItem>
+  </SelectContent>
+</Select>`}
+          >
+            <Select>
+              <SelectTrigger showClear>
+                <SelectValue placeholder="Select status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="paid">Paid</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="overdue">Overdue</SelectItem>
+              </SelectContent>
+            </Select>
+          </ComponentPreview>
+        </div>
+
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Sizes</h3>
           <p className="text-xs text-muted-foreground">

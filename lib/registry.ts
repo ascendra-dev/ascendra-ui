@@ -279,6 +279,7 @@ export const registry: Record<string, ComponentMeta> = {
     importNames: ['Select', 'SelectTrigger', 'SelectContent', 'SelectItem', 'SelectGroup', 'SelectLabel', 'SelectValue', 'SelectSeparator'],
     props: [
       { name: 'size', type: "'sm' | 'default'", default: "'default'", description: 'Size of the trigger (on SelectTrigger).' },
+      { name: 'showClear', type: 'boolean', default: 'false', description: 'Show the × clear button in place of the chevron while a value is selected (on SelectTrigger). Backspace/Delete on the focused trigger also clears.' },
       { name: 'position', type: "'popper' | 'item-aligned'", default: "'popper'", description: 'Positioning strategy of the dropdown (on SelectContent).' },
     ],
   },
