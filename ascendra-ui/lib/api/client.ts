@@ -1,7 +1,7 @@
 import axios, { type AxiosError } from 'axios';
 import { getSession } from 'next-auth/react';
 
-import { ApiError, type ApiErrorPayload, type ApiResponse } from './types';
+import { ApiError, type ApiErrorPayload } from './types';
 
 function toApiError(err: AxiosError): ApiError {
   const status = err.response?.status ?? 0;
@@ -82,5 +82,4 @@ apiClient.interceptors.response.use(
 );
 
 export { apiClient };
-export type { ApiResponse };
 

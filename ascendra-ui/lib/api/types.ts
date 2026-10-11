@@ -1,10 +1,3 @@
-export interface PaginationMeta {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
-
 /** api-contract.md Rule 4, page-based list meta (the default shape). */
 export interface PageMeta {
   page: number;
@@ -38,13 +31,6 @@ export interface ExportResult {
   truncated?: boolean;
   /** The server's row cap (`X-Export-Limit`). */
   limit?: number;
-}
-
-export interface ApiResponse<T> {
-  success: true;
-  data: T;
-  message?: string;
-  meta?: PaginationMeta;
 }
 
 /** api-contract.md Rule 1 — every error response body, flat. */
