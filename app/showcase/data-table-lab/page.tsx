@@ -1,6 +1,62 @@
 "use client";
 
-import { Button, type ColumnDef, createPageQueryFn, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableBulkDeleteHeadAction, DataTableBulkExportHeadAction, DataTableCell, DataTableCheckboxCell, DataTableCheckboxHead, DataTableColumnManager, DataTableCopyValueAction, DataTableDeleteRowAction, DataTableDuplicateRowAction, DataTableEditRowAction, DataTableEmptyBody, DataTableErrorBody, DataTableExportButton, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeadAction, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableRow, DataTableRowAction, DataTableRowActionItem, DataTableSearchInput, DataTableSortDropdown, DataTableViewRowAction, DataTableWithQueryProvider, DataTableWrapper, DropdownMenuLabel, DropdownMenuSeparator, type FieldOptionsMap, MainContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, QueryBar, type QueryFunctionMap, QueryParamPanel, SimpleBadge, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
+import {
+  Button,
+  type ColumnDef,
+  createPageQueryFn,
+  DataTable,
+  DataTableBar,
+  DataTableBarAction,
+  DataTableBarContent,
+  DataTableBody,
+  DataTableBulkDeleteHeadAction,
+  DataTableBulkExportHeadAction,
+  DataTableCell,
+  DataTableCheckboxCell,
+  DataTableCheckboxHead,
+  DataTableColumnManager,
+  DataTableCopyValueAction,
+  DataTableDeleteRowAction,
+  DataTableDuplicateRowAction,
+  DataTableEditRowAction,
+  DataTableEmptyBody,
+  DataTableErrorBody,
+  DataTableExportButton,
+  DataTableFilterBar,
+  DataTableFilterDropdown,
+  DataTableFoot,
+  DataTableHead,
+  DataTableHeadAction,
+  DataTableHeader,
+  DataTableHeaderRow,
+  DataTableHighlight,
+  DataTableLoadingBody,
+  DataTableRow,
+  DataTableRowAction,
+  DataTableRowActionItem,
+  DataTableSearchInput,
+  DataTableSortDropdown,
+  DataTableViewRowAction,
+  DataTableWithQueryProvider,
+  DataTableWrapper,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  type FieldOptionsMap,
+  MainContent,
+  PageHeader,
+  PageHeaderGroup,
+  PageMain,
+  PageSubtitle,
+  PageTitle,
+  QueryBar,
+  type QueryFunctionMap,
+  QueryParamPanel,
+  SimpleBadge,
+  TabContent,
+  TabList,
+  Tabs,
+  TabTrigger,
+} from "@/ascendra-ui";
 import {
   PRESET_QUERIES,
   exportMockInvoices,
@@ -8,9 +64,6 @@ import {
   type Invoice,
   type InvoiceStatus,
 } from "@/lib/mock/invoice-mock";
-
-
-
 
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
@@ -38,7 +91,10 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 ];
 
 const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
-  PRESET_QUERIES.map((q) => [q.id, createPageQueryFn((_params, page) => fetchMockInvoices(q.id, page))]),
+  PRESET_QUERIES.map((q) => [
+    q.id,
+    createPageQueryFn((_params, page) => fetchMockInvoices(q.id, page)),
+  ]),
 );
 
 // Demonstrates dynamic fieldOptions — overrides static options in PRESET_QUERIES
@@ -109,9 +165,10 @@ export default function DataTableLabPage() {
                   </DataTableBarContent>
                   <DataTableBarAction>
                     <DataTableExportButton
-                      exportFn={(_params, queryId) => exportMockInvoices(queryId)}
+                      exportFn={(_params, queryId) =>
+                        exportMockInvoices(queryId)
+                      }
                     />
-                    <Button>+ Add Invoice</Button>
                   </DataTableBarAction>
                 </DataTableBar>
                 <DataTableFilterBar />
