@@ -12,6 +12,7 @@ const meta = registry["date-picker"];
 export function DatePickerDocContent() {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [dateDropdown, setDateDropdown] = useState<Date | undefined>(undefined);
+  const [editableDate, setEditableDate] = useState<Date | undefined>(undefined);
   const [clearableDate, setClearableDate] = useState<Date | undefined>(() => new Date());
 
   return (
@@ -32,6 +33,33 @@ const [date, setDate] = useState<Date | undefined>(undefined);
       {/* Examples */}
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>
+
+        {/* Editable */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Editable</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to type the date as well as pick it
+            (dd/mm/yyyy; /, - or . all work). It&apos;s read on blur or Enter;
+            unreadable text reverts to the last value and empty text clears.
+            The calendar button opens the picker, so typing is never
+            interrupted.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the day/month order (default
+            dd/MM/yyyy).
+          </p>
+          <ComponentPreview
+            code={`<DatePicker value={date} onChange={setDate} editable showClear />`}
+          >
+            <div className="w-64">
+              <DatePicker
+                value={editableDate}
+                onChange={setEditableDate}
+                editable
+                showClear
+              />
+            </div>
+          </ComponentPreview>
+        </div>
 
         {/* Clearable */}
         <div className="space-y-3">

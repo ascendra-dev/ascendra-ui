@@ -632,6 +632,8 @@ Popover-based single date picker with a trigger button and an embedded Calendar.
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
 | `showClear` | `boolean` | `false` | Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields. |
 | `minDate / maxDate` | `Date` | — | Earliest / latest selectable day — days outside are disabled. |
+| `editable` | `boolean` | `false` | Type as well as pick: the field becomes a text input read on blur/Enter (unreadable text reverts, empty clears) and a calendar button opens the picker. A range is typed in the same single field. |
+| `dateFormat` | `string` | `'dd/MM/yyyy'` | date-fns pattern typed and shown when editable; /, - and . separators are all accepted. |
 | `captionLayout` | `CalendarProps['captionLayout']` | — | Caption style passed to the inner Calendar. |
 
 ---
@@ -657,6 +659,8 @@ Popover-based date range picker with configurable month count and an embedded ra
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
 | `showClear` | `boolean` | `false` | Show a × while a value is set; clicking it (or Backspace/Delete on the trigger) clears to undefined without opening the calendar. The query panel turns it on for optional fields. |
 | `minDate / maxDate` | `Date` | — | Earliest / latest selectable day — days outside are disabled. |
+| `editable` | `boolean` | `false` | Type as well as pick: the field becomes a text input read on blur/Enter (unreadable text reverts, empty clears) and a calendar button opens the picker. A range is typed in the same single field. |
+| `dateFormat` | `string` | `'dd/MM/yyyy'` | date-fns pattern typed and shown when editable; /, - and . separators are all accepted. |
 | `maxRangeDays` | `number` | — | Longest range, counting both ends — once a start is picked, days beyond it are disabled. |
 
 ---

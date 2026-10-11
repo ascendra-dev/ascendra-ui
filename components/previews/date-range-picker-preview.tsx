@@ -15,6 +15,7 @@ export function DateRangePickerDocContent() {
   const [singleRange, setSingleRange] = useState<DateRange | undefined>(
     undefined
   );
+  const [editableRange, setEditableRange] = useState<DateRange | undefined>(undefined);
   const [clearableRange, setClearableRange] = useState<DateRange | undefined>(
     () => {
       const to = new Date();
@@ -65,6 +66,34 @@ const [range, setRange] = useState<DateRange | undefined>(undefined);
                 value={singleRange}
                 onChange={setSingleRange}
                 numberOfMonths={1}
+              />
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Editable */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Editable</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">editable</code> to type the range as well as pick it,
+            in one field — e.g. 14/07/2026 – 11/10/2026. Any text between
+            the two dates works (14-7-2026 to 11-10-2026 too). It&apos;s read on
+            blur or Enter: one date is a start-only range, an end typed first
+            is swapped, unreadable text reverts and empty text clears. The
+            calendar button opens the picker.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">dateFormat</code> sets the day/month order (default
+            dd/MM/yyyy).
+          </p>
+          <ComponentPreview
+            code={`<DateRangePicker value={range} onChange={setRange} editable showClear />`}
+          >
+            <div className="w-80">
+              <DateRangePicker
+                value={editableRange}
+                onChange={setEditableRange}
+                editable
+                showClear
               />
             </div>
           </ComponentPreview>
