@@ -60,44 +60,63 @@ export function SortField({
   disabled,
   onBlur,
 }: SortFieldProps) {
-  const keys = value.map(parseSortToken).filter((key): key is SortKey => key !== null);
+  const keys = value
+    .map(parseSortToken)
+    .filter((key): key is SortKey => key !== null);
   const selectedFields = keys.map((key) => key.field);
   const atMax = maxItems !== undefined && keys.length >= maxItems;
-  const labelOf = (field: string) => options.find((o) => o.value === field)?.label ?? field;
+  const labelOf = (field: string) =>
+    options.find((o) => o.value === field)?.label ?? field;
 
   // Selecting keeps each kept column's direction and adds a new one ascending, last.
   const handleFieldsChange = (fields: string[]) => {
     const byField = new Map(keys.map((key) => [key.field, key]));
-    onChange(fields.map((field) => formatSortToken(byField.get(field) ?? { field, direction: "asc" })));
+    onChange(
+      fields.map((field) =>
+        formatSortToken(byField.get(field) ?? { field, direction: "asc" }),
+      ),
+    );
   };
 
   const toggleDirection = (field: string) => {
     onChange(
       keys.map((key) =>
         formatSortToken(
-          key.field === field ? { field, direction: key.direction === "asc" ? "desc" : "asc" } : key,
+          key.field === field
+            ? { field, direction: key.direction === "asc" ? "desc" : "asc" }
+            : key,
         ),
       ),
     );
   };
 
   return (
-    <Combobox multiple value={selectedFields} onValueChange={handleFieldsChange} disabled={disabled}>
+    <Combobox
+      multiple
+      value={selectedFields}
+      onValueChange={handleFieldsChange}
+      disabled={disabled}
+    >
       <ComboboxChips aria-invalid={invalid || undefined}>
         {keys.map((key, index) => {
           const label = labelOf(key.field);
           const descending = key.direction === "desc";
           return (
-            <ComboboxChipItem key={key.field} value={key.field} data-slot="sort-field-chip">
+            <ComboboxChipItem
+              key={key.field}
+              value={key.field}
+              data-slot="sort-field-chip"
+            >
               {keys.length > 1 && (
-                <span className="text-muted-foreground tabular-nums">{index + 1}</span>
+                <span className="text-muted-foreground tabular-nums">
+                  {index + 1}
+                </span>
               )}
               {label}
               <button
                 type="button"
                 data-slot="sort-field-direction"
                 aria-label={`${label}: ${descending ? "descending" : "ascending"} — switch to ${descending ? "ascending" : "descending"}`}
-                title={descending ? "Descending" : "Ascending"}
                 disabled={disabled}
                 // Keep the press on the button — the chip and its input would otherwise take it.
                 onMouseDown={(e) => e.preventDefault()}
@@ -105,12 +124,13 @@ export function SortField({
                   e.stopPropagation();
                   toggleDirection(key.field);
                 }}
-                className="text-muted-foreground hover:text-foreground flex items-center rounded-xs p-0.5 hover:bg-black/5 focus-visible:outline-1 dark:hover:bg-white/10"
+                // Same look as the chip's remove button beside it.
+                className="flex items-center justify-center rounded-xs p-0.5 opacity-50 hover:bg-black/5 hover:opacity-100 focus-visible:outline-1 dark:hover:bg-white/10"
               >
                 {descending ? (
-                  <LuArrowDownWideNarrow className="size-3.5" />
+                  <LuArrowDownWideNarrow className="pointer-events-none size-3" />
                 ) : (
-                  <LuArrowUpNarrowWide className="size-3.5" />
+                  <LuArrowUpNarrowWide className="pointer-events-none size-3" />
                 )}
               </button>
             </ComboboxChipItem>

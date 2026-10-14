@@ -440,7 +440,7 @@ export const PRESET_QUERIES: QueryDef[] = [
       },
 
       // ── Sort & Options section ────────────────────────────────────────────
-      { _type: 'section', title: 'Sort & Options', showTitle: true },
+      { _type: 'section', title: 'Sorting Options', showTitle: false },
 
       {
         name: 'orderBy',
@@ -449,7 +449,8 @@ export const PRESET_QUERIES: QueryDef[] = [
         span: 'full',
         maxItems: 3,
         defaultValue: ['issuedAt:desc'],
-        info: 'In priority order — the arrow on each column switches ascending / descending',
+        description: 'In priority order — the arrow on each column switches ascending / descending',
+        mandatory: true,
         options: [
           { value: 'issuedAt', label: 'Issue Date' },
           { value: 'dueDate', label: 'Due Date' },
@@ -457,6 +458,7 @@ export const PRESET_QUERIES: QueryDef[] = [
           { value: 'clientName', label: 'Client' },
         ],
       },
+      { _type: 'section', title: '', showTitle: false },
       {
         name: 'includeArchived',
         label: 'Include Archived',
