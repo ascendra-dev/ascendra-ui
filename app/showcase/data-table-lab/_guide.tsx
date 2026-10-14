@@ -873,7 +873,7 @@ function QuerySystemSection() {
         <PropTable>
           <PropRow name="name" type="string" required description="Field name — key under which the value appears in QueryParamValues." />
           <PropRow name="label" type="string" required description="Human-readable label rendered above the input." />
-          <PropRow name="type" type="'text' | 'number' | 'select' | 'multiselect' | 'date' | 'daterange' | 'checkbox' | 'radio'" required description="Controls which input component is rendered." />
+          <PropRow name="type" type="'text' | 'number' | 'select' | 'multiselect' | 'date' | 'daterange' | 'checkbox' | 'radio' | 'sort'" required description="Controls which input component is rendered." />
           <PropRow name="options" type="SelectOption[]" description="Static options for select / multiselect / radio fields." />
           <PropRow name="required" type="boolean" description="Marks the field required in the Zod schema — validation fails on submit if empty." />
           <PropRow name="mandatory" type="boolean" description="Shows a red 'Mandatory' badge (visual only — combine with required for actual validation)." />
@@ -885,12 +885,48 @@ function QuerySystemSection() {
           <PropRow name="min / max" type="number" description="Min/max constraints for number inputs." />
           <PropRow name="minLength / maxLength" type="number" description="Length constraints for text inputs." />
           <PropRow name="pattern / patternMessage" type="string" description="text: regex source the whole value must match, and the message when it doesn't (default '<label> is not in the expected format'). An empty optional field skips it." />
-          <PropRow name="maxItems" type="number" description="multiselect: most items that may be selected." />
+          <PropRow name="maxItems" type="number" description="multiselect / sort: most items that may be selected." />
           <PropRow name="minDate / maxDate" type="DateExpr" description="date / daterange: earliest / latest allowed day, inclusive. 'today', a signed offset ('-90d', '+1d', '-2w', '-6m', '-1y') or 'YYYY-MM-DD' — resolved when the form opens, so it never goes stale. Out-of-range days are disabled in the picker and rejected with a message." />
           <PropRow name="maxRangeDays" type="number" description="daterange: longest allowed range, counting both ends. Once a start is picked, days beyond it are disabled; a longer range is rejected with a message. A required daterange also needs both ends." />
           <PropRow name="editable" type="boolean" description="date / daterange: adds a pencil that switches the field to a dd/mm/yyyy text box (a range in one field), read on blur/Enter; unreadable text reverts, empty clears. Clicking the field still opens the calendar." />
           <PropRow name="defaultValue" type="FieldDefaultValue" description="Starting value, and what Reset restores — a value of the field's own type; date takes a DateExpr, daterange { from: DateExpr; to?: DateExpr }. A saved draft for the query wins over it." />
         </PropTable>
+      </div>
+
+      {/* Sort fields */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">Sort fields</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          A <Code>type: &apos;sort&apos;</Code> param renders <Code>SortField</Code>:
+          the columns to sort by as chips in priority order, each with an
+          ascending / descending toggle (new columns start ascending). Its{" "}
+          <Code>options</Code> are the sortable columns. The value is a list of
+          sort tokens — <Code>&apos;amount&apos;</Code> for ascending,{" "}
+          <Code>&apos;issuedAt:desc&apos;</Code> for descending — so a default,
+          a saved query or a trigger URL (<Code>q.orderBy=issuedAt:desc,amount</Code>)
+          all carry it as-is. Send it with <Code>toOrderBy</Code>, which gives the
+          API contract&apos;s <Code>orderBy</Code> param.
+        </p>
+        <CodeBlock>{`// In the QueryDef's params
+{
+  name: "orderBy",
+  label: "Sort By",
+  type: "sort",
+  maxItems: 3,
+  defaultValue: ["issuedAt:desc"],   // newest first
+  options: [
+    { value: "issuedAt", label: "Issue Date" },
+    { value: "amount", label: "Amount" },
+  ],
+}
+
+// In its query function
+createPageQueryFn((params, page) =>
+  api.get<PageListResponse<Invoice>>("/invoices", {
+    page,
+    orderBy: toOrderBy(params.orderBy as string[]),  // "issuedAt:desc,amount"
+  }),
+);`}</CodeBlock>
       </div>
 
       {/* SectionBreak */}

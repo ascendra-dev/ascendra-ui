@@ -1,6 +1,6 @@
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-10-11.
+> Auto-generated on 2026-10-14.
 > Run `npm run gen:ui-docs` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
@@ -25,14 +25,14 @@ For the technical API (props, import paths, TypeScript types) see `docs/ui-refer
 
 | Stat | Count |
 |---|---|
-| Primitive components | 67 |
+| Primitive components | 68 |
 | Composite form patterns | 10 |
 | Dialog patterns | 12 |
 | Sheet patterns | 10 |
 | Drawer patterns | 8 |
 | Dashboard demos | 10 |
 | Report demos | 10 |
-| Showcase pages total | 121 |
+| Showcase pages total | 122 |
 
 ---
 
@@ -1847,7 +1847,7 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ## Showcase Gallery Entry Points
 
-The showcase has 121 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
+The showcase has 122 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
 
 | Section | Route |
 |---|---|

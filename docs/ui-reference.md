@@ -7,7 +7,7 @@
 
 ## Overview
 
-**Primitive components:** 67  
+**Primitive components:** 68  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -22,7 +22,7 @@
 | Reports | Report Header, Report Document, Report Content |
 | Charts | Chart Legend, Chart Target Legend |
 | Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, KPI Tile, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, With State, With Skeleton, With Loading, With Error, Toast |
-| Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
+| Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, Sort Field, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
 | Tables & Data | Table, Empty State, Data Table |
@@ -497,6 +497,27 @@ Searchable dropdown with single and multi-select (chips) modes, built on Base UI
 | `showClear` | `boolean` | `false` | Show the × clear button (on ComboboxInput). |
 | `showRemove` | `boolean` | `true` | Show the × remove button on each chip (on ComboboxChip). |
 | `disabled` | `boolean` | `false` | Disables the input (on ComboboxInput). |
+
+---
+
+#### Sort Field
+
+Picks the columns to sort by as chips in priority order, each toggling ascending / descending. The value is a list of sort tokens (`amount`, `issuedAt:desc`) — toOrderBy turns it into the API contract's `orderBy` param. Also a QueryDef param type: `type: 'sort'`.
+
+- **Import:** `import { SortField, toOrderBy, parseSortToken, formatSortToken } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/inputs/sort-field](/showcase/inputs/sort-field)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string[]` | — | Required. Sort tokens in priority order — 'amount' (ascending) or 'issuedAt:desc'. |
+| `onChange` | `(value: string[]) => void` | — | Required. Called with the new tokens when a column is added, removed or has its direction switched. |
+| `options` | `{ value: string; label: string }[]` | — | Required. Sortable columns — value is the column name sent to the backend. |
+| `maxItems` | `number` | — | Most columns that can be sorted on at once. |
+| `placeholder` | `string` | `'Sort by…'` | Shown while no column is chosen. |
+| `invalid` | `boolean` | `false` | Shows the invalid outline. |
+| `disabled` | `boolean` | `false` | Disables the field. |
 
 ---
 

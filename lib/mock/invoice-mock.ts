@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { objectsToCsv } from '@/ascendra-ui/utils/common.util';
+import { parseSortToken } from '@/ascendra-ui/utils/order-by.util';
 import type { ExportResult, PageListResponse, QueryParamValues } from '@/ascendra-ui';
 
 export type InvoiceStatus = 'Paid' | 'Pending' | 'Overdue' | 'Cancelled';
@@ -143,6 +144,21 @@ function filterByQuery(queryId: string, params: QueryParamValues = {}): Invoice[
   }
 }
 
+/** Applies sort tokens the way a backend applies `orderBy` — earlier tokens win, later ones break ties. */
+function orderRows(rows: Invoice[], tokens: string[] | undefined): Invoice[] {
+  const keys = (tokens ?? []).map(parseSortToken).filter((key) => key !== null);
+  if (!keys.length) return rows;
+  return [...rows].sort((a, b) => {
+    for (const { field, direction } of keys) {
+      const x = a[field as keyof Invoice] ?? '';
+      const y = b[field as keyof Invoice] ?? '';
+      const diff = typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y));
+      if (diff !== 0) return direction === 'desc' ? -diff : diff;
+    }
+    return 0;
+  });
+}
+
 // ─── Mock fetch ───────────────────────────────────────────────────────────────
 
 const ERROR_RATE = 0.08;
@@ -164,7 +180,7 @@ export async function fetchMockInvoices(
     throw new Error('Failed to load invoices. The mock service rolled a bad number.');
   }
 
-  const allRows = filterByQuery(queryId, params);
+  const allRows = orderRows(filterByQuery(queryId, params), params.orderBy as string[] | undefined);
   const totalPages = Math.max(1, Math.ceil(allRows.length / pageSize));
   const safeBatch = Math.min(Math.max(1, batch), totalPages);
   const start = (safeBatch - 1) * pageSize;
@@ -427,17 +443,18 @@ export const PRESET_QUERIES: QueryDef[] = [
       { _type: 'section', title: 'Sort & Options', showTitle: true },
 
       {
-        name: 'sortOrder',
-        label: 'Sort Order',
-        type: 'radio',
-        mandatory: true,
-        required: true,
+        name: 'orderBy',
+        label: 'Sort By',
+        type: 'sort',
         span: 'full',
+        maxItems: 3,
+        defaultValue: ['issuedAt:desc'],
+        info: 'In priority order — the arrow on each column switches ascending / descending',
         options: [
-          { value: 'newest', label: 'Newest First' },
-          { value: 'oldest', label: 'Oldest First' },
-          { value: 'highest', label: 'Highest Amount' },
-          { value: 'lowest', label: 'Lowest Amount' },
+          { value: 'issuedAt', label: 'Issue Date' },
+          { value: 'dueDate', label: 'Due Date' },
+          { value: 'amount', label: 'Amount' },
+          { value: 'clientName', label: 'Client' },
         ],
       },
       {

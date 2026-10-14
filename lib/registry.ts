@@ -585,6 +585,23 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'sort-field': {
+    slug: 'sort-field',
+    name: 'Sort Field',
+    description: 'Picks the columns to sort by as chips in priority order, each toggling ascending / descending. The value is a list of sort tokens (`amount`, `issuedAt:desc`) — toOrderBy turns it into the API contract\'s `orderBy` param. Also a QueryDef param type: `type: \'sort\'`.',
+    importPath: '@/ascendra-ui',
+    importNames: ['SortField', 'toOrderBy', 'parseSortToken', 'formatSortToken'],
+    props: [
+      { name: 'value', type: 'string[]', description: "Required. Sort tokens in priority order — 'amount' (ascending) or 'issuedAt:desc'." },
+      { name: 'onChange', type: '(value: string[]) => void', description: 'Required. Called with the new tokens when a column is added, removed or has its direction switched.' },
+      { name: 'options', type: '{ value: string; label: string }[]', description: 'Required. Sortable columns — value is the column name sent to the backend.' },
+      { name: 'maxItems', type: 'number', description: 'Most columns that can be sorted on at once.' },
+      { name: 'placeholder', type: 'string', default: "'Sort by…'", description: 'Shown while no column is chosen.' },
+      { name: 'invalid', type: 'boolean', default: 'false', description: 'Shows the invalid outline.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the field.' },
+    ],
+  },
+
   'nav': {
     slug: 'nav',
     name: 'Nav',

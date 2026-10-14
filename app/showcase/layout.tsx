@@ -351,6 +351,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/inputs/combobox">
                       Combobox
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/inputs/sort-field">
+                      Sort Field
+                    </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/inputs/table-lookup">
                       Table Lookup
                     </SideBarMenuItem>

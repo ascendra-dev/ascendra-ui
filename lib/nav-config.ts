@@ -109,6 +109,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Select', slug: 'inputs/select' },
       { name: 'Field', slug: 'inputs/field' },
       { name: 'Combobox', slug: 'inputs/combobox' },
+      { name: 'Sort Field', slug: 'inputs/sort-field' },
       { name: 'Table Lookup', slug: 'inputs/table-lookup' },
       { name: 'File Upload', slug: 'inputs/file-upload' },
       { name: 'Rich Text Editor', slug: 'inputs/rich-text-editor' },
