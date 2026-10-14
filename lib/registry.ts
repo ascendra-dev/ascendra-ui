@@ -355,6 +355,7 @@ export const registry: Record<string, ComponentMeta> = {
     props: [
       { name: 'variant', type: "'default' | 'destructive'", default: "'default'", description: 'Color variant for DropdownMenuItem.' },
       { name: 'inset', type: 'boolean', description: 'Add left padding to align items without icons (on DropdownMenuItem).' },
+      { name: 'modal', type: 'boolean', default: 'false', description: 'true locks page scroll and blocks the page behind while open (on DropdownMenu). Off by default so the page keeps scrolling; an outside click then closes the menu and also reaches the element under it.' },
     ],
   },
 

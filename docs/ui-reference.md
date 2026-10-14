@@ -1,6 +1,6 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-10-11.
+> Auto-generated on 2026-10-14.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
@@ -777,6 +777,7 @@ Full-featured dropdown with items, separators, checkboxes, radio groups, and sub
 |---|---|---|---|
 | `variant` | `'default' \| 'destructive'` | `'default'` | Color variant for DropdownMenuItem. |
 | `inset` | `boolean` | — | Add left padding to align items without icons (on DropdownMenuItem). |
+| `modal` | `boolean` | `false` | true locks page scroll and blocks the page behind while open (on DropdownMenu). Off by default so the page keeps scrolling; an outside click then closes the menu and also reaches the element under it. |
 
 ---
 
