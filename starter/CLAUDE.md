@@ -90,11 +90,11 @@ README.md                   ← your project README — yours to update
 // Library components — always from @/ascendra-ui
 import { Button, Badge, DataTable, PageLayout } from "@/ascendra-ui";
 
-// Tooltip* comes from @/ascendra-ui like everything else:
+// Tooltip* and Drawer* come from @/ascendra-ui like everything else:
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/ascendra-ui";
+import { Drawer, DrawerContent, DrawerHeader } from "@/ascendra-ui";
 
 // shadcn exceptions — these come from @/ascendra-ui/shadcn, not @/ascendra-ui
-import { Drawer, DrawerContent, DrawerHeader } from "@/ascendra-ui/shadcn";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/ascendra-ui/shadcn";
 
 // Chart primitives — always from recharts directly

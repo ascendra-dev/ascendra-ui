@@ -428,7 +428,7 @@ The description should cover: what the component is, its primary use case, and a
 
 ### Imports
 - **Do** import all `ascendra-ui` components from `@/ascendra-ui`
-- **Do** import `Drawer*`, `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `type ChartConfig` from `@/ascendra-ui/shadcn` — these are the shadcn exceptions (`Tooltip*` moved to `@/ascendra-ui`)
+- **Do** import `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `type ChartConfig` from `@/ascendra-ui/shadcn` — these are the shadcn exceptions (`Tooltip*` and `Drawer*` moved to `@/ascendra-ui`)
 - **Do** import chart primitives (`AreaChart`, `BarChart`, `CartesianGrid`, etc.) from `recharts`
 - **Do** import icons from `react-icons/lu` — always Lucide, always this package
 - **Don't** use relative imports like `../../components/button` — always use path aliases

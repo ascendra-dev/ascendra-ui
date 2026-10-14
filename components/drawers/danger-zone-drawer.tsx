@@ -8,7 +8,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn";
+} from "@/ascendra-ui";
 import { Button, Input, SimpleAlert } from "@/ascendra-ui";
 
 const consequences = [

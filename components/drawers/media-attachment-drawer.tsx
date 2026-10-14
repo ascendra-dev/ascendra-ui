@@ -10,7 +10,7 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn";
+} from "@/ascendra-ui";
 import { Button } from "@/ascendra-ui";
 
 export default function MediaAttachmentDrawer() {
