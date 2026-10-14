@@ -313,6 +313,7 @@ function ProviderSection() {
           <PropRow name="data" type="T[]" description="Override data (e.g. SSR-prefetched or optimistic). Takes precedence over query results." />
           <PropRow name="isLoading" type="boolean" description="Override loading state." />
           <PropRow name="getRowId" type="(row: T) => string" description="Enable row selection. See Row Selection section." />
+          <PropRow name="urlKey" type="string" defaultVal="'q'" description="Prefix of the URL params that trigger a query on load. Give each table on a page its own key. See Triggering Queries." />
         </PropTable>
 
         <CodeBlock>{`<DataTableWithQueryProvider
@@ -714,7 +715,7 @@ function ActionsSection() {
   onAction={(id, selectedRowIds) => {
     if (id === "bulk-export") exportRows(selectedRowIds);
     if (id === "bulk-delete") deleteRows(selectedRowIds);
-    if (id === "refresh") refetch();
+    if (id === "refresh") refetch?.();
   }}
 >
   <DataTableBulkExportHeadAction />
@@ -853,7 +854,7 @@ function QuerySystemSection() {
           <PropRow name="id" type="string" required description="Unique identifier. Used as the key in queryFunctions and fieldOptions maps." />
           <PropRow name="title" type="string" required description="Short display name shown in QueryBar and the param panel header." />
           <PropRow name="description" type="string" required description="One-line description shown below the title in QueryBar." />
-          <PropRow name="group" type="'query' | 'user-query' | 'filter'" required description="Groups queries into sections in the QueryBar dropdown. 'filter' queries require param confirmation before running." />
+          <PropRow name="group" type="'query' | 'user-query' | 'filter' | 'trigger'" required description="Groups queries into sections in the QueryBar dropdown. 'filter' queries require param confirmation before running. 'trigger' queries are never listed — they run only via runQuery() or the URL." />
           <PropRow name="params" type="ParamItem[]" description="Form fields rendered in QueryParamPanel. If omitted, the panel is skipped and the query runs immediately." />
           <PropRow name="info" type="string" description="Informational text shown in the panel footer." />
           <PropRow name="columns" type="ColumnsConfig" description="Grid column layout for the param form. E.g. { sm: 1, md: 2, lg: 3 }." />
@@ -979,8 +980,10 @@ function QuerySystemSection() {
             <code className="font-mono text-xs font-medium text-foreground">QueryBar</code>
             <p className="text-xs text-muted-foreground">
               Dropdown button showing the active query title and description.
-              Lists all queries grouped by their <Code>group</Code>. Shows a
-              loading spinner while fetching. No props.
+              Lists all queries grouped by their <Code>group</Code>. A running
+              trigger shows as the last filter, and a running query hidden in
+              Manage Queries as the last item of its section. Shows a loading
+              spinner while fetching. No props.
             </p>
           </div>
           <div className="px-4 py-3 space-y-1">
@@ -1002,6 +1005,95 @@ function QuerySystemSection() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function TriggeringSection() {
+  return (
+    <div className="space-y-6">
+      <SectionHeader>Triggering Queries</SectionHeader>
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        Any <Code>query</Code>, <Code>filter</Code> or <Code>trigger</Code> can
+        be run without the user picking it — from a component inside the
+        provider, or from a link. Queries hidden in Manage Queries run too;
+        saved user queries can&apos;t be triggered. A triggered run is one-off:
+        it isn&apos;t saved as the table&apos;s last run, so a plain visit later
+        restores whatever ran before.
+      </p>
+
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">From inside the provider — runQuery</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          A <Code>query</Code> takes no params — its backend applies its own
+          defaults. A <Code>filter</Code> or <Code>trigger</Code> takes its field
+          values; any left out fall back to the field&apos;s{" "}
+          <Code>defaultValue</Code>. Dates take a <Code>Date</Code>, a date
+          expression (<Code>&apos;-7d&apos;</Code>, <Code>&apos;today&apos;</Code>,{" "}
+          <Code>&apos;2026-07-01&apos;</Code>) or an ISO timestamp.
+        </p>
+        <CodeBlock>{`function RunQueryItem({ queryId, params, children }) {
+  const { runQuery } = useQueryContext();
+  return (
+    <DropdownMenuItem onSelect={() => runQuery(queryId, params)}>
+      {children}
+    </DropdownMenuItem>
+  );
+}
+
+// In a row action menu — drill down from the row
+<RunQueryItem queryId="by-status" params={{ statuses: [row.status] }}>
+  All {row.status} invoices
+</RunQueryItem>`}</CodeBlock>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">From a link — the URL</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          The table reads <Code>?q=&lt;queryId&gt;&amp;q.&lt;field&gt;=&lt;value&gt;</Code>{" "}
+          on load (and on later same-page navigations), runs it, then removes
+          those params from the address bar — Back goes to the page the link
+          was on. Multiselect is comma-separated, a date range is{" "}
+          <Code>from..to</Code>. Build links with <Code>buildQuerySearch</Code>{" "}
+          rather than by hand. Two tables on one page need different{" "}
+          <Code>urlKey</Code>s.
+        </p>
+        <CodeBlock>{`import { buildQuerySearch } from "@/ascendra-ui";
+
+<Link href={\`/invoices?\${buildQuerySearch("by-status", { statuses: ["Overdue"] })}\`}>
+  Overdue invoices
+</Link>
+// → /invoices?q=by-status&q.statuses=Overdue
+
+// A table with urlKey="refunds"
+buildQuerySearch("by-date", { range: "-7d..today" }, "refunds");
+// → ?refunds=by-date&refunds.range=-7d..today`}</CodeBlock>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">Trigger queries</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          A <Code>group: &apos;trigger&apos;</Code> query is never listed in
+          QueryBar or Manage Queries and never opens the param form — its{" "}
+          <Code>params</Code> only say how to read and check the values. It
+          needs its own entry in <Code>queryFunctions</Code>. Once run, it shows
+          selected as the last item under Filters in QueryBar.
+        </p>
+      </div>
+
+      <Note>
+        The caller is responsible for valid params. An unknown query id, an
+        unknown param, a param on a <Code>query</Code>, or a value that
+        can&apos;t be read as its field&apos;s type shows in the table&apos;s
+        error state (no Retry) and nothing runs. A value that fails a rule
+        (required, min, maxItems …) only logs a warning — the run goes ahead
+        and the backend decides.
+      </Note>
+      <Warn>
+        URL values end up in browser history, server and CDN logs, and
+        analytics. Never put personal or sensitive values (emails, account
+        numbers, card data) in a trigger URL — use runQuery for those.
+      </Warn>
     </div>
   );
 }
@@ -1063,7 +1155,7 @@ function HooksSection() {
           {
             name: "useQueryContext()",
             returns: "QueryContextValue",
-            description: "Query provider state: activeQuery, confirmedParams, isLoading, isError, refetch, currentBatch, goNextBatch, goPrevBatch …",
+            description: "Query provider state: activeQuery, confirmedParams, isLoading, isError, refetch, runQuery, currentBatch, goNextBatch, goPrevBatch …",
           },
         ].map(({ name, returns, description }) => (
           <div key={name} className="flex flex-col gap-0.5 px-4 py-3">
@@ -1192,6 +1284,7 @@ export function DataTableGuide() {
       <HighlightSection />
       <StateDisplaySection />
       <QuerySystemSection />
+      <TriggeringSection />
       <HooksSection />
       <GotchasSection />
       <p className="border-t pt-6 text-xs text-muted-foreground">

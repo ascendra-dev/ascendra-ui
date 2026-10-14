@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import {
+  buildQuerySearch,
+  Button,
   type ColumnDef,
   createPageQueryFn,
   DataTable,
@@ -41,6 +44,7 @@ import {
   DataTableViewRowAction,
   DataTableWithQueryProvider,
   DataTableWrapper,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   type FieldOptionsMap,
@@ -53,6 +57,7 @@ import {
   QueryBar,
   type QueryFunctionMap,
   QueryParamPanel,
+  type TriggerParams,
   IdText,
   Sheet,
   SheetBody,
@@ -69,6 +74,7 @@ import {
   TabList,
   Tabs,
   TabTrigger,
+  useQueryContext,
 } from "@/ascendra-ui";
 import {
   PRESET_QUERIES,
@@ -80,7 +86,13 @@ import {
 
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
-import { LuNotebookPen, LuTicketCheck, LuTrash2 } from "react-icons/lu";
+import {
+  LuCalendarClock,
+  LuFilter,
+  LuNotebookPen,
+  LuTicketCheck,
+  LuTrash2,
+} from "react-icons/lu";
 
 const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {
   Paid: "green",
@@ -106,7 +118,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
   PRESET_QUERIES.map((q) => [
     q.id,
-    createPageQueryFn((_params, page) => fetchMockInvoices(q.id, page)),
+    createPageQueryFn((params, page) => fetchMockInvoices(q.id, page, params)),
   ]),
 );
 
@@ -139,6 +151,34 @@ const INVOICE_FIELD_OPTIONS: FieldOptionsMap = {
   },
 };
 
+// Same-page links that trigger a query through the URL — a link from another page works the same way.
+const URL_TRIGGER_LINKS = [
+  { label: "Overdue invoices", search: buildQuerySearch("by-status", { statuses: ["Overdue"] }) },
+  { label: "Due by Feb 15, 2024", search: buildQuerySearch("due-by", { dueBy: "2024-02-15" }) },
+  { label: "Broken link (unknown param)", search: buildQuerySearch("by-status", { colour: "red" }) },
+];
+
+/** A row-action item that runs a query on this same table — a drill-down from the row. */
+function RunQueryItem({
+  queryId,
+  params,
+  icon,
+  children,
+}: {
+  queryId: string;
+  params?: TriggerParams;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  const { runQuery } = useQueryContext();
+  return (
+    <DropdownMenuItem onSelect={() => runQuery(queryId, params)}>
+      {icon}
+      {children}
+    </DropdownMenuItem>
+  );
+}
+
 export default function DataTableLabPage() {
   const [selected, setSelected] = useState<Invoice | null>(null);
 
@@ -161,6 +201,16 @@ export default function DataTableLabPage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-muted-foreground text-xs">
+                  Open by link:
+                </span>
+                {URL_TRIGGER_LINKS.map((link) => (
+                  <Button key={link.label} variant="secondary" size="sm" asChild>
+                    <Link href={`?${link.search}`}>{link.label}</Link>
+                  </Button>
+                ))}
+              </div>
               <DataTableWithQueryProvider
                 queries={PRESET_QUERIES}
                 queryFunctions={INVOICE_QUERY_FUNCTIONS}
@@ -287,6 +337,21 @@ export default function DataTableLabPage() {
                               value={row.invoiceNumber}
                             />
                             <DataTableDeleteRowAction />
+                            <DropdownMenuSeparator />
+                            <RunQueryItem
+                              queryId="by-status"
+                              params={{ statuses: [row.status] }}
+                              icon={<LuFilter />}
+                            >
+                              All {row.status} invoices
+                            </RunQueryItem>
+                            <RunQueryItem
+                              queryId="due-by"
+                              params={{ dueBy: row.dueDate }}
+                              icon={<LuCalendarClock />}
+                            >
+                              Due by {formatDate(row.dueDate)}
+                            </RunQueryItem>
                             <DropdownMenuSeparator />
                             <DataTableRowActionItem
                               id="set-default"

@@ -1,5 +1,6 @@
+import { format } from 'date-fns';
 import { objectsToCsv } from '@/ascendra-ui/utils/common.util';
-import type { ExportResult, PageListResponse } from '@/ascendra-ui';
+import type { ExportResult, PageListResponse, QueryParamValues } from '@/ascendra-ui';
 
 export type InvoiceStatus = 'Paid' | 'Pending' | 'Overdue' | 'Cancelled';
 
@@ -117,8 +118,16 @@ const ALL_INVOICES: Invoice[] = [
 
 // ─── Query-aware filters ───────────────────────────────────────────────────────
 
-function filterByQuery(queryId: string): Invoice[] {
+function filterByQuery(queryId: string, params: QueryParamValues = {}): Invoice[] {
   switch (queryId) {
+    case 'by-status': {
+      const statuses = params.statuses as string[] | undefined;
+      return statuses?.length ? ALL_INVOICES.filter((i) => statuses.includes(i.status)) : ALL_INVOICES;
+    }
+    case 'due-by': {
+      const dueBy = params.dueBy as Date | undefined;
+      return dueBy ? ALL_INVOICES.filter((i) => i.dueDate <= format(dueBy, 'yyyy-MM-dd')) : ALL_INVOICES;
+    }
     case 'all-active':
       return ALL_INVOICES.filter((i) => i.status === 'Pending' || i.status === 'Overdue');
     case 'last-3-months': {
@@ -146,6 +155,7 @@ function delay(ms: number) {
 export async function fetchMockInvoices(
   queryId: string,
   batch = 1,
+  params: QueryParamValues = {},
   pageSize = PAGE_SIZE,
 ): Promise<PageListResponse<Invoice>> {
   await delay(700 + Math.random() * 600);
@@ -154,7 +164,7 @@ export async function fetchMockInvoices(
     throw new Error('Failed to load invoices. The mock service rolled a bad number.');
   }
 
-  const allRows = filterByQuery(queryId);
+  const allRows = filterByQuery(queryId, params);
   const totalPages = Math.max(1, Math.ceil(allRows.length / pageSize));
   const safeBatch = Math.min(Math.max(1, batch), totalPages);
   const start = (safeBatch - 1) * pageSize;
@@ -440,5 +450,14 @@ export const PRESET_QUERIES: QueryDef[] = [
         required: true,
       },
     ],
+  },
+
+  // ── Trigger — never listed; run by a row action or a URL ───────────────────
+  {
+    id: 'due-by',
+    group: 'trigger',
+    title: 'Due By',
+    description: 'Invoices due on or before a date',
+    params: [{ name: 'dueBy', label: 'Due by', type: 'date', required: true }],
   },
 ];
