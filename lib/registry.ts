@@ -366,7 +366,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['SimpleTable', 'SimpleTableHeader', 'SimpleTableHead', 'SimpleTableBody', 'SimpleTableRow', 'SimpleTableCell'],
     props: [
-      { name: 'className', type: 'string', description: 'On every part — merged over the built-in styles (e.g. "text-right" on a numeric head and cell). SimpleTable passes it to the <table>. SimpleTableHead\'s weight is important (font-semibold!) — override it with e.g. font-medium!.' },
+      { name: 'className', type: 'string', description: 'On every part — merged over the built-in styles (e.g. "text-right" on a numeric head and cell). SimpleTable passes it to the <table>.' },
       { name: '...props', type: 'native element props', description: 'Each part takes its element\'s own props: <table>, <thead>, <th>, <tbody>, <tr>, <td> (e.g. colSpan).' },
     ],
   },
