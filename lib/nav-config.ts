@@ -174,6 +174,7 @@ export const navConfig: NavCategory[] = [
     title: 'Tables & Data',
     items: [
       { name: 'Table', slug: 'data-table/table' },
+      { name: 'Simple Table', slug: 'data-table/simple-table' },
       { name: 'Empty State', slug: 'data-table/empty' },
       { name: 'Data Table', slug: 'data-table' },
       { name: 'Data Table Lab', slug: 'data-table-lab' },

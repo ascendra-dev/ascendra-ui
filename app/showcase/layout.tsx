@@ -498,6 +498,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/data-table/table">
                       Table
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/data-table/simple-table">
+                      Simple Table
+                    </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/data-table/empty">
                       Empty State
                     </SideBarMenuItem>

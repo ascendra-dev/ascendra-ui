@@ -25,6 +25,7 @@ import { DialogDocContent } from "@/components/previews/dialog-preview";
 import { SheetDocContent } from "@/components/previews/sheet-preview";
 import { DropdownMenuDocContent } from "@/components/previews/dropdown-menu-preview";
 import { TableDocContent } from "@/components/previews/table-preview";
+import { SimpleTableDocContent } from "@/components/previews/simple-table-preview";
 import { EmptyDocContent } from "@/components/previews/empty-preview";
 import { PageHeaderDocContent } from "@/components/previews/page-header-preview";
 import { PageBarDocContent } from "@/components/previews/page-bar-preview";
@@ -97,6 +98,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   sheet: SheetDocContent,
   "dropdown-menu": DropdownMenuDocContent,
   table: TableDocContent,
+  "simple-table": SimpleTableDocContent,
   empty: EmptyDocContent,
   card: CardDocContent,
   "page-header": PageHeaderDocContent,

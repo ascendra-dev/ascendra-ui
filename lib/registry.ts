@@ -359,6 +359,18 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'simple-table': {
+    slug: 'simple-table',
+    name: 'Simple Table',
+    description: 'Light read-only table for short lists in a sheet, card or panel — one border, a muted header strip, divider lines between rows. No provider.',
+    importPath: '@/ascendra-ui',
+    importNames: ['SimpleTable', 'SimpleTableHeader', 'SimpleTableHead', 'SimpleTableBody', 'SimpleTableRow', 'SimpleTableCell'],
+    props: [
+      { name: 'className', type: 'string', description: 'On every part — merged over the built-in styles (e.g. "text-right" on a numeric head and cell). SimpleTable passes it to the <table>.' },
+      { name: '...props', type: 'native element props', description: 'Each part takes its element\'s own props: <table>, <thead>, <th>, <tbody>, <tr>, <td> (e.g. colSpan).' },
+    ],
+  },
+
   'table': {
     slug: 'table',
     name: 'Table',
