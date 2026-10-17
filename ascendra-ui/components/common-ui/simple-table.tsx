@@ -29,7 +29,8 @@ function SimpleTableHead({ className, ...props }: React.ComponentProps<'th'>) {
     <th
       data-slot="simple-table-head"
       className={cn(
-        'text-muted-foreground px-4 py-2 text-left text-xs font-semibold tracking-wider whitespace-nowrap uppercase',
+        // `font-semibold!`: apps ship an unlayered `th { font-weight: inherit }` in globals.css, which beats a plain utility.
+        'text-muted-foreground px-4 py-2 text-left text-xs font-semibold! tracking-wider whitespace-nowrap uppercase',
         className,
       )}
       {...props}
