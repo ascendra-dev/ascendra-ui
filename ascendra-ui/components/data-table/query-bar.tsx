@@ -29,13 +29,13 @@ import {
   ArrowUp,
   ChevronDown,
   Loader2,
-  RotateCcw,
   Sparkles,
-  X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { LuCopy, LuCopyCheck, LuLayoutList } from "react-icons/lu";
 import { toast } from "@/ascendra-ui/components/common-ui/toast";
+import { RxCrossCircled, RxReset } from "react-icons/rx";
+import { FilterChip, FilterChipValue } from "./filter-chip";
 import { formatSortToken, parseSortToken } from "@/ascendra-ui/utils/order-by.util";
 import {
   Tooltip,
@@ -211,55 +211,54 @@ function RunCriteria({
   criteria: QueryCriteria;
   onRunChanged: () => void;
 }) {
-  const { mutedParams } = useQueryContext();
+  const { mutedParams, toggleParamMuted } = useQueryContext();
   const orderByMuted = !!orderBy && mutedParams.includes(orderBy.name);
+
+  // The chip's icon + label mutes or restores it, then closes the menu — without selecting the item it sits in.
+  // The item selects on pointer-up/click, so neither may reach it, or it would re-run the query.
+  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
+  const muteAction = (name: string, label: string, muted: boolean) => ({
+    icon: muted ? <RxReset /> : <RxCrossCircled />,
+    "aria-label": muted ? `Restore ${label}` : `Mute ${label}`,
+    onPointerDown: stop,
+    onPointerUp: stop,
+    onClick: (e: React.MouseEvent) => {
+      e.stopPropagation();
+      toggleParamMuted(name);
+      onRunChanged();
+    },
+  });
 
   return (
     <div className="mt-1.5 flex flex-wrap items-center gap-1">
       {criteria.map((criterion) => {
         const muted = mutedParams.includes(criterion.name);
-        // The tooltip repeats only the value — a checkbox criterion has none, so its label.
-        const fullText = criterion.text || criterion.label;
         return (
-          <SimpleBadge
+          <FilterChip
             key={criterion.name}
-            variant="secondary"
-            // SimpleBadge centres its content in an inner span — let that span shrink so long text truncates.
-            className="max-w-full justify-start [&>span]:min-w-0"
+            label={
+              <span className={cn("text-muted-foreground", muted && MUTED_CLASS)}>{criterion.label}</span>
+            }
+            // Required fields can't be muted — the run needs them.
+            action={criterion.required ? undefined : muteAction(criterion.name, criterion.label, muted)}
           >
-            <TruncatedText
-              fullText={fullText}
-              className={cn(muted && "line-through opacity-60")}
-            >
-              {criterion.text ? (
-                <>
-                  {criterion.label}:{" "}
-                  <span className="text-foreground">{criterion.text}</span>
-                </>
-              ) : (
-                <span className="text-foreground">{criterion.label}</span>
-              )}
-            </TruncatedText>
-            {!criterion.required && (
-              <MuteButton
-                name={criterion.name}
-                label={criterion.label}
-                muted={muted}
-                onToggled={onRunChanged}
-              />
+            {/* A checkbox criterion has no value — just its label. */}
+            {criterion.text && (
+              <FilterChipValue>
+                <TruncatedText fullText={criterion.text} className={cn("text-foreground", muted && MUTED_CLASS)}>
+                  {criterion.text}
+                </TruncatedText>
+              </FilterChipValue>
             )}
-          </SimpleBadge>
+          </FilterChip>
         );
       })}
       {orderBy && (
-        <span className="text-muted-foreground ml-1 inline-flex items-center gap-1.5 text-xs">
-          <span className="shrink-0">{orderBy.label}</span>
-          <span
-            className={cn(
-              "flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5",
-              orderByMuted && "line-through opacity-60",
-            )}
-          >
+        <FilterChip
+          label={<span className={cn("text-muted-foreground", orderByMuted && MUTED_CLASS)}>{orderBy.label}</span>}
+          action={orderBy.required ? undefined : muteAction(orderBy.name, orderBy.label, orderByMuted)}
+        >
+          <FilterChipValue className={cn("flex-wrap gap-x-1.5 gap-y-0.5", orderByMuted && MUTED_CLASS)}>
             {orderBy.columns.map((column, i) => (
               <span key={i} className="text-foreground inline-flex items-center gap-0.5">
                 {i > 0 && <span className="text-muted-foreground/60 mr-1">·</span>}
@@ -273,20 +272,15 @@ function RunCriteria({
                 />
               </span>
             ))}
-          </span>
-          {!orderBy.required && (
-            <MuteButton
-              name={orderBy.name}
-              label={orderBy.label}
-              muted={orderByMuted}
-              onToggled={onRunChanged}
-            />
-          )}
-        </span>
+          </FilterChipValue>
+        </FilterChip>
       )}
     </div>
   );
 }
+
+/** How a muted criterion shows — struck through, faded. */
+const MUTED_CLASS = "line-through opacity-60";
 
 /** Truncates with "…" and shows the full text in a tooltip — only when it's actually cut off. */
 function TruncatedText({
@@ -359,7 +353,7 @@ function CopyRunLinkButton() {
   );
 }
 
-/** Flips one sort column between ascending and descending and re-runs — then closes the menu, like MuteButton. */
+/** Flips one sort column between ascending and descending and re-runs — then closes the menu, like the mute action. */
 function SortDirectionButton({
   name,
   column,
@@ -381,7 +375,7 @@ function SortDirectionButton({
     <button
       type="button"
       aria-label={`Sort ${column.label} ${next}`}
-      className="hover:bg-muted inline-flex shrink-0 cursor-pointer items-center justify-center rounded-sm p-0.5"
+      className="hover:bg-background inline-flex shrink-0 cursor-pointer items-center justify-center rounded-sm p-0.5"
       onPointerDown={stop}
       onPointerUp={stop}
       onClick={(e) => {
@@ -396,40 +390,6 @@ function SortDirectionButton({
       }}
     >
       <Arrow className="size-3" strokeWidth={2} />
-    </button>
-  );
-}
-
-/** Mutes or restores one criterion, then closes the menu — without selecting the item it sits in. */
-function MuteButton({
-  name,
-  label,
-  muted,
-  onToggled,
-}: {
-  name: string;
-  label: string;
-  muted: boolean;
-  onToggled: () => void;
-}) {
-  const { toggleParamMuted } = useQueryContext();
-  const Icon = muted ? RotateCcw : X;
-  // The menu item selects on pointer-up/click — keep both from reaching it, or it would re-run the query.
-  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
-  return (
-    <button
-      type="button"
-      aria-label={muted ? `Restore ${label}` : `Mute ${label}`}
-      className="hover:text-foreground hover:bg-muted inline-flex shrink-0 cursor-pointer items-center justify-center rounded-sm p-0.5"
-      onPointerDown={stop}
-      onPointerUp={stop}
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleParamMuted(name);
-        onToggled();
-      }}
-    >
-      <Icon className="size-3" strokeWidth={2} />
     </button>
   );
 }
