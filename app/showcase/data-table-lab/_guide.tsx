@@ -292,7 +292,8 @@ function ProviderSection() {
           <PropRow name="columns" type="ColumnDef<T>[]" required description="Column definitions array." />
           <PropRow name="data" type="T[]" description="Array of items. Omit when using DataTableQueryProvider as the parent (it injects data automatically)." />
           <PropRow name="isLoading" type="boolean" description="Forces the loading skeleton. Pass your external loading state here if not using the query provider." />
-          <PropRow name="getRowId" type="(row: T) => string" description="Required to enable row selection. Must return a stable unique string per row. If omitted, DataTableCheckboxHead/Cell render as no-ops." />
+          <PropRow name="getRowId" type="(row: T) => string" description="A stable unique string per row — used by row selection, DataTableSheetNavigator and the active-row highlight. On its own it does not turn selection on." />
+          <PropRow name="selectable" type="boolean" defaultVal="false" description="Turns on row selection (needs getRowId). Without it, DataTableCheckboxHead/Cell render nothing and DataTableHeadAction has no Select all / Clear all." />
         </PropTable>
       </div>
 
@@ -312,7 +313,8 @@ function ProviderSection() {
           <PropRow name="fieldOptions" type="FieldOptionsMap" description="Optional dynamic field options for QueryParamPanel. Overrides static options defined in QueryDef.params." />
           <PropRow name="data" type="T[]" description="Override data (e.g. SSR-prefetched or optimistic). Takes precedence over query results." />
           <PropRow name="isLoading" type="boolean" description="Override loading state." />
-          <PropRow name="getRowId" type="(row: T) => string" description="Enable row selection. See Row Selection section." />
+          <PropRow name="getRowId" type="(row: T) => string" description="A stable unique string per row — for selection and the sheet navigator." />
+          <PropRow name="selectable" type="boolean" defaultVal="false" description="Turns on row selection (needs getRowId). See Row Selection section." />
           <PropRow name="urlKey" type="string" defaultVal="'q'" description="Prefix of the URL params that trigger a query on load. Give each table on a page its own key. See Triggering Queries." />
         </PropTable>
 
@@ -321,7 +323,8 @@ function ProviderSection() {
   queryFunctions={QUERY_FUNCTIONS}
   fieldOptions={FIELD_OPTIONS}      // optional
   columns={COLUMNS}
-  getRowId={(row) => String(row.id)} // enables selection
+  getRowId={(row) => String(row.id)}
+  selectable                          // optional — turns on row selection
 >
   {/* All toolbar and table components go here */}
 </DataTableWithQueryProvider>`}</CodeBlock>
@@ -504,16 +507,21 @@ function SelectionSection() {
     <div className="space-y-4">
       <SectionHeader>Row Selection</SectionHeader>
       <p className="text-sm text-muted-foreground leading-relaxed">
-        Row selection is opt-in. Pass <Code>getRowId</Code> to the provider to
-        enable it. Without it, the checkbox components are no-ops (render
-        nothing), so existing tables are unaffected.
+        Row selection is opt-in. Pass <Code>selectable</Code> and{" "}
+        <Code>getRowId</Code> to the provider to enable it. Without{" "}
+        <Code>selectable</Code>, the checkbox components render nothing and{" "}
+        <Code>DataTableHeadAction</Code> offers no Select all / Clear all — a{" "}
+        <Code>getRowId</Code> given only for the sheet navigator doesn&apos;t make rows
+        selectable. A head action with nothing to offer renders an empty header
+        cell, so its column still lines up.
       </p>
 
-      <CodeBlock>{`// 1. Enable selection — pass getRowId to the provider
+      <CodeBlock>{`// 1. Enable selection — selectable + getRowId on the provider
 <DataTableProvider
   columns={COLUMNS}
   data={data}
   getRowId={(row) => String(row.id)}
+  selectable
 >
 
   // 2. Add checkboxes + bulk actions in the header
@@ -551,7 +559,7 @@ function SelectionSection() {
         </p>
         <PropTable>
           <PropRow name="selectedRows" type="Set<string>" description="IDs of all currently selected rows. Use .size to count, spread to get an array." />
-          <PropRow name="selectionEnabled" type="boolean" description="True when getRowId was provided to the provider." />
+          <PropRow name="selectionEnabled" type="boolean" description="True when the provider has selectable and getRowId." />
           <PropRow name="isAllSelected" type="boolean" description="True when every row on the current page is selected." />
           <PropRow name="isIndeterminate" type="boolean" description="True when some but not all current-page rows are selected. Used to show the indeterminate checkbox state." />
           <PropRow name="isRowSelected" type="(id: string) => boolean" description="Check if a specific row ID is selected." />
@@ -1228,14 +1236,14 @@ function GotchasSection() {
             ),
           },
           {
-            title: "Selection is disabled without getRowId",
+            title: "Selection needs selectable and getRowId",
             body: (
               <>
                 <Code>DataTableCheckboxHead</Code> and{" "}
-                <Code>DataTableCheckboxCell</Code> render nothing when{" "}
-                <Code>getRowId</Code> is not provided — no error, just empty
-                space (actually zero width). Always pass{" "}
-                <Code>getRowId</Code> when you add checkbox components.
+                <Code>DataTableCheckboxCell</Code> render nothing unless the
+                provider has both <Code>selectable</Code> and{" "}
+                <Code>getRowId</Code> — no error, just empty space (actually
+                zero width). Pass both when you add checkbox components.
               </>
             ),
           },

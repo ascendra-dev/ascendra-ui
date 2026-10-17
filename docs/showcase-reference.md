@@ -1386,6 +1386,7 @@ export default function InvoicesPage() {
       fieldOptions={FIELD_OPTIONS}
       columns={COLUMNS}
       getRowId={(row) => String(row.id)}
+      selectable            // turns on row selection — the checkbox components below need it
       tableId="invoices-table"  // persists active query + params to localStorage
     >
       {/* QueryBar — query picker dropdown */}
@@ -1466,7 +1467,7 @@ Pass `tableId` (a stable unique string per table, e.g. `"invoices-table"`) to pe
 | Gotcha | What to do instead |
 |---|---|
 | Wrapping `DataTableCell` in a fragment, `React.memo`, or custom component | Pass cells as **direct children** of `DataTableRow` — wrapping hides the `column` prop and the cell is silently dropped |
-| Adding `DataTableCheckboxCell` without `getRowId` | Always pass `getRowId` to the provider when using checkbox components — without it they render nothing |
+| Adding `DataTableCheckboxCell` without `selectable` + `getRowId` | Pass both to the provider when using checkbox components — without either they render nothing. `getRowId` alone (e.g. for the sheet navigator) no longer turns selection on |
 | Rendering the raw `data` prop in a custom body | Use `pagedData` from `useDataTableData()` — `data` bypasses search / filter / sort / pagination |
 | Placing `DataTableFoot` or `DataTableErrorBody` outside `DataTableWrapper` | All state-display siblings (`LoadingBody`, `ErrorBody`, `EmptyBody`, `Foot`) must be **inside** `DataTableWrapper` |
 | Defining `group: 'user-query'` in your `QueryDef` array | `'user-query'` is reserved; the system manages these automatically when users save filter queries |

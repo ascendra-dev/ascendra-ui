@@ -217,6 +217,7 @@ export default function DataTableLabPage() {
                 fieldOptions={INVOICE_FIELD_OPTIONS}
                 columns={INVOICE_COLUMNS}
                 getRowId={(row) => String(row.id)}
+                selectable
                 tableId="data-table-lab-table"
               >
                 <QueryBar />
