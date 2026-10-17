@@ -21,8 +21,9 @@ export function FilterChip({
   children?: React.ReactNode;
 }) {
   const { icon, className: actionClassName, ...actionProps } = action ?? { icon: null };
+  // Spans throughout, so a chip is valid inside a button (the query bar's "N criteria").
   return (
-    <div
+    <span
       data-slot="filter-chip"
       className={cn(
         'bg-muted flex max-w-full items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs',
@@ -42,14 +43,14 @@ export function FilterChip({
         <span className="shrink-0 px-1.5">{label}</span>
       )}
       {children}
-    </div>
+    </span>
   );
 }
 
 /** The value side of a FilterChip, after the divider. Takes a ref and props, so it can be a dropdown trigger. */
-export function FilterChipValue({ className, ...props }: React.ComponentProps<'div'>) {
+export function FilterChipValue({ className, ...props }: React.ComponentProps<'span'>) {
   return (
-    <div
+    <span
       data-slot="filter-chip-value"
       className={cn('flex min-w-0 items-center gap-1 border-l px-1.5', className)}
       {...props}

@@ -23,7 +23,6 @@ import {
   type QueryOrderBy,
 } from "@/ascendra-ui/providers/data-table-query/query-criteria";
 import { cn } from "@/ascendra-ui/shadcn";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import {
   ArrowDown,
   ArrowUp,
@@ -34,7 +33,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { LuCopy, LuCopyCheck, LuLayoutList } from "react-icons/lu";
 import { toast } from "@/ascendra-ui/components/common-ui/toast";
-import { RxCrossCircled, RxReset } from "react-icons/rx";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { RxCrossCircled } from "react-icons/rx";
 import { FilterChip, FilterChipValue } from "./filter-chip";
 import { formatSortToken, parseSortToken } from "@/ascendra-ui/utils/order-by.util";
 import {
@@ -122,9 +122,15 @@ export function QueryBar() {
                   {confirmedQuery.description}
                 </span>
                 {appliedCount > 0 && (
-                  <SimpleBadge variant="secondary">
-                    {appliedCount} {appliedCount === 1 ? "criterion" : "criteria"}
-                  </SimpleBadge>
+                  // The criteria chips' pill, slimmed so it doesn't add to the bar's height.
+                  <FilterChip
+                    className="shrink-0 py-0 leading-4"
+                    label={
+                      <span className="text-muted-foreground">
+                        {appliedCount} {appliedCount === 1 ? "criterion" : "criteria"}
+                      </span>
+                    }
+                  />
                 )}
               </span>
             )}
@@ -183,14 +189,15 @@ function QueryRadioItem({
 }) {
   const hasCriteria = !!criteria && (criteria.criteria.length > 0 || !!criteria.orderBy);
   return (
-    // The tick sits on the title row (h-5 = its line height), not centred on the whole item.
-    <DropdownMenuRadioItem
-      value={query.id}
-      className="items-start [&>[data-slot=dropdown-menu-radio-item-indicator]]:h-5"
-    >
+    // No tick: the selected item shows the closed bar's sparkle before its title (plus its copy-link button and
+    // criteria) — no background, so hover stays the only highlight. pr-2: no tick needs the room on the right.
+    <DropdownMenuRadioItem value={query.id} className="items-start pr-2" indicator={null}>
       <div className="flex min-w-0 flex-1 flex-col">
         <span className="flex items-center justify-between gap-2">
-          <span className="font-medium">{query.title}</span>
+          <span className="flex items-center gap-2 font-medium">
+            {criteria && <Sparkles className="text-muted-foreground size-3 shrink-0" strokeWidth={2} />}
+            {query.title}
+          </span>
           {criteria && <CopyRunLinkButton />}
         </span>
         <span className="text-muted-foreground text-xs">
@@ -218,7 +225,7 @@ function RunCriteria({
   // The item selects on pointer-up/click, so neither may reach it, or it would re-run the query.
   const stop = (e: React.SyntheticEvent) => e.stopPropagation();
   const muteAction = (name: string, label: string, muted: boolean) => ({
-    icon: muted ? <RxReset /> : <RxCrossCircled />,
+    icon: muted ? <IoArrowBackCircleOutline /> : <RxCrossCircled />,
     "aria-label": muted ? `Restore ${label}` : `Mute ${label}`,
     onPointerDown: stop,
     onPointerUp: stop,
@@ -314,6 +321,7 @@ const COPIED_MS = 1500;
 function CopyRunLinkButton() {
   const { getRunLink } = useQueryContext();
   const [copied, setCopied] = useState(false);
+  const [hovered, setHovered] = useState(false);
   useEffect(() => {
     if (!copied) return;
     const timer = setTimeout(() => setCopied(false), COPIED_MS);
@@ -324,8 +332,8 @@ function CopyRunLinkButton() {
   // The menu item selects on pointer-up/click — keep both from reaching it.
   const stop = (e: React.SyntheticEvent) => e.stopPropagation();
   return (
-    // Controlled: the tooltip is only the "copied" confirmation — it never opens on hover.
-    <Tooltip open={copied}>
+    // Hover says what it does; after a copy the same tooltip confirms it, until COPIED_MS passes.
+    <Tooltip open={hovered || copied} onOpenChange={setHovered}>
       <TooltipTrigger asChild>
         <button
           type="button"
@@ -348,7 +356,7 @@ function CopyRunLinkButton() {
           <Icon className={cn("size-3.5", copied && "text-green-600")} />
         </button>
       </TooltipTrigger>
-      <TooltipContent side="top">Query link copied to clipboard</TooltipContent>
+      <TooltipContent side="top">{copied ? "Query link copied to clipboard" : "Copy query link"}</TooltipContent>
     </Tooltip>
   );
 }
