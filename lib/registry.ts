@@ -731,7 +731,7 @@ export const registry: Record<string, ComponentMeta> = {
     importNames: ['IdText'],
     props: [
       { name: 'value', type: 'string', description: 'The full, untruncated id/uuid value — copied and shown in the tooltip in full, regardless of size.' },
-      { name: 'size', type: "'full' | 'sm' | 'md' | 'lg'", default: "'full'", description: '\'full\' shows the value as-is; \'sm\'/\'md\'/\'lg\' truncate to "head…tail" with progressively more characters.' },
+      { name: 'size', type: "'full' | 'sm' | 'md' | 'lg'", default: "'full'", description: '\'full\' shows the value as-is; \'sm\'/\'md\'/\'lg\' truncate to "head…tail" with progressively more characters, kept on one line.' },
       { name: 'copyable', type: 'boolean', default: 'true', description: 'Copy-to-clipboard on click, with icon feedback.' },
       { name: 'showTooltip', type: 'boolean', default: 'true', description: 'Hover tooltip showing the full value.' },
       { name: 'className', type: 'string', description: 'Applied to the text span — the monospace font itself is fixed.' },

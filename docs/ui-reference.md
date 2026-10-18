@@ -1313,7 +1313,7 @@ Fixed-monospace, truncated display for a uuid/id-shaped value ("head…tail"), w
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `value` | `string` | — | The full, untruncated id/uuid value — copied and shown in the tooltip in full, regardless of size. |
-| `size` | `'full' \| 'sm' \| 'md' \| 'lg'` | `'full'` | 'full' shows the value as-is; 'sm'/'md'/'lg' truncate to "head…tail" with progressively more characters. |
+| `size` | `'full' \| 'sm' \| 'md' \| 'lg'` | `'full'` | 'full' shows the value as-is; 'sm'/'md'/'lg' truncate to "head…tail" with progressively more characters, kept on one line. |
 | `copyable` | `boolean` | `true` | Copy-to-clipboard on click, with icon feedback. |
 | `showTooltip` | `boolean` | `true` | Hover tooltip showing the full value. |
 | `className` | `string` | — | Applied to the text span — the monospace font itself is fixed. |
