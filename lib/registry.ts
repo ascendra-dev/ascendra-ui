@@ -703,7 +703,7 @@ export const registry: Record<string, ComponentMeta> = {
   'with-sheet-icon': {
     slug: 'with-sheet-icon',
     name: 'With Sheet Icon',
-    description: 'Display only: shows a panel icon after children on hover (or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link\'s arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.',
+    description: 'Display only: shows a panel icon after children on hover (on a touch screen, while pressed; or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link\'s arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.',
     importPath: '@/ascendra-ui',
     importNames: ['WithSheetIcon'],
     props: [

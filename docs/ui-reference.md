@@ -1272,7 +1272,7 @@ Renders children when value is non-empty, or a fallback (default an em dash) whe
 
 #### With Sheet Icon
 
-Display only: shows a panel icon after children on hover (or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link's arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.
+Display only: shows a panel icon after children on hover (on a touch screen, while pressed; or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link's arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.
 
 - **Import:** `import { WithSheetIcon } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/util/with-sheet-icon](/showcase/util/with-sheet-icon)
