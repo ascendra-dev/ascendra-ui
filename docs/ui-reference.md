@@ -1135,7 +1135,7 @@ Renders formatDateTime(value, options) as text, with an optional hover tooltip r
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `value` | `string \| Date` | — | The timestamp to format and display. |
-| `style` | `'short' \| 'medium' \| 'long' \| 'relative'` | `'medium'` | Same as formatDateTime's style option. |
+| `style` | `'short' \| 'medium' \| 'long' \| 'month' \| 'relative'` | `'medium'` | Same as formatDateTime's style option (`'month'` = "Sep 2026"). |
 | `time` | `boolean` | `false` | Append time-of-day. Ignored when style is 'relative'. |
 | `relativeFallbackDays` | `number` | `7` | Beyond this age, 'relative' falls back to an absolute 'medium' date. |
 | `showTooltip` | `boolean` | `false` | Show a hover tooltip with the original timestamp as a full ISO string. |
