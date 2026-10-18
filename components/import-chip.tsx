@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { LuCheck, LuCopy } from "react-icons/lu";
+import { copyToClipboard } from "@/ascendra-ui";
 
 export function ImportChip({ importStatement }: { importStatement: string }) {
   const [copied, setCopied] = useState(false);
 
-  function handleCopy() {
-    navigator.clipboard.writeText(importStatement);
+  async function handleCopy() {
+    if (!(await copyToClipboard(importStatement))) return;
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }

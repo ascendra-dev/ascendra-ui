@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/ascendra-ui/shadcn';
+import { copyToClipboard } from '@/ascendra-ui';
 import { LuCopy, LuCheck } from 'react-icons/lu';
 
 type Props = {
@@ -47,7 +48,7 @@ export function CodeBlock({ code, lang = 'tsx', label, className }: Props) {
   }, [code, lang]);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
+    if (!(await copyToClipboard(code))) return;
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   };
