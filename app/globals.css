@@ -461,10 +461,10 @@ th {
 }
 /* Stop short of rounded corners */
 ::-webkit-scrollbar-track:horizontal {
-  margin-inline: 16px;
+  margin-inline: 12px;
 }
 ::-webkit-scrollbar-track:vertical {
-  margin-block: 16px;
+  margin-block: 12px;
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
