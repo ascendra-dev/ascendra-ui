@@ -478,10 +478,10 @@ export const registry: Record<string, ComponentMeta> = {
   'sidebar-menu': {
     slug: 'sidebar-menu',
     name: 'Sidebar Menu',
-    description: 'Expandable sidebar navigation with grouped menu sets, icon headers, active link detection, and an optional SideBarSearch wrapper that filters menu items by name as you type.',
+    description: 'Expandable sidebar navigation with grouped menu sets, icon headers, active link detection, and an optional SideBarSearch wrapper that filters menu items by name as you type. SideBarLayoutToggle (first inside SideBar) lets the user cycle the large-screen layout — centered → full width → menu (the slide-in menu) — remembered per device.',
     importPath: '@/ascendra-ui',
     importNames: [
-      'SideBar', 'useSideBar', 'SideBarFooter', 'SideBarHeader', 'SideBarMain', 'SideBarOverlay', 'SideBarSearch', 'SideBarToggle',
+      'SideBar', 'useSideBar', 'SideBarFooter', 'SideBarHeader', 'SideBarMain', 'SideBarOverlay', 'SideBarSearch', 'SideBarToggle', 'SideBarLayoutToggle',
       'SideBarMenu', 'SideBarMenuHeader', 'SideBarMenuContent', 'SideBarMenuItem', 'SideBarMenuItemGroup', 'SideBarMenuSet', 'SideBarMenuSetTitle',
     ],
     props: [
@@ -490,6 +490,8 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'path', type: 'string', description: 'Link path for the menu item (on SideBarMenuItem).' },
       { name: 'alternate', type: "'default' | 'stand-alone'", default: "'default'", description: 'Layout variant for the menu item.' },
       { name: 'children (SideBarSearch)', type: 'ReactNode', description: 'The menu tree to search — SideBarSearch walks it to extract searchable SideBarMenuItem entries; renders a filtered flat result list in place of the tree while a query is active.' },
+      { name: 'children (SideBarToggle)', type: 'ReactNode', default: "'Menu'", description: 'Label beside the menu button.' },
+      { name: 'className (SideBarLayoutToggle)', type: 'string', description: 'Applied to the toggle row. The toggle takes no other props — the mode lives on <html data-layout> and in localStorage (setLayoutMode / readLayoutMode for app code).' },
     ],
   },
 

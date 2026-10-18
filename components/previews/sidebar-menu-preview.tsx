@@ -2,6 +2,7 @@
 
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
+import { CodeBlock } from "../code-block";
 import { PropsTable } from "../props-table";
 import {
   SideBarMenu,
@@ -204,6 +205,53 @@ export function SidebarMenuDocContent() {
               </SideBarSearch>
             </div>
           </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Layout modes
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Put{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SideBarLayoutToggle
+            </code>{" "}
+            first inside{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SideBar
+            </code>
+            . On a large screen it shows on sidebar hover (try this page&apos;s
+            sidebar) and each click moves to the next mode:{" "}
+            <strong className="font-medium text-foreground">centered</strong>{" "}
+            (the default, content capped with margins either side) →{" "}
+            <strong className="font-medium text-foreground">full width</strong>{" "}
+            (sidebar docked, content uses the whole width) →{" "}
+            <strong className="font-medium text-foreground">menu</strong>{" "}
+            (full width, and the sidebar becomes the small-screen slide-in
+            menu, opened by{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SideBarToggle
+            </code>
+            ) → centered. The choice is remembered per device, in
+            localStorage, and applied before the first paint, so a reload never
+            flashes the centered layout. Below the large breakpoint the toggle
+            is hidden — every mode looks the same there.
+          </p>
+          <CodeBlock
+            code={`<PageLayout>
+  <SideBarOverlay />
+  <Header>…</Header>
+  <Nav>…</Nav>
+  <MainContainer>
+    <SideBarToggle>Showcase</SideBarToggle>  {/* label beside the menu button — default "Menu" */}
+    <SideBar>
+      <SideBarLayoutToggle />
+      <SideBarSearch>…</SideBarSearch>
+    </SideBar>
+    <ContentArea>{children}</ContentArea>
+  </MainContainer>
+</PageLayout>`}
+          />
         </div>
       </div>
 

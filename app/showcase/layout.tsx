@@ -25,6 +25,7 @@ import {
   SideBarMenuSetTitle,
   SideBarOverlay,
   SideBarSearch,
+  SideBarLayoutToggle,
   SideBarToggle,
   SimpleBadge,
   ThemeToggle,
@@ -87,6 +88,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <MainContainer>
         <SideBarToggle />
         <SideBar>
+          <SideBarLayoutToggle />
           <SideBarSearch>
             <SideBarMain>
               {/* Getting Started */}
