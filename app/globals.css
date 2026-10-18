@@ -452,6 +452,14 @@ th {
 /* Global Scrollbar (All Scroll Containers) */
 /* 10px grab area, 4px visible thumb (transparent border + padding-box clip).
    Mobile overlay scrollbars ignore these rules and stay native. */
+:root {
+  --scrollbar-thumb: rgba(0, 0, 0, 0.25);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
+}
+.dark {
+  --scrollbar-thumb: rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.4);
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -470,29 +478,34 @@ th {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: var(--scrollbar-thumb);
   background-clip: padding-box;
   border: 3px solid transparent;
   border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.4);
+/* While PageLayout's scroll script runs (it sets data-scrollbar-reveal on <html>),
+   a thumb shows only while its container scrolls (data-scrolling) or under the
+   pointer; the gutter stays reserved, so content never shifts. */
+html[data-scrollbar-reveal]::-webkit-scrollbar-thumb,
+html[data-scrollbar-reveal] ::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.25);
+html[data-scrollbar-reveal][data-scrolling]::-webkit-scrollbar-thumb,
+html[data-scrollbar-reveal][data-scrolling] > body::-webkit-scrollbar-thumb,
+html[data-scrollbar-reveal] [data-scrolling]::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
 }
-.dark ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+::-webkit-scrollbar-thumb:hover,
+html[data-scrollbar-reveal]::-webkit-scrollbar-thumb:hover,
+html[data-scrollbar-reveal] ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
 }
 /* Firefox — only where ::-webkit-scrollbar is unsupported, since Chrome 121+
    ignores the ::-webkit-scrollbar rules whenever scrollbar-width/-color is set */
 @supports not selector(::-webkit-scrollbar) {
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
-  }
-  .dark * {
-    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
   }
 }
 
