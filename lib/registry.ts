@@ -677,7 +677,7 @@ export const registry: Record<string, ComponentMeta> = {
     importNames: ['DateTime'],
     props: [
       { name: 'value', type: 'string | Date', description: 'The timestamp to format and display.' },
-      { name: 'style', type: "'short' | 'medium' | 'long' | 'relative'", default: "'medium'", description: 'Same as formatDateTime\'s style option.' },
+      { name: 'style', type: "'short' | 'medium' | 'long' | 'month' | 'relative'", default: "'medium'", description: 'Same as formatDateTime\'s style option (`\'month\'` = "Sep 2026").' },
       { name: 'time', type: 'boolean', default: 'false', description: 'Append time-of-day. Ignored when style is \'relative\'.' },
       { name: 'relativeFallbackDays', type: 'number', default: '7', description: 'Beyond this age, \'relative\' falls back to an absolute \'medium\' date.' },
       { name: 'showTooltip', type: 'boolean', default: 'false', description: 'Show a hover tooltip with the original timestamp as a full ISO string.' },
@@ -695,6 +695,18 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'value', type: 'unknown', description: 'Tested for emptiness — null, undefined, and an empty string all count as empty.' },
       { name: 'fallback', type: 'React.ReactNode', default: "'—'", description: 'Rendered when value is empty.' },
       { name: 'children', type: 'React.ReactNode', description: 'Rendered when value is non-empty.' },
+    ],
+  },
+
+  'with-sheet-icon': {
+    slug: 'with-sheet-icon',
+    name: 'With Sheet Icon',
+    description: 'Display only: shows a panel icon after children on hover (or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link\'s arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.',
+    importPath: '@/ascendra-ui',
+    importNames: ['WithSheetIcon'],
+    props: [
+      { name: 'children', type: 'React.ReactNode', description: 'The content the icon follows.' },
+      { name: 'className', type: 'string', description: 'Applied to the wrapping span.' },
     ],
   },
 

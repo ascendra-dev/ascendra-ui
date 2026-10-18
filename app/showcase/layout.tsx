@@ -585,6 +585,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/util/with-empty-value">
                       With Empty Value
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/util/with-sheet-icon">
+                      With Sheet Icon
+                    </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/util/with-tooltip">
                       With Tooltip
                     </SideBarMenuItem>

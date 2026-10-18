@@ -211,6 +211,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Row Action Button', slug: 'util/row-action-button' },
       { name: 'Scroll To Top', slug: 'util/scroll-to-top' },
       { name: 'With Empty Value', slug: 'util/with-empty-value' },
+      { name: 'With Sheet Icon', slug: 'util/with-sheet-icon' },
       { name: 'With Tooltip', slug: 'util/with-tooltip' },
       { name: 'Id Text', slug: 'util/id-text' },
     ],

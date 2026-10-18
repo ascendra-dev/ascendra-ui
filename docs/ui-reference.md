@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-10-14.
+> Auto-generated on 2026-10-18.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 68  
+**Primitive components:** 70  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -25,11 +25,11 @@
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, Sort Field, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
-| Tables & Data | Table, Empty State, Data Table |
+| Tables & Data | Simple Table, Table, Empty State, Data Table |
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
-| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Tooltip, Id Text |
+| Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Sheet Icon, With Tooltip, Id Text |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
 
 ---
@@ -938,6 +938,22 @@ Data table with header, body, footer, scrollable container, and optional accent 
 
 ---
 
+#### Simple Table
+
+Light read-only table for short lists in a sheet, card or panel — one border, a muted header strip, divider lines between rows. No provider.
+
+- **Import:** `import { SimpleTable, SimpleTableHeader, SimpleTableHead, SimpleTableBody, SimpleTableRow, SimpleTableCell } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/data-table/simple-table](/showcase/data-table/simple-table)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className` | `string` | — | On every part — merged over the built-in styles (e.g. "text-right" on a numeric head and cell). SimpleTable passes it to the <table>. |
+| `...props` | `native element props` | — | Each part takes its element's own props: <table>, <thead>, <th>, <tbody>, <tr>, <td> (e.g. colSpan). |
+
+---
+
 #### Empty State
 
 Placeholder for empty content areas with optional icon media and call-to-action.
@@ -1249,6 +1265,22 @@ Renders children when value is non-empty, or a fallback (default an em dash) whe
 | `value` | `unknown` | — | Tested for emptiness — null, undefined, and an empty string all count as empty. |
 | `fallback` | `React.ReactNode` | `'—'` | Rendered when value is empty. |
 | `children` | `React.ReactNode` | — | Rendered when value is non-empty. |
+
+---
+
+#### With Sheet Icon
+
+Display only: shows a panel icon after children on hover (or when their clickable parent is keyboard-focused), signalling that a click opens a sheet — the sheet counterpart of an external link's arrow. It adds no click, label or tooltip; wrap the content inside your own button. Space for the icon is always reserved, so nothing shifts.
+
+- **Import:** `import { WithSheetIcon } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/util/with-sheet-icon](/showcase/util/with-sheet-icon)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `React.ReactNode` | — | The content the icon follows. |
+| `className` | `string` | — | Applied to the wrapping span. |
 
 ---
 

@@ -70,6 +70,7 @@ import { ReportHeaderDocContent } from "@/components/previews/report-header-prev
 import { ReportDocumentDocContent } from "@/components/previews/report-document-preview";
 import { ReportContentDocContent } from "@/components/previews/report-content-preview";
 import { WithEmptyValueDocContent } from "@/components/previews/with-empty-value-preview";
+import { WithSheetIconDocContent } from "@/components/previews/with-sheet-icon-preview";
 import { WithTooltipDocContent } from "@/components/previews/with-tooltip-preview";
 import { IdTextDocContent } from "@/components/previews/id-text-preview";
 
@@ -143,6 +144,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "report-document": ReportDocumentDocContent,
   "report-content": ReportContentDocContent,
   "with-empty-value": WithEmptyValueDocContent,
+  "with-sheet-icon": WithSheetIconDocContent,
   "with-tooltip": WithTooltipDocContent,
   "id-text": IdTextDocContent,
 };
