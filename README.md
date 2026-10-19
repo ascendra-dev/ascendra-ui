@@ -63,6 +63,7 @@ ascendra-ui/
 | Charts | Recharts 3 |
 | Rich text | Tiptap 3 |
 | Notifications | Sonner |
+| Scrollbars | OverlayScrollbars (tables, sheets, sidebar) |
 | Icons | Lucide (via `react-icons/lu`) |
 | Theme | next-themes (light / dark) |
 | Font | Geist (sans + mono) |
