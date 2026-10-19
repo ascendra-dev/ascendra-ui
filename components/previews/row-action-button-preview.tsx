@@ -35,7 +35,8 @@ export function RowActionButtonDocContent() {
             <code className="rounded bg-muted px-1 font-mono text-xs">
               group/row
             </code>{" "}
-            and is hovered. Hover over the row below to see it.
+            and is hovered. On touch devices (no hover) it is always visible.
+            Hover over the row below to see it.
           </p>
           <ComponentPreview
             code={`<div className="group/row flex items-center justify-between rounded-lg border px-4 py-3">
