@@ -876,7 +876,6 @@ export default function MarketingPage() {
                   ))}
                 </TableBody>
               </Table>
-              <CardFooter className="border-t-0 pt-0"></CardFooter>
             </TableWrapper>
           </div>
         </div>

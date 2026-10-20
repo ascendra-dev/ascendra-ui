@@ -3,7 +3,6 @@
 import {
   BackLink,
   Card,
-  CardFooter,
   CardHeader,
   CardHeaderSubtitle,
   CardHeaderTitle,
@@ -853,7 +852,6 @@ export default function TradingPortfolioPage() {
                   ))}
                 </TableBody>
               </Table>
-              <CardFooter className="border-t-0 pt-0" />
             </TableWrapper>
           </div>
         </div>

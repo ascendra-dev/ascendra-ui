@@ -1,6 +1,6 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, KpiLabel, KpiTile, KpiTrend, KpiValue, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { BackLink, Card, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, KpiLabel, KpiTile, KpiTrend, KpiValue, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -443,7 +443,6 @@ export default function HealthcarePage() {
                   ))}
                 </TableBody>
               </Table>
-              <CardFooter className="border-t-0 pt-0" />
             </TableWrapper>
           </div>
         </div>

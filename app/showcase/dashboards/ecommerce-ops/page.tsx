@@ -678,7 +678,6 @@ export default function EcommerceOpsPage() {
                   ))}
                 </TableBody>
               </Table>
-              <CardFooter className="border-t-0 pt-0" />
             </TableWrapper>
           </div>
         </div>
