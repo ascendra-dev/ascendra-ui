@@ -1076,19 +1076,16 @@ function TriggeringSection() {
           expression (<Code>&apos;-7d&apos;</Code>, <Code>&apos;today&apos;</Code>,{" "}
           <Code>&apos;2026-07-01&apos;</Code>) or an ISO timestamp.
         </p>
-        <CodeBlock>{`function RunQueryItem({ queryId, params, children }) {
-  const { runQuery } = useQueryContext();
-  return (
-    <DropdownMenuItem onSelect={() => runQuery(queryId, params)}>
-      {children}
-    </DropdownMenuItem>
-  );
-}
+        <CodeBlock>{`// In a row action menu — drill down from the row (a fresh run; default icon: a filter)
+<DataTableRunQueryAction
+  title={\`All \${row.status} invoices\`}
+  queryId="by-status"
+  params={{ statuses: [row.status] }}
+/>
 
-// In a row action menu — drill down from the row
-<RunQueryItem queryId="by-status" params={{ statuses: [row.status] }}>
-  All {row.status} invoices
-</RunQueryItem>`}</CodeBlock>
+// Anywhere else inside the provider
+const { runQuery } = useQueryContext();
+runQuery('by-status', { statuses: ['Overdue'] });`}</CodeBlock>
       </div>
 
       <div className="space-y-3">

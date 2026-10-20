@@ -1,6 +1,6 @@
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-10-18.
+> Auto-generated on 2026-10-20.
 > Run `npm run gen:ui-docs` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 

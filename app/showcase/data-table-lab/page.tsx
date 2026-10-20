@@ -20,6 +20,7 @@ import {
   DataTableCheckboxHead,
   DataTableColumnManager,
   DataTableCopyValueAction,
+  DataTableRunQueryAction,
   DataTableDeleteRowAction,
   DataTableDuplicateRowAction,
   DataTableEditRowAction,
@@ -44,7 +45,6 @@ import {
   DataTableViewRowAction,
   DataTableWithQueryProvider,
   DataTableWrapper,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   type FieldOptionsMap,
@@ -57,7 +57,6 @@ import {
   QueryBar,
   type QueryFunctionMap,
   QueryParamPanel,
-  type TriggerParams,
   IdText,
   Sheet,
   SheetBody,
@@ -74,7 +73,6 @@ import {
   TabList,
   Tabs,
   TabTrigger,
-  useQueryContext,
 } from "@/ascendra-ui";
 import {
   PRESET_QUERIES,
@@ -88,7 +86,6 @@ import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
 import {
   LuCalendarClock,
-  LuFilter,
   LuNotebookPen,
   LuTicketCheck,
   LuTrash2,
@@ -157,27 +154,6 @@ const URL_TRIGGER_LINKS = [
   { label: "Due by Feb 15, 2024", search: buildQuerySearch("due-by", { dueBy: "2024-02-15" }) },
   { label: "Broken link (unknown param)", search: buildQuerySearch("by-status", { colour: "red" }) },
 ];
-
-/** A row-action item that runs a query on this same table — a drill-down from the row. */
-function RunQueryItem({
-  queryId,
-  params,
-  icon,
-  children,
-}: {
-  queryId: string;
-  params?: TriggerParams;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  const { runQuery } = useQueryContext();
-  return (
-    <DropdownMenuItem onSelect={() => runQuery(queryId, params)}>
-      {icon}
-      {children}
-    </DropdownMenuItem>
-  );
-}
 
 export default function DataTableLabPage() {
   const [selected, setSelected] = useState<Invoice | null>(null);
@@ -339,20 +315,17 @@ export default function DataTableLabPage() {
                             />
                             <DataTableDeleteRowAction />
                             <DropdownMenuSeparator />
-                            <RunQueryItem
+                            <DataTableRunQueryAction
+                              title={`All ${row.status} invoices`}
                               queryId="by-status"
                               params={{ statuses: [row.status] }}
-                              icon={<LuFilter />}
-                            >
-                              All {row.status} invoices
-                            </RunQueryItem>
-                            <RunQueryItem
+                            />
+                            <DataTableRunQueryAction
+                              title={`Due by ${formatDate(row.dueDate)}`}
                               queryId="due-by"
                               params={{ dueBy: row.dueDate }}
                               icon={<LuCalendarClock />}
-                            >
-                              Due by {formatDate(row.dueDate)}
-                            </RunQueryItem>
+                            />
                             <DropdownMenuSeparator />
                             <DataTableRowActionItem
                               id="set-default"
