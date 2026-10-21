@@ -22,7 +22,7 @@ function PeriodExample() {
   const label = PERIODS.find((p) => p.value === period)?.label;
   return (
     <div className="flex flex-col items-start gap-3">
-      <SegmentControl aria-label="Period" segments={PERIODS} value={period} onValueChange={setPeriod} />
+      <SegmentControl segments={PERIODS} value={period} onValueChange={setPeriod} />
       <p className="text-muted-foreground text-xs">Showing: {label}</p>
     </div>
   );
@@ -43,7 +43,7 @@ const PERIODS = [
 
 const [period, setPeriod] = useState("day");
 
-<SegmentControl aria-label="Period" segments={PERIODS} value={period} onValueChange={setPeriod} />`}
+<SegmentControl segments={PERIODS} value={period} onValueChange={setPeriod} />`}
       >
         <PeriodExample />
       </ComponentPreview>
