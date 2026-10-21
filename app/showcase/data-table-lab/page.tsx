@@ -101,7 +101,7 @@ const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: "invoiceNumber", label: "Invoice #", freeze: true },
   { key: "clientName", label: "Client", freeze: true, filter: true },
-  { key: "amount", label: "Amount", type: "number" },
+  { key: "amount", label: "Amount", type: "number", align: "right" },
   { key: "dueDate", label: "Due Date", type: "date" },
   {
     key: "status",
