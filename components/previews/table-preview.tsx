@@ -41,6 +41,17 @@ function SampleRows() {
   );
 }
 
+const LONG_ROWS = [
+  ["Ahmed Khan", "Quarterly retainer"],
+  ["Sara Ali", "Website redesign — discovery, wireframes, visual design and two rounds of revisions"],
+  ["Usman Raza", "Hosting"],
+  ["Ayesha Malik", "Support plan"],
+  ["Bilal Ahmed", "Data migration from the legacy CRM, including a cleanup pass and a dry run"],
+  ["Hina Shah", "Licences"],
+  ["Omar Farooq", "Training"],
+  ["Zara Iqbal", "Audit"],
+];
+
 function SampleHeaders() {
   return (
     <TableHeaderRow>
@@ -436,6 +447,46 @@ export function TableDocContent() {
                   </TableHeader>
                   <TableBody>
                     <SampleRows />
+                  </TableBody>
+                </Table>
+              </TableWrapper>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Visible Rows */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Visible Rows</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">visibleRows</code> shows that many rows whole,
+            then scrolls under the sticky header. The height is measured — rows that wrap still fit — and there is no
+            cap while the table has that many rows or fewer.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<TableWrapper>
+  <Table visibleRows={5}>
+    <TableHeader>...</TableHeader>
+    <TableBody>{/* 8 rows */}</TableBody>
+  </Table>
+</TableWrapper>`}
+          >
+            <div className="w-full max-w-xl">
+              <TableWrapper>
+                <Table visibleRows={5}>
+                  <TableHeader>
+                    <TableHeaderRow>
+                      <TableHead>Client</TableHead>
+                      <TableHead>Work</TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                  <TableBody>
+                    {LONG_ROWS.map(([client, work]) => (
+                      <TableRow key={client}>
+                        <TableCell className="whitespace-nowrap">{client}</TableCell>
+                        <TableCell>{work}</TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableWrapper>
@@ -1166,6 +1217,7 @@ export function TableDocContent() {
               { name: "horizontal", type: "boolean", default: "true", description: "Enables horizontal (x-axis) scroll." },
               { name: "height", type: "number", description: "Max height in px when vertical scroll is enabled." },
               { name: "minHeight", type: "number", description: "Minimum height in px for the table container." },
+              { name: "visibleRows", type: "number", description: "Shows this many body rows whole, then scrolls vertically — measured, so rows of any height fit. Needs no scrollable/vertical and takes over from height. No cap while there are this many rows or fewer." },
             ]}
           />
         </div>

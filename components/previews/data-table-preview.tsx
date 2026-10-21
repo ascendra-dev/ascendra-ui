@@ -147,9 +147,11 @@ function formatDate(s: string) {
 function InvoiceDataTable({
   isLoading = false,
   data = MOCK_INVOICES,
+  visibleRows,
 }: {
   isLoading?: boolean;
   data?: Invoice[];
+  visibleRows?: number;
 }) {
   return (
     <DataTableProvider
@@ -170,7 +172,7 @@ function InvoiceDataTable({
       </DataTableBar>
       <DataTableFilterBar />
       <DataTableWrapper>
-        <DataTable scrollable horizontal height={340}>
+        <DataTable scrollable horizontal height={340} visibleRows={visibleRows}>
           <DataTableHeader>
             <DataTableHeaderRow>
               <DataTableHead column="invoiceNumber" />
@@ -971,6 +973,27 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
           </ComponentPreview>
         </div>
 
+        {/* Visible rows */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Visible Rows</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">visibleRows</code> shows that many rows whole,
+            then scrolls under the sticky header. The height is measured, so rows of any height fit; with that many
+            rows or fewer there is no cap.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<DataTable visibleRows={5}>
+  <DataTableHeader>...</DataTableHeader>
+  <DataTableBody>{(row) => <DataTableRow key={row.id}>...</DataTableRow>}</DataTableBody>
+</DataTable>`}
+          >
+            <div className="w-full">
+              <InvoiceDataTable visibleRows={5} />
+            </div>
+          </ComponentPreview>
+        </div>
+
         {/* Column definition options */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">
@@ -1179,6 +1202,20 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
             ColumnDef&lt;T&gt;
           </h3>
           <PropsTable props={meta.props ?? []} />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">DataTable</h3>
+          <PropsTable
+            props={[
+              {
+                name: "visibleRows",
+                type: "number",
+                description:
+                  "Shows this many body rows whole, then scrolls vertically — measured, so rows of any height fit. Needs no scrollable/vertical and takes over from height. No cap while there are this many rows or fewer.",
+              },
+            ]}
+          />
         </div>
 
         <div className="space-y-3">

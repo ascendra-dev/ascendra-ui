@@ -384,6 +384,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'horizontal', type: 'boolean', default: 'true', description: 'Enables horizontal (x-axis) scroll.' },
       { name: 'height', type: 'number', description: 'Max height in px when vertical scroll is enabled.' },
       { name: 'minHeight', type: 'number', description: 'Minimum height in px for the table container.' },
+      { name: 'visibleRows', type: 'number', description: 'Shows this many body rows whole, then scrolls vertically — measured, so rows of any height fit. Needs no scrollable/vertical and takes over from height. No cap while there are this many rows or fewer. Also on DataTable.' },
       // TableHeaderRow
       { name: 'size (TableHeaderRow)', type: "'default' | 'lg'", default: "'default'", description: 'default: fixed 40px row of column labels. lg: 16px vertical padding, height from content — for a title + subtitle header. The body card always starts under the measured header.' },
       // TableWrapper

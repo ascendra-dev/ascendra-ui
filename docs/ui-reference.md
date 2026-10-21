@@ -925,6 +925,7 @@ Data table with header, body, footer, scrollable container, and optional accent 
 | `horizontal` | `boolean` | `true` | Enables horizontal (x-axis) scroll. |
 | `height` | `number` | — | Max height in px when vertical scroll is enabled. |
 | `minHeight` | `number` | — | Minimum height in px for the table container. |
+| `visibleRows` | `number` | — | Shows this many body rows whole, then scrolls vertically — measured, so rows of any height fit. Needs no scrollable/vertical and takes over from height. No cap while there are this many rows or fewer. Also on DataTable. |
 | `size (TableHeaderRow)` | `'default' \| 'lg'` | `'default'` | default: fixed 40px row of column labels. lg: 16px vertical padding, height from content — for a title + subtitle header. The body card always starts under the measured header. |
 | `border (TableWrapper)` | `BorderConfig` | — | Optional accent border on the outer wrapper. |
 | `border (TableBody)` | `BorderConfig` | — | Optional accent border on the ::before panel element. |
