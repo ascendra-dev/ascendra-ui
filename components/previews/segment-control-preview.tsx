@@ -62,7 +62,6 @@ const [period, setPeriod] = useState("day");
           <ComponentPreview
             align="start"
             code={`<SegmentControl
-  aria-label="Density"
   size="sm"
   segments={[
     { value: "compact", label: "Compact" },
@@ -72,8 +71,7 @@ const [period, setPeriod] = useState("day");
 />`}
           >
             <SegmentControl
-              aria-label="Density"
-              size="sm"
+                          size="sm"
               segments={[
                 { value: "compact", label: "Compact" },
                 { value: "comfortable", label: "Comfortable" },
@@ -92,13 +90,13 @@ const [period, setPeriod] = useState("day");
           </p>
           <ComponentPreview
             align="start"
-            code={`<SegmentControl aria-label="View" defaultValue="list">
+            code={`<SegmentControl defaultValue="list">
   <SegmentControlItem value="list"><LuList /> List</SegmentControlItem>
   <SegmentControlItem value="board"><LuKanban /> Board</SegmentControlItem>
   <SegmentControlItem value="calendar"><LuCalendar /> Calendar</SegmentControlItem>
 </SegmentControl>`}
           >
-            <SegmentControl aria-label="View" defaultValue="list">
+            <SegmentControl defaultValue="list">
               <SegmentControlItem value="list">
                 <LuList /> List
               </SegmentControlItem>

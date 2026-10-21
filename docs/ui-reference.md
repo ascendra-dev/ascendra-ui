@@ -1118,7 +1118,7 @@ One choice out of a few, all visible at once — a period (Past hour / 24 hours 
 | `size` | `'sm' \| 'default'` | `'default'` | Segment height: 24px or 28px. |
 | `disabled` | `boolean` | `false` | Disables every segment (on SegmentControl), or one (on SegmentControlItem). |
 | `value` | `string` | — | This segment’s value (on SegmentControlItem, required). |
-| `aria-label` | `string` | — | Names the group for screen readers — e.g. "Period" (on SegmentControl). |
+| `aria-label` | `string` | `'Options'` | Names the group for screen readers — say what the choice is about, e.g. "Period" (on SegmentControl). |
 
 ---
 

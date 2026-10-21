@@ -477,7 +477,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'size', type: "'sm' | 'default'", default: "'default'", description: 'Segment height: 24px or 28px.' },
       { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables every segment (on SegmentControl), or one (on SegmentControlItem).' },
       { name: 'value', type: 'string', description: 'This segment’s value (on SegmentControlItem, required).' },
-      { name: 'aria-label', type: 'string', description: 'Names the group for screen readers — e.g. "Period" (on SegmentControl).' },
+      { name: 'aria-label', type: 'string', default: "'Options'", description: 'Names the group for screen readers — say what the choice is about, e.g. "Period" (on SegmentControl).' },
     ],
   },
 
