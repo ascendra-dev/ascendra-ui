@@ -31,6 +31,7 @@ import { PageHeaderDocContent } from "@/components/previews/page-header-preview"
 import { PageBarDocContent } from "@/components/previews/page-bar-preview";
 import { AsideContentDocContent } from "@/components/previews/aside-content-preview";
 import { TabsDocContent } from "@/components/previews/tabs-preview";
+import { SegmentedControlDocContent } from "@/components/previews/segmented-control-preview";
 import { SidebarMenuDocContent } from "@/components/previews/sidebar-menu-preview";
 import { WithCopyTextDocContent } from "@/components/previews/with-copy-text-preview";
 import { DateTimeDocContent } from "@/components/previews/date-time-preview";
@@ -106,6 +107,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "page-bar": PageBarDocContent,
   "aside-content": AsideContentDocContent,
   tabs: TabsDocContent,
+  "segmented-control": SegmentedControlDocContent,
   "sidebar-menu": SidebarMenuDocContent,
   "with-copy-text": WithCopyTextDocContent,
   "date-time": DateTimeDocContent,

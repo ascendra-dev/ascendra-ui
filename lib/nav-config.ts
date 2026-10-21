@@ -193,7 +193,10 @@ export const navConfig: NavCategory[] = [
   },
   {
     title: 'Tabs',
-    items: [{ name: 'Tabs', slug: 'tabs' }],
+    items: [
+      { name: 'Tabs', slug: 'tabs' },
+      { name: 'Segmented Control', slug: 'segmented-control' },
+    ],
   },
   {
     title: 'Sidebar',

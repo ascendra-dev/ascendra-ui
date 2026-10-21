@@ -38,6 +38,7 @@ import {
   LuPanelLeft,
   LuPanelRight,
   LuScrollText,
+  LuToggleLeft,
 } from "react-icons/lu";
 import {
   MdDashboardCustomize,
@@ -546,6 +547,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     path="/showcase/tabs"
                   >
                     Tabs
+                  </SideBarMenuItem>
+                  <SideBarMenuItem
+                    alternate="stand-alone"
+                    icon={LuToggleLeft}
+                    path="/showcase/segmented-control"
+                  >
+                    Segmented Control
                   </SideBarMenuItem>
                   <SideBarMenuItem
                     alternate="stand-alone"

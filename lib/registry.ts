@@ -460,6 +460,23 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'segmented-control': {
+    slug: 'segmented-control',
+    name: 'Segmented Control',
+    description: 'One choice out of a few, all visible at once — a period (Past hour / 24 hours / 7 days), a view mode. A radio group: the chosen segment is raised on a muted track; arrow keys move between segments. For switching whole panels of content, use Tabs.',
+    importPath: '@/ascendra-ui',
+    importNames: ['SegmentedControl', 'SegmentedControlItem'],
+    props: [
+      { name: 'value', type: 'string', description: 'The chosen segment (controlled).' },
+      { name: 'defaultValue', type: 'string', description: 'The initially chosen segment (uncontrolled).' },
+      { name: 'onValueChange', type: '(value: string) => void', description: 'Called with the newly chosen segment — not when the chosen one is clicked again.' },
+      { name: 'size', type: "'sm' | 'default'", default: "'default'", description: 'Segment height: 24px or 28px.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables every segment (on SegmentedControl), or one (on SegmentedControlItem).' },
+      { name: 'value', type: 'string', description: 'This segment’s value (on SegmentedControlItem, required).' },
+      { name: 'aria-label', type: 'string', description: 'Names the group for screen readers — e.g. "Period" (on SegmentedControl).' },
+    ],
+  },
+
   'tabs': {
     slug: 'tabs',
     name: 'Tabs',
@@ -835,6 +852,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'locked',       type: 'boolean',                  default: 'false',   description: 'Column position cannot be changed by reordering.' },
       { name: 'active',       type: 'boolean',                  default: 'true',    description: 'Whether the column is visible by default.' },
       { name: 'filter',       type: 'boolean',                  default: 'false',   description: 'Whether the column appears in the filter picker.' },
+      { name: 'align',        type: "'left' | 'right'",         default: "'left'",  description: 'Right-aligns the header (label and sort icon) and every cell — for counts and amounts, so the digits line up.' },
       { name: 'displayValue', type: '(raw: string) => string',  description: 'Converts raw data values to labels in filter chips and options.' },
     ],
   },

@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-10-20.
+> Auto-generated on 2026-10-21.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 70  
+**Primitive components:** 71  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -27,7 +27,7 @@
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
 | Tables & Data | Simple Table, Table, Empty State, Data Table |
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
-| Tabs | Tabs |
+| Tabs | Segmented Control, Tabs |
 | Sidebar | Sidebar Menu |
 | Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Sheet Icon, With Tooltip, Id Text |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
@@ -988,6 +988,7 @@ Feature-rich data table with built-in search, filtering, sorting, column managem
 | `locked` | `boolean` | `false` | Column position cannot be changed by reordering. |
 | `active` | `boolean` | `true` | Whether the column is visible by default. |
 | `filter` | `boolean` | `false` | Whether the column appears in the filter picker. |
+| `align` | `'left' \| 'right'` | `'left'` | Right-aligns the header (label and sort icon) and every cell — for counts and amounts, so the digits line up. |
 | `displayValue` | `(raw: string) => string` | — | Converts raw data values to labels in filter chips and options. |
 
 ---
@@ -1094,6 +1095,27 @@ Tabbed navigation with dirty-state dot indicator and disabled tab support.
 | `onValueChange` | `(value: string) => void` | — | Callback when the active tab changes. |
 | `disabled` | `boolean` | `false` | Disable a tab trigger (on TabTrigger). |
 | `dirty` | `boolean` | `false` | Show unsaved-changes dot on a tab trigger (on TabTrigger). |
+
+---
+
+#### Segmented Control
+
+One choice out of a few, all visible at once — a period (Past hour / 24 hours / 7 days), a view mode. A radio group: the chosen segment is raised on a muted track; arrow keys move between segments. For switching whole panels of content, use Tabs.
+
+- **Import:** `import { SegmentedControl, SegmentedControlItem } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/segmented-control](/showcase/segmented-control)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | The chosen segment (controlled). |
+| `defaultValue` | `string` | — | The initially chosen segment (uncontrolled). |
+| `onValueChange` | `(value: string) => void` | — | Called with the newly chosen segment — not when the chosen one is clicked again. |
+| `size` | `'sm' \| 'default'` | `'default'` | Segment height: 24px or 28px. |
+| `disabled` | `boolean` | `false` | Disables every segment (on SegmentedControl), or one (on SegmentedControlItem). |
+| `value` | `string` | — | This segment’s value (on SegmentedControlItem, required). |
+| `aria-label` | `string` | — | Names the group for screen readers — e.g. "Period" (on SegmentedControl). |
 
 ---
 
