@@ -463,20 +463,21 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
-  'segmented-control': {
-    slug: 'segmented-control',
-    name: 'Segmented Control',
+  'segment-control': {
+    slug: 'segment-control',
+    name: 'Segment Control',
     description: 'One choice out of a few, all visible at once — a period (Past hour / 24 hours / 7 days), a view mode. A radio group: the chosen segment is raised on a muted track; arrow keys move between segments. For switching whole panels of content, use Tabs.',
     importPath: '@/ascendra-ui',
-    importNames: ['SegmentedControl', 'SegmentedControlItem'],
+    importNames: ['SegmentControl', 'SegmentControlItem'],
     props: [
+      { name: 'segments', type: '{ value: string; label: ReactNode; disabled?: boolean }[]', description: 'The segments, in order — each rendered as a SegmentControlItem. Omit to compose SegmentControlItem children instead (icons, counts).' },
       { name: 'value', type: 'string', description: 'The chosen segment (controlled).' },
-      { name: 'defaultValue', type: 'string', description: 'The initially chosen segment (uncontrolled).' },
+      { name: 'defaultValue', type: 'string', description: 'The initially chosen segment (uncontrolled). Defaults to the first of segments.' },
       { name: 'onValueChange', type: '(value: string) => void', description: 'Called with the newly chosen segment — not when the chosen one is clicked again.' },
       { name: 'size', type: "'sm' | 'default'", default: "'default'", description: 'Segment height: 24px or 28px.' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables every segment (on SegmentedControl), or one (on SegmentedControlItem).' },
-      { name: 'value', type: 'string', description: 'This segment’s value (on SegmentedControlItem, required).' },
-      { name: 'aria-label', type: 'string', description: 'Names the group for screen readers — e.g. "Period" (on SegmentedControl).' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables every segment (on SegmentControl), or one (on SegmentControlItem).' },
+      { name: 'value', type: 'string', description: 'This segment’s value (on SegmentControlItem, required).' },
+      { name: 'aria-label', type: 'string', description: 'Names the group for screen readers — e.g. "Period" (on SegmentControl).' },
     ],
   },
 

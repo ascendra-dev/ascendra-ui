@@ -551,9 +551,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem
                     alternate="stand-alone"
                     icon={LuToggleLeft}
-                    path="/showcase/segmented-control"
+                    path="/showcase/segment-control"
                   >
-                    Segmented Control
+                    Segment Control
                   </SideBarMenuItem>
                   <SideBarMenuItem
                     alternate="stand-alone"

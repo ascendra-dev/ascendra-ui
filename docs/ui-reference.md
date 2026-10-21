@@ -27,7 +27,7 @@
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
 | Tables & Data | Simple Table, Table, Empty State, Data Table |
 | Layout | Card, Page Header, Page Bar, Aside Content, Item |
-| Tabs | Segmented Control, Tabs |
+| Tabs | Segment Control, Tabs |
 | Sidebar | Sidebar Menu |
 | Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Sheet Icon, With Tooltip, Id Text |
 | Date & Time | Calendar, Date Picker, Date Range Picker |
@@ -1100,24 +1100,25 @@ Tabbed navigation with dirty-state dot indicator and disabled tab support.
 
 ---
 
-#### Segmented Control
+#### Segment Control
 
 One choice out of a few, all visible at once — a period (Past hour / 24 hours / 7 days), a view mode. A radio group: the chosen segment is raised on a muted track; arrow keys move between segments. For switching whole panels of content, use Tabs.
 
-- **Import:** `import { SegmentedControl, SegmentedControlItem } from "@/ascendra-ui"`
-- **Showcase:** [/showcase/segmented-control](/showcase/segmented-control)
+- **Import:** `import { SegmentControl, SegmentControlItem } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/segment-control](/showcase/segment-control)
 
 **Props**
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `segments` | `{ value: string; label: ReactNode; disabled?: boolean }[]` | — | The segments, in order — each rendered as a SegmentControlItem. Omit to compose SegmentControlItem children instead (icons, counts). |
 | `value` | `string` | — | The chosen segment (controlled). |
-| `defaultValue` | `string` | — | The initially chosen segment (uncontrolled). |
+| `defaultValue` | `string` | — | The initially chosen segment (uncontrolled). Defaults to the first of segments. |
 | `onValueChange` | `(value: string) => void` | — | Called with the newly chosen segment — not when the chosen one is clicked again. |
 | `size` | `'sm' \| 'default'` | `'default'` | Segment height: 24px or 28px. |
-| `disabled` | `boolean` | `false` | Disables every segment (on SegmentedControl), or one (on SegmentedControlItem). |
-| `value` | `string` | — | This segment’s value (on SegmentedControlItem, required). |
-| `aria-label` | `string` | — | Names the group for screen readers — e.g. "Period" (on SegmentedControl). |
+| `disabled` | `boolean` | `false` | Disables every segment (on SegmentControl), or one (on SegmentControlItem). |
+| `value` | `string` | — | This segment’s value (on SegmentControlItem, required). |
+| `aria-label` | `string` | — | Names the group for screen readers — e.g. "Period" (on SegmentControl). |
 
 ---
 
