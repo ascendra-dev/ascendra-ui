@@ -43,7 +43,7 @@ function SegmentControl({
   ...props
 }: Omit<React.ComponentProps<'div'>, 'defaultValue' | 'onChange'> & {
   /** The segments, in order — each rendered as a SegmentControlItem. Omit to compose items as children. */
-  segments?: Segment[];
+  segments?: readonly Segment[];
   /** The chosen segment (controlled). */
   value?: string;
   /** The initially chosen segment (uncontrolled). Defaults to the first of `segments`. */
