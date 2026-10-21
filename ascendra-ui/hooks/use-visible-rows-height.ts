@@ -5,8 +5,8 @@ import * as React from 'react';
 /** How far above the Nth row's bottom the viewport ends. At the top that hides only the row's separator and a little
  *  of its bottom padding; scrolled to the end, it keeps the separator of the row above the last N clear of the card's
  *  top edge — the table's last row has no separator, so it is a pixel short, and fractional row heights (zoom, device
- *  pixel ratio) round up under Math.ceil. 3 was settled by eye on the rate-limiting overview. */
-const ROW_END_OFFSET = 3;
+ *  pixel ratio) round up under Math.ceil. 4 was settled by eye on the rate-limiting overview. */
+const ROW_END_OFFSET = 4;
 
 /**
  * The max height that shows a table's first `visibleRows` body rows whole, then scrolls — for `visibleRows` on Table
