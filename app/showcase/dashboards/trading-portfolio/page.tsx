@@ -802,7 +802,7 @@ export default function TradingPortfolioPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={340}>
+              <Table scrollable horizontal visibleRows={5}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Ticker</TableHead>

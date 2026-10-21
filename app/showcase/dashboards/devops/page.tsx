@@ -804,7 +804,7 @@ export default function DevopsPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={280}>
+              <Table scrollable horizontal visibleRows={4}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Incident ID</TableHead>

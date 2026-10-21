@@ -828,7 +828,7 @@ export default function MarketingPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={300}>
+              <Table scrollable horizontal visibleRows={5}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Campaign</TableHead>

@@ -651,7 +651,7 @@ export default function SaasRevenuePage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={300}>
+              <Table scrollable horizontal visibleRows={4}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Company</TableHead>

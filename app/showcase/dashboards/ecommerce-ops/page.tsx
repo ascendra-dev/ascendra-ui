@@ -634,7 +634,7 @@ export default function EcommerceOpsPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={300}>
+              <Table scrollable horizontal visibleRows={3}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Product</TableHead>

@@ -476,7 +476,7 @@ export default function SupplyChainPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={300}>
+              <Table scrollable horizontal visibleRows={5}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>PO Number</TableHead>

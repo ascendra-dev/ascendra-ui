@@ -697,7 +697,7 @@ export default function FinancialPnlPage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal>
+              <Table scrollable horizontal visibleRows={5}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Line Item</TableHead>

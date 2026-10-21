@@ -749,7 +749,7 @@ export default function RealEstatePage() {
               </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={328}>
+              <Table scrollable horizontal visibleRows={4}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Property</TableHead>

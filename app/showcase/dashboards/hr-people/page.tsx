@@ -390,7 +390,7 @@ export default function HrPeoplePage() {
               <CardHeaderSubtitle>Last 8 hires across all departments</CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
-              <Table scrollable horizontal vertical height={300}>
+              <Table scrollable horizontal visibleRows={4}>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Name</TableHead>
