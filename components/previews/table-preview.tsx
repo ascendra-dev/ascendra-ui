@@ -6,7 +6,7 @@ import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { cn } from "@/ascendra-ui/shadcn";
-import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, CardHeaderSubtitle, CardHeaderTitle, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 
 // ─── Shared sample rows ──────────────────────────────────────────────────────
 
@@ -433,6 +433,51 @@ export function TableDocContent() {
                 <Table>
                   <TableHeader>
                     <SampleHeaders />
+                  </TableHeader>
+                  <TableBody>
+                    <SampleRows />
+                  </TableBody>
+                </Table>
+              </TableWrapper>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Title Header */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Title Header</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">size="lg"</code> on{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">TableHeaderRow</code> drops the fixed 40px row
+            for 16px above and below, so the header can carry a title and subtitle. The body card starts under the
+            header's measured height.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<TableWrapper>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow size="lg">
+        <TableHead colSpan={4}>
+          <CardHeaderTitle>Recent invoices</CardHeaderTitle>
+          <CardHeaderSubtitle>Last 30 days · newest first</CardHeaderSubtitle>
+        </TableHead>
+      </TableHeaderRow>
+    </TableHeader>
+    <TableBody>...</TableBody>
+  </Table>
+</TableWrapper>`}
+          >
+            <div className="w-full">
+              <TableWrapper>
+                <Table>
+                  <TableHeader>
+                    <TableHeaderRow size="lg">
+                      <TableHead colSpan={4}>
+                        <CardHeaderTitle>Recent invoices</CardHeaderTitle>
+                        <CardHeaderSubtitle>Last 30 days · newest first</CardHeaderSubtitle>
+                      </TableHead>
+                    </TableHeaderRow>
                   </TableHeader>
                   <TableBody>
                     <SampleRows />
@@ -1121,6 +1166,16 @@ export function TableDocContent() {
               { name: "horizontal", type: "boolean", default: "true", description: "Enables horizontal (x-axis) scroll." },
               { name: "height", type: "number", description: "Max height in px when vertical scroll is enabled." },
               { name: "minHeight", type: "number", description: "Minimum height in px for the table container." },
+            ]}
+          />
+        </div>
+
+        {/* TableHeaderRow */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">TableHeaderRow</h3>
+          <PropsTable
+            props={[
+              { name: "size", type: "'default' | 'lg'", default: "'default'", description: "default: a fixed 40px row of column labels. lg: 16px vertical padding, height from the content — for a header that carries a title and subtitle." },
             ]}
           />
         </div>

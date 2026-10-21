@@ -384,6 +384,8 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'horizontal', type: 'boolean', default: 'true', description: 'Enables horizontal (x-axis) scroll.' },
       { name: 'height', type: 'number', description: 'Max height in px when vertical scroll is enabled.' },
       { name: 'minHeight', type: 'number', description: 'Minimum height in px for the table container.' },
+      // TableHeaderRow
+      { name: 'size (TableHeaderRow)', type: "'default' | 'lg'", default: "'default'", description: 'default: fixed 40px row of column labels. lg: 16px vertical padding, height from content — for a title + subtitle header. The body card always starts under the measured header.' },
       // TableWrapper
       { name: 'border (TableWrapper)', type: 'BorderConfig', description: 'Optional accent border on the outer wrapper.' },
       // TableBody
