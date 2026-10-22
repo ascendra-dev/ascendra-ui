@@ -913,8 +913,9 @@ In-body text blocks for executive summaries, analyst notes, and methodology disc
 
 Data table with header, body, footer, scrollable container, and optional accent border and gradient background.
 
-- **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody } from "@/ascendra-ui"`
+- **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, TableNote, EmptyBody } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table/table](/showcase/data-table/table)
+- **TableNote:** a muted note under the table, inside `TableWrapper` after `Table` — lined up with an `lg` header's title. For what the rows don't say on their own; pagination is `TableFoot`.
 
 **Props**
 
