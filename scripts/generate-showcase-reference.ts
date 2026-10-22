@@ -1340,7 +1340,7 @@ const lines: string[] = [
   "",
   "**Cursor-based pagination:** If your API uses cursors and has no page count, return `totalBatches: 1` and handle navigation externally.",
   "",
-  "**React Query cache key:** The provider uses `['data-table', queryId, confirmedParams, batch]` as the query key — invalidate this key from outside if you need to force a refetch.",
+  "**React Query cache key:** The provider uses `['data-table', tableId, queryId, confirmedParams, batch]` as the query key — scoped by `tableId` (or, without one, the instance), so two tables with the same query id never share cached rows. Invalidate `['data-table', tableId]` from outside to force a refetch.",
   "",
   "### QueryDef — Defining Queries",
   "",
