@@ -6,7 +6,7 @@ import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { cn } from "@/ascendra-ui/shadcn";
-import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, CardFooter, CardFooterIcon, CardHeaderSubtitle, CardHeaderTitle, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, CardFooter, CardFooterIcon, CardHeaderSubtitle, CardHeaderTitle, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableRowLink, TableWrapper, WithTooltip } from "@/ascendra-ui";
 
 // ─── Shared sample rows ──────────────────────────────────────────────────────
 
@@ -582,6 +582,59 @@ export function TableDocContent() {
                   <CardFooterIcon />
                   <span>Amounts are in the invoice&apos;s own currency — not converted.</span>
                 </CardFooter>
+              </TableWrapper>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Row Link */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Row Link</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">TableRowLink</code> in one cell makes the whole
+            row a real link — the browser shows where it goes, and cmd/middle-click open a new tab. One per row; the
+            row&apos;s own controls (the status tooltip here) stay above it. A row that opens a sheet keeps{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">onClick</code>.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<TableRow>
+  <TableCell>
+    <TableRowLink href={\`?invoice=\${row.id}\`}>{row.customer}</TableRowLink>
+  </TableCell>
+  <TableCell>{row.id}</TableCell>
+  <TableCell>{row.amount}</TableCell>
+  <TableCell>
+    <WithTooltip tooltip="Due Oct 3">
+      <SimpleBadge variant="red">Overdue</SimpleBadge>
+    </WithTooltip>
+  </TableCell>
+</TableRow>`}
+          >
+            <div className="w-full">
+              <TableWrapper>
+                <Table>
+                  <TableBody>
+                    {[
+                      { customer: "Ahmed Khan", id: "INV-001", amount: "PKR 12,000", status: "Paid", variant: "green", due: "Paid Sep 28" },
+                      { customer: "Sara Ali", id: "INV-002", amount: "PKR 8,500", status: "Pending", variant: "amber", due: "Due Oct 30" },
+                      { customer: "Usman Raza", id: "INV-003", amount: "PKR 15,000", status: "Overdue", variant: "red", due: "Due Oct 3" },
+                    ].map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell>
+                          <TableRowLink href={`?invoice=${row.id}`} scroll={false}>{row.customer}</TableRowLink>
+                        </TableCell>
+                        <TableCell>{row.id}</TableCell>
+                        <TableCell>{row.amount}</TableCell>
+                        <TableCell>
+                          <WithTooltip tooltip={row.due}>
+                            <SimpleBadge variant={row.variant as "green" | "amber" | "red"}>{row.status}</SimpleBadge>
+                          </WithTooltip>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </TableWrapper>
             </div>
           </ComponentPreview>
