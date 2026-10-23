@@ -79,7 +79,7 @@ const layoutRules: Rule[] = [
   {
     label: "Use BackLink on every sub-page",
     detail:
-      "Any page that navigates from a parent list/gallery page gets a BackLink above the PageHeader. Hardcoded '← Back' anchor links are not acceptable.",
+      "Any page that navigates from a parent list/gallery page gets a BackLink above the PageHeader. Hardcoded '← Back' anchor links are not acceptable. A page reached from the sidebar is a root page — no BackLink. A link that crosses to another section's page builds its href with useBackTo(label), so that page's BackLink returns to where the user was (\"Back to denied requests\", filters intact) instead of its default parent.",
   },
   {
     label: "Use app-container for full-width page layouts",
