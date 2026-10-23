@@ -123,7 +123,7 @@ export default function LayoutGuidePage() {
       {/* ── 1. Back Link ──────────────────────────────────────────────────── */}
       <GuideSection
         title="Back Link"
-        description="Sub-pages that navigate up to a parent use a back link placed above the page header. Use the BackLink component with the parent page's label. Opened from another section by a link built with useBackTo(label), the same BackLink goes back there instead."
+        description="Sub-pages that navigate up to a parent use a back link placed above the page header. Use the BackLink component with the parent page's label. Never inside the PageHeader — its actions center on the title alone. Opened from another section by a link built with useBackTo(label), the page title also shows a back icon that returns there."
       >
         <Variant
           label="Standard back link"
