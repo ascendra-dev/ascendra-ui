@@ -513,8 +513,8 @@ export function TableDocContent() {
             row&apos;s own controls (the status tooltip here) stay above it. The row ends in a chevron on hover (always
             on touch) — <code className="rounded bg-muted px-1 font-mono text-xs">external</code> makes it an arrow out.
             A row that opens a sheet keeps <code className="rounded bg-muted px-1 font-mono text-xs">onClick</code> and
-            puts a <code className="rounded bg-muted px-1 font-mono text-xs">RowSheetIcon</code> in any cell — its end
-            shows a panel instead. CardListLink is the same in a CardList.
+            takes <code className="rounded bg-muted px-1 font-mono text-xs">opensSheet</code> — its end shows a panel
+            instead (TableRow, DataTableRow, CardListItem). CardListLink is the same in a CardList.
           </p>
           <ComponentPreview
             align="start"
