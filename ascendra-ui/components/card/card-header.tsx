@@ -1,6 +1,6 @@
 "use client";
 
-import { LuMaximize, LuMinimize } from "react-icons/lu";
+import { LuChevronDown } from "react-icons/lu";
 
 import { cn } from "@/ascendra-ui/shadcn";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
@@ -38,11 +38,8 @@ export function CardHeader({
           onClick={onToggle}
           className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
-          {collapsed ? (
-            <LuMaximize className="size-3.5" />
-          ) : (
-            <LuMinimize className="size-3.5" />
-          )}
+          {/* A chevron — maximize/minimize icons are for a card that fills the screen, not one that folds. */}
+          <LuChevronDown className={cn("size-4 transition-transform duration-300", !collapsed && "rotate-180")} />
         </button>
       </div>
     </header>

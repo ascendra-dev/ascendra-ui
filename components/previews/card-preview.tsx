@@ -6,8 +6,110 @@ import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { cn } from "@/ascendra-ui/shadcn";
-import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, Input, SimpleBadge } from "@/ascendra-ui";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardList, CardListItem, CardListLink, CardPanel, CardPanelField, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, CardTable, DataTableEmptyBody, Input, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow } from "@/ascendra-ui";
 import { InfoIcon, TriangleAlertIcon } from "lucide-react";
+
+
+// ─── Card list / card table samples ──────────────────────────────────────────
+
+const SOURCES = [
+  { route: "POST /payments", count: 1284, share: 1 },
+  { route: "GET /invoices", count: 902, share: 0.7 },
+  { route: "POST /login", count: 611, share: 0.48 },
+  { route: "GET /customers", count: 340, share: 0.26 },
+  { route: "POST /refunds", count: 211, share: 0.16 },
+  { route: "GET /reports", count: 98, share: 0.08 },
+  { route: "DELETE /cards", count: 41, share: 0.03 },
+];
+
+function SampleCardList() {
+  return (
+    <Card collapseable="expanded">
+      <CardHeader>
+        <CardHeaderTitle>Rejections by route</CardHeaderTitle>
+        <CardHeaderSubtitle>Past 7 days · most first</CardHeaderSubtitle>
+      </CardHeader>
+      <CardPanel>
+        <CardList columns="auto auto 1fr" visibleRows={5}>
+          {SOURCES.map((r) => (
+            <CardListItem key={r.route}>
+              <CardListLink href="#">
+                <SimpleBadge>{r.route}</SimpleBadge>
+              </CardListLink>
+              <span className="text-right font-mono tabular-nums">{r.count.toLocaleString()}</span>
+              <span className="bg-primary/15 block h-1.5 rounded-full">
+                <span className="bg-primary block h-full rounded-full" style={{ width: `${r.share * 100}%` }} />
+              </span>
+            </CardListItem>
+          ))}
+        </CardList>
+      </CardPanel>
+      <CardFooter>
+        <CardFooterIcon />
+        <span>Each row opens Rejections filtered to that route.</span>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function SampleCardListEmpty() {
+  return (
+    <Card collapseable="expanded">
+      <CardHeader>
+        <CardHeaderTitle>Top sources</CardHeaderTitle>
+        <CardHeaderSubtitle>Past 24 hours</CardHeaderSubtitle>
+      </CardHeader>
+      <CardPanel>
+        <DataTableEmptyBody isLoading={false} isEmpty title="No rejections" description="Nothing hit a limit — try a longer period." className="h-40" />
+      </CardPanel>
+    </Card>
+  );
+}
+
+const LOCKS = [
+  { job: "invoice-reminders", holder: "worker-3", since: "2 min ago", state: "held" },
+  { job: "nightly-export", holder: "worker-1", since: "41 min ago", state: "stale" },
+  { job: "audit-pruner", holder: "worker-2", since: "6 s ago", state: "held" },
+];
+
+function SampleCardTable() {
+  return (
+    <Card collapseable="expanded">
+      <CardHeader>
+        <CardHeaderTitle>Locks</CardHeaderTitle>
+        <CardHeaderSubtitle>Who holds which job right now</CardHeaderSubtitle>
+      </CardHeader>
+      <CardTable>
+        <Table>
+          <TableHeader>
+            <TableHeaderRow>
+              <TableHead>Job</TableHead>
+              <TableHead>Holder</TableHead>
+              <TableHead>Since</TableHead>
+              <TableHead className="text-right">State</TableHead>
+            </TableHeaderRow>
+          </TableHeader>
+          <TableBody>
+            {LOCKS.map((l) => (
+              <TableRow key={l.job}>
+                <TableCell className="font-mono text-xs">{l.job}</TableCell>
+                <TableCell>{l.holder}</TableCell>
+                <TableCell className="text-muted-foreground">{l.since}</TableCell>
+                <TableCell className="text-right">
+                  <SimpleBadge variant={l.state === "stale" ? "orange" : "green"}>{l.state}</SimpleBadge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardTable>
+      <CardFooter>
+        <CardFooterIcon />
+        <span>A stale lock is released when its holder stops renewing it.</span>
+      </CardFooter>
+    </Card>
+  );
+}
 
 // ─── Reusable sample content ──────────────────────────────────────────────────
 
@@ -374,6 +476,74 @@ export function CardDocContent() {
       <div className="space-y-8">
         <SectionHeader>Examples</SectionHeader>
 
+        {/* Card list */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Card list</h3>
+          <p className="text-xs text-muted-foreground">
+            A one-list section — <code className="rounded bg-muted px-1 font-mono text-xs">CardList</code> in a
+            CardPanel. <code className="rounded bg-muted px-1 font-mono text-xs">columns</code> lines each row&apos;s
+            children up like table cells; <code className="rounded bg-muted px-1 font-mono text-xs">visibleRows</code>{" "}
+            shows that many, then scrolls; <code className="rounded bg-muted px-1 font-mono text-xs">CardListLink</code>{" "}
+            makes the whole row a link. Rows have the table&apos;s hover and separators.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<Card collapseable="expanded">
+  <CardHeader>
+    <CardHeaderTitle>Rejections by route</CardHeaderTitle>
+    <CardHeaderSubtitle>Past 7 days · most first</CardHeaderSubtitle>
+  </CardHeader>
+  <CardPanel>
+    <CardList columns="auto auto 1fr" visibleRows={5}>
+      {rows.map((r) => (
+        <CardListItem key={r.route}>
+          <CardListLink href={r.href}><SimpleBadge>{r.route}</SimpleBadge></CardListLink>
+          <span className="text-right font-mono tabular-nums">{r.count}</span>
+          <ShareBar share={r.share} />
+        </CardListItem>
+      ))}
+    </CardList>
+  </CardPanel>
+  <CardFooter>…</CardFooter>
+</Card>`}
+          >
+            <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+              <SampleCardList />
+              <SampleCardListEmpty />
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Card table */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Card with a table</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">CardTable</code> in place of the CardPanel: the
+            card&apos;s header above, the table&apos;s own column header and rows, a CardFooter below. It folds with
+            the card.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<Card collapseable="expanded">
+  <CardHeader>
+    <CardHeaderTitle>Locks</CardHeaderTitle>
+    <CardHeaderSubtitle>Who holds which job right now</CardHeaderSubtitle>
+  </CardHeader>
+  <CardTable>
+    <Table>
+      <TableHeader>…</TableHeader>
+      <TableBody>…</TableBody>
+    </Table>
+  </CardTable>
+  <CardFooter>…</CardFooter>
+</Card>`}
+          >
+            <div className="w-full">
+              <SampleCardTable />
+            </div>
+          </ComponentPreview>
+        </div>
+
         {/* Collapseable */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">
@@ -392,7 +562,7 @@ export function CardDocContent() {
             <code className="rounded bg-muted px-1 font-mono text-xs">
               Card
             </code>
-            . A maximize/minimize toggle appears in{" "}
+            . A chevron toggle appears in{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">
               CardHeader
             </code>{" "}
