@@ -18,7 +18,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn";
-import { Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
+import { Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, ChartBarLink, SimpleBadge } from "@/ascendra-ui";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
@@ -38,6 +38,16 @@ const stackedData = [
   { month: "Apr", new: 520, returning: 940, churned: 80 },
   { month: "May", new: 610, returning: 1020, churned: 70 },
   { month: "Jun", new: 580, returning: 1100, churned: 90 },
+];
+
+// One month with nothing — its column is still a link.
+const linkedData = [
+  { month: "Jan", new: 340, returning: 820 },
+  { month: "Feb", new: 410, returning: 890 },
+  { month: "Mar", new: 0, returning: 0 },
+  { month: "Apr", new: 520, returning: 940 },
+  { month: "May", new: 610, returning: 1020 },
+  { month: "Jun", new: 580, returning: 1100 },
 ];
 
 const horizontalData = [
@@ -69,6 +79,11 @@ const stackedConfig: ChartConfig = {
   new: { label: "New", color: "var(--chart-3)" },
   returning: { label: "Returning", color: "var(--chart-1)" },
   churned: { label: "Churned", color: "var(--chart-5)" },
+};
+
+const linkedConfig: ChartConfig = {
+  new: { label: "New", color: "var(--chart-1)" },
+  returning: { label: "Returning", color: "var(--chart-2)" },
 };
 
 const horizontalConfig: ChartConfig = {
@@ -688,6 +703,51 @@ export default function BarChartsPage() {
               </ChartContainer>
             </div>
           </CardPanel>
+        </Card>
+
+        {/* Linked columns */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <CardHeaderTitle>Linked Columns</CardHeaderTitle>
+                <CardHeaderSubtitle>
+                  Each month&apos;s column is a real link — hover shows where it goes, cmd-click opens a new tab. March
+                  is empty and still links.
+                </CardHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Link
+              </SimpleBadge>
+            </div>
+          </CardHeader>
+          <CardPanel>
+            <div className="p-5">
+              <ChartContainer config={linkedConfig} className="h-72 w-full">
+                <BarChart data={linkedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(linkedConfig, fmtNum)} />} />
+                  <Bar dataKey="new" stackId="m" fill="var(--chart-1)" />
+                  {/* The top series of the stack carries the link — its column covers the whole stack. */}
+                  <Bar
+                    dataKey="returning"
+                    stackId="m"
+                    fill="var(--chart-2)"
+                    radius={[3, 3, 0, 0]}
+                    shape={<ChartBarLink href={(row: (typeof linkedData)[number]) => `?month=${row.month}`} />}
+                  />
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </CardPanel>
+          <CardFooter>
+            <CardFooterIcon />
+            <span>
+              <code>{"<Bar shape={<ChartBarLink href={(row) => …} />} />"}</code> — on a stack, the top series only.
+            </span>
+          </CardFooter>
         </Card>
       </div>
     </>
