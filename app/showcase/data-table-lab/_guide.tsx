@@ -889,6 +889,7 @@ function QuerySystemSection() {
           <PropRow name="optional" type="boolean" description="Shows a grey 'Optional' badge." />
           <PropRow name="span" type="1 | 2 | 'full'" description="Grid column span for the field within the form layout." />
           <PropRow name="placeholder" type="string" description="Placeholder text for text/number inputs." />
+          <PropRow name="checkboxLabel" type="string" description="checkbox: the text beside the box. With it, label sits above like other fields and the box lines up with the inputs in its row." />
           <PropRow name="description" type="string" description="Helper text rendered below the input." />
           <PropRow name="info" type="string" description="Subtitle shown above the input (used for contextual hints)." />
           <PropRow name="min / max" type="number" description="Min/max constraints for number inputs." />
