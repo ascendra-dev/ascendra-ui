@@ -6,7 +6,7 @@ import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { cn } from "@/ascendra-ui/shadcn";
-import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, CardHeaderSubtitle, CardHeaderTitle, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, CardFooter, CardFooterIcon, CardHeaderSubtitle, CardHeaderTitle, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 
 // ─── Shared sample rows ──────────────────────────────────────────────────────
 
@@ -534,6 +534,54 @@ export function TableDocContent() {
                     <SampleRows />
                   </TableBody>
                 </Table>
+              </TableWrapper>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Table Note */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Table Note</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">CardFooter</code> after the{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">Table</code>, inside the wrapper — a note on what
+            the rows don&apos;t say on their own. No top border (the body card divides it), lined up with the
+            header&apos;s title.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<TableWrapper>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow size="lg">...</TableHeaderRow>
+    </TableHeader>
+    <TableBody>...</TableBody>
+  </Table>
+  <CardFooter>
+    <CardFooterIcon />
+    <span>Amounts are in the invoice's own currency — not converted.</span>
+  </CardFooter>
+</TableWrapper>`}
+          >
+            <div className="w-full">
+              <TableWrapper>
+                <Table>
+                  <TableHeader>
+                    <TableHeaderRow size="lg">
+                      <TableHead colSpan={4}>
+                        <CardHeaderTitle>Recent invoices</CardHeaderTitle>
+                        <CardHeaderSubtitle>Last 30 days · newest first</CardHeaderSubtitle>
+                      </TableHead>
+                    </TableHeaderRow>
+                  </TableHeader>
+                  <TableBody>
+                    <SampleRows />
+                  </TableBody>
+                </Table>
+                <CardFooter>
+                  <CardFooterIcon />
+                  <span>Amounts are in the invoice&apos;s own currency — not converted.</span>
+                </CardFooter>
               </TableWrapper>
             </div>
           </ComponentPreview>

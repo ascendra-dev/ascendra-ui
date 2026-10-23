@@ -915,6 +915,7 @@ Data table with header, body, footer, scrollable container, and optional accent 
 
 - **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table/table](/showcase/data-table/table)
+- **Note under a table:** `CardFooter` (+ `CardFooterIcon`) inside `TableWrapper` after `Table` — no top border there, lined up with an `lg` header's title.
 
 **Props**
 
