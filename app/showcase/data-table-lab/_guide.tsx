@@ -559,6 +559,7 @@ function SelectionSection() {
         </p>
         <PropTable>
           <PropRow name="selectedRows" type="Set<string>" description="IDs of all currently selected rows. Use .size to count, spread to get an array." />
+          <PropRow name="selectedData" type="T[]" description="The selected rows themselves, from every page of the loaded data — what a bar action acts on (a row picked on another page is included)." />
           <PropRow name="selectionEnabled" type="boolean" description="True when the provider has selectable and getRowId." />
           <PropRow name="isAllSelected" type="boolean" description="True when every row on the current page is selected." />
           <PropRow name="isIndeterminate" type="boolean" description="True when some but not all current-page rows are selected. Used to show the indeterminate checkbox state." />
@@ -1181,7 +1182,7 @@ function HooksSection() {
           {
             name: "useDataTableSelection()",
             returns: "DataTableSelectionContextValue",
-            description: "selectedRows, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled",
+            description: "selectedRows, selectedData, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled",
           },
           {
             name: "useDataTableContext()",
