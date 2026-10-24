@@ -621,7 +621,7 @@ export default function Page() {
 
         <Variant
           label="Collapseable section"
-          note='Pass collapseable="expanded" or collapseable="collapsed" to Card. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
+          note='Pass collapseable="expanded" or collapseable="collapsed" to Card. State is managed internally — a click on the header folds it, and a chevron shows the state; add maximizable for a maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
           code={`import { Card } from "@/ascendra-ui";
 
 // Starts expanded

@@ -562,12 +562,16 @@ export function CardDocContent() {
             <code className="rounded bg-muted px-1 font-mono text-xs">
               Card
             </code>
-            . A chevron toggle appears in{" "}
+            . A click anywhere on the{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">
               CardHeader
             </code>{" "}
-            automatically — with a maximize toggle beside it: the card fills the screen over the overlay, Esc or a click
-            outside brings it back, and a list or table shows every row (<code className="rounded bg-muted px-1 font-mono text-xs">maximizable={"{false}"}</code> turns it off).
+            folds it, and a chevron says which way. Add{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">maximizable</code> for a maximize toggle: at rest
+            it's the only icon (the chevron fades in on hover, and stays on touch), the card fills the screen over a
+            light overlay, Esc or a click outside brings it back, a list or table shows every row and a chart takes the
+            card's height. Maximized is for reading — a row or chart link that would leave the page brings the card
+            back first, then marks the row.
           </p>
 
           <div className="space-y-1.5">
@@ -576,7 +580,7 @@ export function CardDocContent() {
             </p>
             <ComponentPreview
               align="start"
-              code={`<Card collapseable="expanded">
+              code={`<Card collapseable="expanded" maximizable>
   <CardHeader>
     <CardHeaderTitle>Notifications</CardHeaderTitle>
     <CardHeaderSubtitle>Manage your alert preferences.</CardHeaderSubtitle>
@@ -588,7 +592,7 @@ export function CardDocContent() {
 </Card>`}
             >
               <div className="w-full">
-                <Card collapseable="expanded">
+                <Card collapseable="expanded" maximizable>
                   <CardHeader>
                     <CardHeaderTitle>Notifications</CardHeaderTitle>
                     <CardHeaderSubtitle>
@@ -600,7 +604,7 @@ export function CardDocContent() {
                   </CardPanel>
                   <CardFooter>
                     <CardFooterIcon icon={InfoIcon} />
-                    Click the icon in the header to collapse.
+                    Click the header to collapse.
                   </CardFooter>
                 </Card>
               </div>

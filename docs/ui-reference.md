@@ -1,6 +1,6 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-10-21.
+> Auto-generated on 2026-10-24.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
@@ -915,8 +915,6 @@ Data table with header, body, footer, scrollable container, and optional accent 
 
 - **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table/table](/showcase/data-table/table)
-- **Row link:** `TableRowLink` (from `@/ascendra-ui`) in one cell makes the whole row a real link to its `href` — one per row; the row's buttons, other links and tooltip triggers stay above it. A row that opens a sheet keeps `onClick`.
-- **Note under a table:** `CardFooter` (+ `CardFooterIcon`) inside `TableWrapper` after `Table` — no top border there, lined up with an `lg` header's title.
 
 **Props**
 
@@ -1011,7 +1009,8 @@ Settings-style card with header, collapsible panel, panel items, field, crown ba
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `danger` | `boolean` | `false` | Applies red danger styling (on Card). |
-| `collapseable` | `'expanded' \| 'collapsed'` | — | Enables collapse with toggle in CardHeader. |
+| `collapseable` | `'expanded' \| 'collapsed'` | — | Enables collapse — a click on the CardHeader folds it; a chevron shows the state. |
+| `maximizable` | `boolean` | `false` | A maximize toggle in CardHeader: the card fills the screen over a light overlay; Esc or an outside click restores it. Maximized, page links in rows and charts restore the card instead of navigating. |
 | `hasError` | `boolean` | `false` | Shows a destructive outline ring when collapsed (on Card). |
 | `border` | `BorderConfig` | — | Optional accent border on Card or CardPanel. |
 | `bg` | `BgConfig` | — | Optional gradient background on CardPanel. |

@@ -423,7 +423,8 @@ export const registry: Record<string, ComponentMeta> = {
     importNames: ['Card', 'CardHeader', 'CardHeaderTitle', 'CardHeaderSubtitle', 'CardPanel', 'CardFooter', 'CardFooterIcon', 'CardPanelItem', 'CardPanelItemGroup', 'CardPanelItemCrown', 'CardPanelField'],
     props: [
       { name: 'danger', type: 'boolean', default: 'false', description: 'Applies red danger styling (on Card).' },
-      { name: 'collapseable', type: "'expanded' | 'collapsed'", description: 'Enables collapse with toggle in CardHeader.' },
+      { name: 'collapseable', type: "'expanded' | 'collapsed'", description: 'Enables collapse — a click on the CardHeader folds it; a chevron shows the state.' },
+      { name: 'maximizable', type: 'boolean', default: 'false', description: 'A maximize toggle in CardHeader: the card fills the screen over a light overlay; Esc or an outside click restores it. Maximized, page links in rows and charts restore the card instead of navigating.' },
       { name: 'hasError', type: 'boolean', default: 'false', description: 'Shows a destructive outline ring when collapsed (on Card).' },
       { name: 'border', type: 'BorderConfig', description: 'Optional accent border on Card or CardPanel.' },
       { name: 'bg', type: 'BgConfig', description: 'Optional gradient background on CardPanel.' },
