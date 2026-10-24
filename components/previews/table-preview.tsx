@@ -510,11 +510,13 @@ export function TableDocContent() {
           <p className="text-xs text-muted-foreground">
             <code className="rounded bg-muted px-1 font-mono text-xs">TableRowLink</code> in one cell makes the whole
             row a real link — the browser shows where it goes, and cmd/middle-click open a new tab. One per row; the
-            row&apos;s own controls (the status tooltip here) stay above it. The row ends in a chevron on hover (always
-            on touch) — <code className="rounded bg-muted px-1 font-mono text-xs">external</code> makes it an arrow out.
-            A row that opens a sheet keeps <code className="rounded bg-muted px-1 font-mono text-xs">onClick</code> and
-            takes <code className="rounded bg-muted px-1 font-mono text-xs">opensSheet</code> — its end shows a panel
-            instead (TableRow, DataTableRow, CardListItem). CardListLink is the same in a CardList.
+            row&apos;s own controls (the status tooltip here) stay above it. No icon: the hand cursor says the row
+            goes somewhere, the ordinary one that it doesn&apos;t —{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">external</code> alone ends the row in an arrow out
+            (a new tab). A row that opens a sheet keeps <code className="rounded bg-muted px-1 font-mono text-xs">onClick</code>{" "}
+            and takes <code className="rounded bg-muted px-1 font-mono text-xs">opensSheet</code> — the hand cursor too
+            (TableRow, DataTableRow, CardListItem). In focus mode a page link takes the zoom-out cursor instead: a click
+            brings the view back. CardListLink is the same in a CardList.
           </p>
           <ComponentPreview
             align="start"
