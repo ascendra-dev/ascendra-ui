@@ -566,7 +566,8 @@ export function CardDocContent() {
             <code className="rounded bg-muted px-1 font-mono text-xs">
               CardHeader
             </code>{" "}
-            automatically.
+            automatically — with a maximize toggle beside it: the card fills the screen over the overlay, Esc or a click
+            outside brings it back, and a list or table shows every row (<code className="rounded bg-muted px-1 font-mono text-xs">maximizable={"{false}"}</code> turns it off).
           </p>
 
           <div className="space-y-1.5">
