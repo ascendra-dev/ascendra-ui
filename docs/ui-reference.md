@@ -1023,7 +1023,7 @@ Settings-style card with header, collapsible panel, panel items, field, crown ba
 
 #### Page Header
 
-Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen; links that leave the page restore it first.
+Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen (with one DataTable, compact: only its rows scroll, the footer stays at the bottom); links that leave the page restore it first.
 
 - **Import:** `import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction, PageFocus, PageFocusToggle } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/layout/page-header](/showcase/layout/page-header)

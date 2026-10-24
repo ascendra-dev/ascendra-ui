@@ -127,7 +127,9 @@ export function PageHeaderDocContent() {
             <code className="rounded bg-muted px-1 font-mono text-xs">PageFocus</code>, and put a{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">PageFocusToggle</code> last in the{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">PageHeaderAction</code>: the page fills the
-            screen over a light overlay and scrolls inside it — a table keeps its query, filters and page. Focus mode
+            screen over a light overlay — a table keeps its query, filters and page. With one DataTable the page is
+            compact: the title, query bar and toolbar stay put, the rows scroll under the column header and the
+            pagination footer sits at the bottom (otherwise the page scrolls inside the panel). Focus mode
             is for reading: a row or chart link that would leave the page brings it back first, and the title&apos;s
             back arrow hides. Keep a{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">BackLink</code> outside. A page holding a

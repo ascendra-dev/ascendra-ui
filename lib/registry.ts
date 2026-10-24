@@ -438,7 +438,7 @@ export const registry: Record<string, ComponentMeta> = {
   'page-header': {
     slug: 'page-header',
     name: 'Page Header',
-    description: 'Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen; links that leave the page restore it first.',
+    description: 'Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen (with one DataTable, compact: only its rows scroll, the footer stays at the bottom); links that leave the page restore it first.',
     importPath: '@/ascendra-ui',
     importNames: ['PageHeader', 'PageHeaderGroup', 'PageTitle', 'PageSubtitle', 'PageHeaderAction', 'PageFocus', 'PageFocusToggle'],
     props: [],
