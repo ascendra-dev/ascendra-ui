@@ -55,11 +55,22 @@ function DialogClose({
  */
 const DialogFooterSlotContext = React.createContext<HTMLElement | null | undefined>(undefined);
 
+/** A text field — what `focusField` focuses (not a checkbox, radio or button). */
+const TEXT_FIELD = "input:not([type=hidden],[type=checkbox],[type=radio],[type=button],[type=submit]), textarea";
+
+/**
+ * On open, focus goes to the dialog itself — no ring, and on a phone no keyboard over half the screen; a screen reader
+ * still announces it, and Tab reaches the first field. `focusField` — for a dialog that's for typing (a search over a
+ * list): its first text field takes focus instead, with a fine pointer only; on a touch screen the keyboard waits for
+ * a tap on the field.
+ */
 function DialogContent({
   className,
   children,
+  focusField = false,
+  onOpenAutoFocus,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & { focusField?: boolean }) {
   // A DialogFooter anywhere inside — a direct child, or within a component that renders a step of the dialog — moves
   // itself into the strip below the card (a portal; React context and events still follow the tree).
   const [footerSlot, setFooterSlot] = React.useState<HTMLElement | null>(null);
@@ -69,6 +80,16 @@ function DialogContent({
       <DialogOverlay />
       <DialogPrimitive.Content
         data-slot="dialog-content"
+        onOpenAutoFocus={(event) => {
+          onOpenAutoFocus?.(event);
+          if (event.defaultPrevented) return;
+          event.preventDefault();
+          const panel = event.currentTarget as HTMLElement;
+          const field = focusField && window.matchMedia("(pointer: fine)").matches
+            ? panel.querySelector<HTMLElement>(TEXT_FIELD)
+            : null;
+          (field ?? panel).focus();
+        }}
         className={cn(
           /* positioning */
           "fixed top-18 left-1/2 z-1000 w-[calc(100%-2rem)] max-w-sm -translate-x-1/2 p-0 outline-none",
