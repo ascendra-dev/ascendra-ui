@@ -55,8 +55,9 @@ function DialogClose({
  */
 const DialogFooterSlotContext = React.createContext<HTMLElement | null | undefined>(undefined);
 
-/** A text field — what `focusField` focuses (not a checkbox, radio or button). */
-const TEXT_FIELD = "input:not([type=hidden],[type=checkbox],[type=radio],[type=button],[type=submit]), textarea";
+/** A field to type in — what `focusField` focuses: not a checkbox, radio or button, nor a read-only or disabled one. */
+const TEXT_FIELD =
+  "input:not([type=hidden],[type=checkbox],[type=radio],[type=button],[type=submit],[readonly],:disabled), textarea:not([readonly],:disabled)";
 
 /**
  * On open, focus goes to the dialog itself — no ring, and on a phone no keyboard over half the screen; a screen reader
