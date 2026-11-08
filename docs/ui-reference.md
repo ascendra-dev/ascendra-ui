@@ -1,13 +1,13 @@
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-10-24.
+> Auto-generated on 2026-11-08.
 > Run `npm run gen:ui-docs` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 71  
+**Primitive components:** 72  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -26,7 +26,7 @@
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
 | Tables & Data | Simple Table, Table, Empty State, Data Table |
-| Layout | Card, Page Header, Page Bar, Aside Content, Item |
+| Layout | Card, Page Header, Page Bar, App Shell & Page Layout, Aside Content, Item |
 | Tabs | Segment Control, Tabs |
 | Sidebar | Sidebar Menu |
 | Utilities | With Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top, Export CSV Button, Date Time, With Empty Value, With Sheet Icon, With Tooltip, Id Text |
@@ -198,9 +198,9 @@ Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset 
 
 #### Progress & Stepper
 
-ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses.
+ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses. For a multi-step form, StepperProvider holds the steps and the current step, and StepperNavigator renders Previous and Next (Submit on the last step) inside it.
 
-- **Import:** `import { ProgressBar, Stepper } from "@/ascendra-ui"`
+- **Import:** `import { ProgressBar, Stepper, StepperProvider, StepperNavigator, useStepperContext } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/feedback/progress](/showcase/feedback/progress)
 
 **Props**
@@ -213,6 +213,9 @@ ProgressBar wraps Radix Progress with size and color variants plus an indetermin
 | `indeterminate` | `boolean` | `false` | ProgressBar — looping animation when progress is unknown. |
 | `steps` | `StepperItem[]` | — | Stepper — array of step objects with label, optional description, and optional status. |
 | `currentStep` | `number` | — | Stepper — active step index. Drives completed/active/pending status automatically. |
+| `steps (StepperProvider)` | `StepperStep[]` | — | Each step: label, optional description, and an optional onNext() => Promise<boolean> that validates before moving on. Returning false stays on the step. |
+| `onSubmit (StepperProvider)` | `() => Promise<boolean>` | — | Runs when Next is pressed on the last step. StepperNavigator shows "Submitting…" meanwhile. |
+| `StepperNavigator` | `—` | — | No props. Previous (disabled on the first step) and Next or Submit, read from the StepperProvider context. |
 
 ---
 
@@ -997,17 +1000,43 @@ Feature-rich data table with built-in search, filtering, sorting, column managem
 
 ### Layout
 
+#### App Shell & Page Layout
+
+The frame every app is built in. Shell: PageLayout > Header, Nav, MainContainer > (SideBarToggle, SideBar, ContentArea > the page). A page inside ContentArea: PageHeader, then PageMain > PageWrapper > MainContent. PageContent sits below a PageBar and lays out main content beside an AsideContent. DashboardContent stacks dashboard rows. See the Layout Guide showcase page for the four page recipes.
+
+- **Import:** `import { PageLayout, MainContainer, ContentArea, PageMain, PageWrapper, MainContent, PageContent, DashboardContent } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/layout-guide](/showcase/layout-guide)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `PageLayout` | `div props` | — | The root grid (min-h-screen; rows: Header, Nav, content). Applies the device's saved layout mode (centered, full width or menu) before first paint. |
+| `MainContainer` | `main props` | — | The centered container under the top bars, holding the sidebar beside the content. Drops its max width in the full-width and menu layout modes. |
+| `ContentArea` | `section props` | — | The flexible column beside the sidebar where each page renders (flex-1 min-w-0). |
+| `PageWrapper` | `div props` | — | Wraps a page's main content with a separator line above it, hidden when the page holds a Stepper. |
+| `MainContent` | `main props` | — | The page's main column: a full-width flex column with gap-6. |
+| `PageContent` | `div props` | — | A row below a PageBar (no top margin when it directly follows one) that places main content beside an AsideContent from lg up. |
+| `DashboardContent` | `div props` | — | A flex column with gap-4 for a dashboard's stacked rows of panels. |
+
+---
+
 #### Card
 
-Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel.
+Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel. A card's body is one of three: CardPanel (padded content), CardTable (a Table in place of a panel: the card header above, the table's own column header and rows, a CardFooter below; it folds with the card, and maximized the table scrolls its rows under a sticky column header — put the Table and its loading/empty/error bodies in it), or a CardList inside a CardPanel (a one-list section such as "top sources": rows that look and behave like a table's, instead of a table whose header row carries the title).
 
-- **Import:** `import { Card, CardHeader, CardHeaderTitle, CardHeaderSubtitle, CardPanel, CardFooter, CardFooterIcon, CardPanelItem, CardPanelItemGroup, CardPanelItemCrown, CardPanelField } from "@/ascendra-ui"`
+- **Import:** `import { Card, CardHeader, CardHeaderTitle, CardHeaderSubtitle, CardPanel, CardFooter, CardFooterIcon, CardPanelItem, CardPanelItemGroup, CardPanelItemCrown, CardPanelField, CardTable, CardList, CardListItem, CardListLink } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/layout/card](/showcase/layout/card)
 
 **Props**
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `className (CardTable)` | `string` | — | Extra classes on the CardTable body. No other props: it reads collapse and maximize from the enclosing Card. |
+| `columns (CardList)` | `string` | — | A CSS grid template, such as "auto auto 1fr". Each row's children line up in these columns across the list, as table cells would. Without it, each row is a flex line. |
+| `visibleRows (CardList)` | `number` | — | Shows that many rows whole, then scrolls, measured like Table's visibleRows. Ignored while the card is maximized, when every row shows. |
+| `opensSheet (CardListItem)` | `boolean` | — | The row opens a sheet through its own onClick; the hand cursor says so. A row is otherwise a list item with a separator below it and the table's hover tint. |
+| `CardListLink` | `TableRowLink props` | — | Makes the whole row a real link (status-bar URL, cmd/middle-click, Tab focus). Same props as TableRowLink. |
 | `danger` | `boolean` | `false` | Applies red danger styling (on Card). |
 | `collapseable` | `'expanded' \| 'collapsed'` | — | Enables collapse — a click on the CardHeader folds it; a chevron shows the state. |
 | `maximizable` | `boolean` | `false` | A maximize toggle in CardHeader: the card fills the screen over a light overlay; Esc or an outside click restores it. Maximized, page links in rows and charts restore the card instead of navigating. |
@@ -1025,20 +1054,27 @@ Settings-style card with header, collapsible panel, panel items, field, crown ba
 
 Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen (with one DataTable, compact: only its rows scroll, the footer stays at the bottom); links that leave the page restore it first.
 
-- **Import:** `import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction, PageFocus, PageFocusToggle } from "@/ascendra-ui"`
+- **Import:** `import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction, PageFocus, PageFocusToggle, BackLink, PageBackButton, useBackTo } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/layout/page-header](/showcase/layout/page-header)
 
 **Props**
 
-_No custom props — accepts standard HTML attributes._
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `href (BackLink)` | `string` | — | The page's parent. BackLink always goes there: it is the page's way up, shown above the page header with an arrow. |
+| `children (BackLink)` | `React.ReactNode` | — | What the link says, such as "Back to people". |
+| `label (BackLink)` | `string` | — | The parent's name, such as "People". When the page was opened by a cross-link, the title shows its own back icon, and BackLink then shows this label without an arrow, so only one back arrow is on screen. |
+| `className (BackLink)` | `string` | — | Extra classes on the link. |
+| `PageBackButton` | `—` | — | The back icon beside the page title. Rendered by PageTitle itself, only when the page was opened by a cross-link built with useBackTo, and not while the page is focused. It returns to where the user came from, with that page's filters as they were. |
+| `useBackTo(label)` | `(label: string) => backTo(href)` | — | For a link that leaves this page for another section's page: backTo(href) adds this page's URL and the label to href, so that page shows a back icon reading "Back to {label}". |
 
 ---
 
 #### Page Bar
 
-Horizontal toolbar for search, filters, and primary actions above page content.
+Horizontal toolbar for search, filters, and primary actions above page content. TableBar is the same row (stacked on small screens, side by side from sm) for a toolbar directly above a table.
 
-- **Import:** `import { PageBar, PageBarContent, PageBarAction } from "@/ascendra-ui"`
+- **Import:** `import { PageBar, PageBarContent, PageBarAction, TableBar } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/layout/page-bar](/showcase/layout/page-bar)
 
 **Props**

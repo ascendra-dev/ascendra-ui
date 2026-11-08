@@ -418,10 +418,15 @@ export const registry: Record<string, ComponentMeta> = {
   'card': {
     slug: 'card',
     name: 'Card',
-    description: 'Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel.',
+    description: 'Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel. A card\'s body is one of three: CardPanel (padded content), CardTable (a Table in place of a panel: the card header above, the table\'s own column header and rows, a CardFooter below; it folds with the card, and maximized the table scrolls its rows under a sticky column header — put the Table and its loading/empty/error bodies in it), or a CardList inside a CardPanel (a one-list section such as "top sources": rows that look and behave like a table\'s, instead of a table whose header row carries the title).',
     importPath: '@/ascendra-ui',
-    importNames: ['Card', 'CardHeader', 'CardHeaderTitle', 'CardHeaderSubtitle', 'CardPanel', 'CardFooter', 'CardFooterIcon', 'CardPanelItem', 'CardPanelItemGroup', 'CardPanelItemCrown', 'CardPanelField'],
+    importNames: ['Card', 'CardHeader', 'CardHeaderTitle', 'CardHeaderSubtitle', 'CardPanel', 'CardFooter', 'CardFooterIcon', 'CardPanelItem', 'CardPanelItemGroup', 'CardPanelItemCrown', 'CardPanelField', 'CardTable', 'CardList', 'CardListItem', 'CardListLink'],
     props: [
+      { name: 'className (CardTable)', type: 'string', description: 'Extra classes on the CardTable body. No other props: it reads collapse and maximize from the enclosing Card.' },
+      { name: 'columns (CardList)', type: 'string', description: 'A CSS grid template, such as "auto auto 1fr". Each row\'s children line up in these columns across the list, as table cells would. Without it, each row is a flex line.' },
+      { name: 'visibleRows (CardList)', type: 'number', description: 'Shows that many rows whole, then scrolls, measured like Table\'s visibleRows. Ignored while the card is maximized, when every row shows.' },
+      { name: 'opensSheet (CardListItem)', type: 'boolean', description: 'The row opens a sheet through its own onClick; the hand cursor says so. A row is otherwise a list item with a separator below it and the table\'s hover tint.' },
+      { name: 'CardListLink', type: 'TableRowLink props', description: 'Makes the whole row a real link (status-bar URL, cmd/middle-click, Tab focus). Same props as TableRowLink.' },
       { name: 'danger', type: 'boolean', default: 'false', description: 'Applies red danger styling (on Card).' },
       { name: 'collapseable', type: "'expanded' | 'collapsed'", description: 'Enables collapse — a click on the CardHeader folds it; a chevron shows the state.' },
       { name: 'maximizable', type: 'boolean', default: 'false', description: 'A maximize toggle in CardHeader: the card fills the screen over a light overlay; Esc or an outside click restores it. Maximized, page links in rows and charts restore the card instead of navigating.' },
@@ -440,17 +445,41 @@ export const registry: Record<string, ComponentMeta> = {
     name: 'Page Header',
     description: 'Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction. Focus mode: wrap PageHeader + PageMain in PageFocus and put PageFocusToggle last in PageHeaderAction — the page fills the screen (with one DataTable, compact: only its rows scroll, the footer stays at the bottom); links that leave the page restore it first.',
     importPath: '@/ascendra-ui',
-    importNames: ['PageHeader', 'PageHeaderGroup', 'PageTitle', 'PageSubtitle', 'PageHeaderAction', 'PageFocus', 'PageFocusToggle'],
-    props: [],
+    importNames: ['PageHeader', 'PageHeaderGroup', 'PageTitle', 'PageSubtitle', 'PageHeaderAction', 'PageFocus', 'PageFocusToggle', 'BackLink', 'PageBackButton', 'useBackTo'],
+    props: [
+      { name: 'href (BackLink)', type: 'string', description: 'The page\'s parent. BackLink always goes there: it is the page\'s way up, shown above the page header with an arrow.' },
+      { name: 'children (BackLink)', type: 'React.ReactNode', description: 'What the link says, such as "Back to people".' },
+      { name: 'label (BackLink)', type: 'string', description: 'The parent\'s name, such as "People". When the page was opened by a cross-link, the title shows its own back icon, and BackLink then shows this label without an arrow, so only one back arrow is on screen.' },
+      { name: 'className (BackLink)', type: 'string', description: 'Extra classes on the link.' },
+      { name: 'PageBackButton', type: '—', description: 'The back icon beside the page title. Rendered by PageTitle itself, only when the page was opened by a cross-link built with useBackTo, and not while the page is focused. It returns to where the user came from, with that page\'s filters as they were.' },
+      { name: 'useBackTo(label)', type: '(label: string) => backTo(href)', description: 'For a link that leaves this page for another section\'s page: backTo(href) adds this page\'s URL and the label to href, so that page shows a back icon reading "Back to {label}".' },
+    ],
   },
 
   'page-bar': {
     slug: 'page-bar',
     name: 'Page Bar',
-    description: 'Horizontal toolbar for search, filters, and primary actions above page content.',
+    description: 'Horizontal toolbar for search, filters, and primary actions above page content. TableBar is the same row (stacked on small screens, side by side from sm) for a toolbar directly above a table.',
     importPath: '@/ascendra-ui',
-    importNames: ['PageBar', 'PageBarContent', 'PageBarAction'],
+    importNames: ['PageBar', 'PageBarContent', 'PageBarAction', 'TableBar'],
     props: [],
+  },
+
+  'layout-guide': {
+    slug: 'layout-guide',
+    name: 'App Shell & Page Layout',
+    description: 'The frame every app is built in. Shell: PageLayout > Header, Nav, MainContainer > (SideBarToggle, SideBar, ContentArea > the page). A page inside ContentArea: PageHeader, then PageMain > PageWrapper > MainContent. PageContent sits below a PageBar and lays out main content beside an AsideContent. DashboardContent stacks dashboard rows. See the Layout Guide showcase page for the four page recipes.',
+    importPath: '@/ascendra-ui',
+    importNames: ['PageLayout', 'MainContainer', 'ContentArea', 'PageMain', 'PageWrapper', 'MainContent', 'PageContent', 'DashboardContent'],
+    props: [
+      { name: 'PageLayout', type: 'div props', description: 'The root grid (min-h-screen; rows: Header, Nav, content). Applies the device\'s saved layout mode (centered, full width or menu) before first paint.' },
+      { name: 'MainContainer', type: 'main props', description: 'The centered container under the top bars, holding the sidebar beside the content. Drops its max width in the full-width and menu layout modes.' },
+      { name: 'ContentArea', type: 'section props', description: 'The flexible column beside the sidebar where each page renders (flex-1 min-w-0).' },
+      { name: 'PageWrapper', type: 'div props', description: 'Wraps a page\'s main content with a separator line above it, hidden when the page holds a Stepper.' },
+      { name: 'MainContent', type: 'main props', description: 'The page\'s main column: a full-width flex column with gap-6.' },
+      { name: 'PageContent', type: 'div props', description: 'A row below a PageBar (no top margin when it directly follows one) that places main content beside an AsideContent from lg up.' },
+      { name: 'DashboardContent', type: 'div props', description: 'A flex column with gap-4 for a dashboard\'s stacked rows of panels.' },
+    ],
   },
 
   'aside-content': {
@@ -893,9 +922,9 @@ export const registry: Record<string, ComponentMeta> = {
   'progress': {
     slug: 'progress',
     name: 'Progress & Stepper',
-    description: 'ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses.',
+    description: 'ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses. For a multi-step form, StepperProvider holds the steps and the current step, and StepperNavigator renders Previous and Next (Submit on the last step) inside it.',
     importPath: '@/ascendra-ui',
-    importNames: ['ProgressBar', 'Stepper'],
+    importNames: ['ProgressBar', 'Stepper', 'StepperProvider', 'StepperNavigator', 'useStepperContext'],
     props: [
       { name: 'value', type: 'number', description: 'ProgressBar — progress value 0–100. Omit for indeterminate.' },
       { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'ProgressBar — bar height.' },
@@ -903,6 +932,9 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'indeterminate', type: 'boolean', default: 'false', description: 'ProgressBar — looping animation when progress is unknown.' },
       { name: 'steps', type: 'StepperItem[]', description: 'Stepper — array of step objects with label, optional description, and optional status.' },
       { name: 'currentStep', type: 'number', description: 'Stepper — active step index. Drives completed/active/pending status automatically.' },
+      { name: 'steps (StepperProvider)', type: 'StepperStep[]', description: 'Each step: label, optional description, and an optional onNext() => Promise<boolean> that validates before moving on. Returning false stays on the step.' },
+      { name: 'onSubmit (StepperProvider)', type: '() => Promise<boolean>', description: 'Runs when Next is pressed on the last step. StepperNavigator shows "Submitting…" meanwhile.' },
+      { name: 'StepperNavigator', type: '—', description: 'No props. Previous (disabled on the first step) and Next or Submit, read from the StepperProvider context.' },
     ],
   },
 

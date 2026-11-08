@@ -1,6 +1,6 @@
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-10-24.
+> Auto-generated on 2026-11-08.
 > Run `npm run gen:ui-docs` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
@@ -25,7 +25,7 @@ For the technical API (props, import paths, TypeScript types) see `docs/ui-refer
 
 | Stat | Count |
 |---|---|
-| Primitive components | 71 |
+| Primitive components | 72 |
 | Composite form patterns | 10 |
 | Dialog patterns | 12 |
 | Sheet patterns | 10 |
