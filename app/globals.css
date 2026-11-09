@@ -100,8 +100,10 @@
   --primary-foreground: oklch(0.98 0.02 201);
   /* derived: hover fill and hover text — a step darker */
   --primary-hover: oklch(from var(--primary) calc(l - 0.055) c h);
-  /* derived: 1px edge around checked controls (checkbox, radio, button) */
-  --primary-edge: var(--primary);
+  /* derived: 1px edge around checked controls (checkbox, radio, button).
+     Never darker than 0.53 lightness, so a dark primary doesn't read as a black outline
+     against the button's gloss. */
+  --primary-edge: oklch(from var(--primary) max(l, 0.53) c h);
   /* derived: primary used as text — links, ghost buttons, anchors */
   --primary-text: var(--primary);
   /* secondary: #fff #33333e */
@@ -118,8 +120,8 @@
   --border: oklch(0.9437 0.0027 286.35);
   --input: oklch(0.923 0.003 48.717);
   --ring: var(--primary); /* derived */
-  /* chart palette: violet → sky → emerald → rose → orange → amber → red → primary */
-  --chart-1: oklch(0.606 0.23 281); /* violet-500   */
+  /* chart palette: primary → sky → emerald → rose → orange → amber → red → primary */
+  --chart-1: oklch(from var(--primary) calc(l + 0.05) c h); /* derived: primary, a step lighter */
   --chart-2: oklch(0.679 0.154 233); /* sky-500      */
   --chart-3: oklch(0.698 0.152 163); /* emerald-500  */
   --chart-4: oklch(0.647 0.227 14); /* rose-500     */
@@ -332,7 +334,7 @@
   --sh-comment: var(--color-gray-700);
 
   /* chart palette — neon boost for dark backgrounds */
-  --chart-1: oklch(0.72 0.26 281); /* violet neon   */
+  --chart-1: oklch(from var(--primary) 0.72 c h); /* derived: primary neon */
   --chart-2: oklch(0.78 0.18 233); /* sky neon      */
   --chart-3: oklch(0.78 0.18 163); /* emerald neon  */
   --chart-4: oklch(0.74 0.25 14); /* rose neon     */
@@ -350,6 +352,7 @@
     --primary-hover: var(--primary);
     --primary-edge: var(--primary);
     --primary-text: var(--primary);
+    --chart-1: var(--primary);
     --chart-8: var(--primary);
   }
 }

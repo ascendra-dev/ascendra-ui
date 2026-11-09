@@ -644,9 +644,9 @@ export default function DesignTokensPage() {
                 {
                   token: "chart-1",
                   bg: "bg-[--chart-1]",
-                  lightOklch: "oklch(0.606 0.230 281)",
-                  role: "Primary / Brand — violet",
-                  dark: "Neon violet · oklch(0.72 0.26 281)",
+                  lightOklch: "var(--primary), a step lighter",
+                  role: "Primary / Brand — follows --primary",
+                  dark: "Neon primary · lightness 0.72",
                 },
                 {
                   token: "chart-2",
