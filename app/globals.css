@@ -95,9 +95,9 @@
      .dark. Every token below marked "derived" follows --primary on
      its own; override one only to fine-tune that shade.
      ──────────────────────────────────────────────────────────── */
-  /* primary: #6c47ff */
-  --primary: oklch(0.5573 0.2543 283.67);
-  --primary-foreground: oklch(0.98 0.02 201);
+  /* primary: #016836 */
+  --primary: #016836;
+  --primary-foreground: #ffffff;
   /* derived: hover fill and hover text — a step darker */
   --primary-hover: oklch(from var(--primary) calc(l - 0.055) c h);
   /* derived: 1px edge around checked controls (checkbox, radio, button).
@@ -123,7 +123,7 @@
   /* chart palette: primary → sky → emerald → rose → orange → amber → red → primary */
   --chart-1: oklch(from var(--primary) calc(l + 0.05) c h); /* derived: primary, a step lighter */
   --chart-2: oklch(0.679 0.154 233); /* sky-500      */
-  --chart-3: oklch(0.698 0.152 163); /* emerald-500  */
+  --chart-3: oklch(0.606 0.23 281); /* violet-500 — emerald would blur with a green primary */
   --chart-4: oklch(0.647 0.227 14); /* rose-500     */
   --chart-5: oklch(0.702 0.187 44); /* orange-500   */
   --chart-6: oklch(0.769 0.17 70); /* amber-500    */
@@ -245,7 +245,7 @@
      Override in .dark for theme switching.
      ============================================================ */
   --brand: var(--primary); /* derived: primary brand */
-  --positive: var(--color-green-700); /* #15892b — success */
+  --positive: oklch(0.55 0.17 132); /* #498400 — success, yellow-green so it doesn't blur with a green primary */
   --negative: var(--color-red-700); /* #e02e2e — error/danger */
   --warning: var(--color-orange-500); /* #fd7224 — warning */
   --info: var(--color-blue-700); /* #236dd7 — informational */
@@ -284,8 +284,8 @@
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.5573 0.2543 283.67);
-  --primary-foreground: oklch(0.3 0.05 230);
+  --primary: #197944;
+  --primary-foreground: #ffffff;
   /* derived: on dark, hover goes a step lighter */
   --primary-hover: oklch(from var(--primary) calc(l + 0.07) c h);
   --primary-edge: oklch(from var(--primary) calc(l + 0.04) c h);
@@ -318,7 +318,7 @@
      SEMANTIC ALIASES — Dark Mode overrides
      ============================================================ */
   --brand: var(--primary-text); /* derived: lighter brand on dark */
-  --positive: var(--color-green-400); /* #31c854 */
+  --positive: oklch(0.76 0.2 132); /* #7fca23 */
   --negative: var(--color-red-600); /* #f73d3d */
   --warning: var(--color-orange-500); /* #fd7224 */
   --info: var(--color-blue-600); /* #307ff6 */
@@ -336,7 +336,7 @@
   /* chart palette — neon boost for dark backgrounds */
   --chart-1: oklch(from var(--primary) 0.72 c h); /* derived: primary neon */
   --chart-2: oklch(0.78 0.18 233); /* sky neon      */
-  --chart-3: oklch(0.78 0.18 163); /* emerald neon  */
+  --chart-3: oklch(0.72 0.26 281); /* violet neon   */
   --chart-4: oklch(0.74 0.25 14); /* rose neon     */
   --chart-5: oklch(0.78 0.21 44); /* orange neon   */
   --chart-6: oklch(0.86 0.18 70); /* amber neon    */
