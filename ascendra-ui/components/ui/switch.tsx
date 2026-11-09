@@ -15,10 +15,10 @@ function Switch({
       className={cn(
         'peer group/switch',
         'relative top-px inline-flex w-6 shrink-0 items-center justify-start rounded-full p-0.5',
-        'ring-1 data-[state=checked]:ring-purple-800/88 data-[state=unchecked]:ring-(--color-umbra)/20 dark:data-[state=checked]:ring-purple-600 dark:data-[state=unchecked]:ring-white/15',
+        'ring-1 data-[state=checked]:ring-primary-hover/88 data-[state=unchecked]:ring-(--color-umbra)/20 dark:data-[state=checked]:ring-primary-hover dark:data-[state=unchecked]:ring-white/15',
         'data-[state=checked]:bg-primary',
         'data-[state=unchecked]:bg-gray-300 data-[state=unchecked]:hover:bg-gray-400 data-[state=unchecked]:hover:ring-gray-400 dark:data-[state=unchecked]:bg-(--color-gray-1000) dark:data-[state=unchecked]:hover:bg-gray-900',
-        'data-[state=checked]:hover:bg-purple-800 dark:data-[state=checked]:hover:bg-(--color-purple-650)',
+        'data-[state=checked]:hover:bg-primary-hover dark:data-[state=checked]:hover:bg-primary-edge',
         'transition',
         'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-3',
         'data-disabled:cursor-not-allowed data-disabled:opacity-40',

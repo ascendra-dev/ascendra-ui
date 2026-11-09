@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { SectionHeader } from "@/components/section-header";
+import { LiveColorValue } from "@/components/live-color-value";
 
 // ─── Token data ───────────────────────────────────────────────────────────────
-// Values hard-coded from app/globals.css so no client-side JS is needed.
-// Swatches use Tailwind utility classes, so they flip automatically with the
-// dark-mode toggle — no JavaScript required.
+// Values hard-coded from app/globals.css. Swatches use Tailwind utility
+// classes, so they flip automatically with the dark-mode toggle.
+// Tokens that follow --primary have no fixed value: their approx is null and
+// the swatch shows the live value read from the page instead.
 
 type ColorToken = {
   name: string;
   cssVar: string;
   twBg: string;
-  lightApprox: string;
-  darkApprox: string;
+  lightApprox: string | null;
+  darkApprox: string | null;
 };
 
 const semanticColors: ColorToken[] = [
@@ -40,15 +42,36 @@ const semanticColors: ColorToken[] = [
     name: "Primary",
     cssVar: "--primary",
     twBg: "bg-primary",
-    lightApprox: "#6c47ff",
-    darkApprox: "#6c47ff",
+    lightApprox: null,
+    darkApprox: null,
   },
   {
     name: "Primary Foreground",
     cssVar: "--primary-foreground",
     twBg: "bg-primary-foreground",
-    lightApprox: "#f4f9fc",
-    darkApprox: "#0f2040",
+    lightApprox: null,
+    darkApprox: null,
+  },
+  {
+    name: "Primary Hover",
+    cssVar: "--primary-hover",
+    twBg: "bg-primary-hover",
+    lightApprox: null,
+    darkApprox: null,
+  },
+  {
+    name: "Primary Edge",
+    cssVar: "--primary-edge",
+    twBg: "bg-primary-edge",
+    lightApprox: null,
+    darkApprox: null,
+  },
+  {
+    name: "Primary Text",
+    cssVar: "--primary-text",
+    twBg: "bg-primary-text",
+    lightApprox: null,
+    darkApprox: null,
   },
   {
     name: "Secondary",
@@ -110,8 +133,8 @@ const semanticColors: ColorToken[] = [
     name: "Ring",
     cssVar: "--ring",
     twBg: "bg-ring",
-    lightApprox: "#6c47ff",
-    darkApprox: "#6c47ff",
+    lightApprox: null,
+    darkApprox: null,
   },
   {
     name: "Card",
@@ -134,8 +157,8 @@ const brandColors: ColorToken[] = [
     name: "Brand",
     cssVar: "--brand",
     twBg: "bg-brand",
-    lightApprox: "#6c47ff",
-    darkApprox: "#846bff",
+    lightApprox: null,
+    darkApprox: null,
   },
   {
     name: "Positive",
@@ -241,8 +264,14 @@ function ColorSwatch({ token }: { token: ColorToken }) {
           {token.twBg}
         </p>
         <p className="pt-0.5 font-mono text-[0.6rem] text-muted-foreground/60">
-          <span className="mr-2">☀ {token.lightApprox}</span>
-          <span>☾ {token.darkApprox}</span>
+          {token.lightApprox === null ? (
+            <LiveColorValue cssVar={token.cssVar} />
+          ) : (
+            <>
+              <span className="mr-2">☀ {token.lightApprox}</span>
+              <span>☾ {token.darkApprox}</span>
+            </>
+          )}
         </p>
       </div>
     </div>
@@ -392,7 +421,7 @@ export default function DesignTokensPage() {
                 --font-mono · <span className="italic">code blocks</span>
               </p>
               <p className="font-mono text-sm text-foreground">
-                const token = &quot;oklch(0.5573 0.2543 283.67)&quot;;
+                const token = &quot;var(--primary)&quot;;
               </p>
             </div>
           </div>
@@ -664,9 +693,9 @@ export default function DesignTokensPage() {
                 {
                   token: "chart-8",
                   bg: "bg-[--chart-8]",
-                  lightOklch: "oklch(0.557 0.254 284)",
-                  role: "Secondary brand — deep violet",
-                  dark: "Neon deep violet · oklch(0.70 0.26 284)",
+                  lightOklch: "var(--primary)",
+                  role: "Secondary brand — follows --primary",
+                  dark: "Neon primary · lightness 0.70",
                 },
               ].map((row) => (
                 <div

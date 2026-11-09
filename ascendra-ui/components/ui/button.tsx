@@ -12,10 +12,10 @@ const buttonVariants = cva(
           'focus-visible:outline-primary',
           'bg-primary text-white',
           /* The 4-Layer Shadow Stack */
-          'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.12),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(255,255,255,0.024),0_0_0_1px_rgb(108,71,255)]',
+          'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.12),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(255,255,255,0.024),0_0_0_1px_var(--primary-edge)]',
           'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.16),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.12)]',
           /* Gloss Effect */
-          'before:bg-linear-to-b before:from-white/20 before:to-transparent hover:before:opacity-0 dark:hover:bg-[var(--color-purple-600)]',
+          'before:bg-linear-to-b before:from-white/20 before:to-transparent hover:before:opacity-0 dark:hover:bg-primary-hover',
         ],
         secondary: [
           'focus-visible:outline-primary',
@@ -37,12 +37,12 @@ const buttonVariants = cva(
         ],
         ghost: [
           'focus-visible:outline-primary',
-          'text-primary dark:text-[var(--color-purple-600)] dark:hover:text-primary bg-transparent shadow-none before:hidden',
-          'hover:text-[var(--color-purple-800)]',
+          'text-primary-text dark:hover:text-primary bg-transparent shadow-none before:hidden',
+          'hover:text-primary-hover',
         ],
         link: [
           'focus-visible:outline-primary',
-          'text-primary underline-offset-4 dark:text-[var(--color-purple-600)] hover:underline before:hidden',
+          'text-primary-text underline-offset-4 hover:underline before:hidden',
           'shadow-none bg-transparent',
         ],
       },

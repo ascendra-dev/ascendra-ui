@@ -45,6 +45,9 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-edge: var(--primary-edge);
+  --color-primary-text: var(--primary-text);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -87,9 +90,20 @@
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
+  /* ── THEME ────────────────────────────────────────────────────
+     To rebrand, set --primary and --primary-foreground here and in
+     .dark. Every token below marked "derived" follows --primary on
+     its own; override one only to fine-tune that shade.
+     ──────────────────────────────────────────────────────────── */
   /* primary: #6c47ff */
   --primary: oklch(0.5573 0.2543 283.67);
   --primary-foreground: oklch(0.98 0.02 201);
+  /* derived: hover fill and hover text — a step darker */
+  --primary-hover: oklch(from var(--primary) calc(l - 0.055) c h);
+  /* derived: 1px edge around checked controls (checkbox, radio, button) */
+  --primary-edge: var(--primary);
+  /* derived: primary used as text — links, ghost buttons, anchors */
+  --primary-text: var(--primary);
   /* secondary: #fff #33333e */
   --secondary: oklch(1 0 0);
   --secondary-foreground: oklch(0.147 0.004 49.25);
@@ -103,7 +117,7 @@
   /* #ececee */
   --border: oklch(0.9437 0.0027 286.35);
   --input: oklch(0.923 0.003 48.717);
-  --ring: oklch(0.5573 0.2543 283.67);
+  --ring: var(--primary); /* derived */
   /* chart palette: violet → sky → emerald → rose → orange → amber → red → primary */
   --chart-1: oklch(0.606 0.23 281); /* violet-500   */
   --chart-2: oklch(0.679 0.154 233); /* sky-500      */
@@ -112,7 +126,7 @@
   --chart-5: oklch(0.702 0.187 44); /* orange-500   */
   --chart-6: oklch(0.769 0.17 70); /* amber-500    */
   --chart-7: oklch(0.637 0.213 27); /* red-500      */
-  --chart-8: oklch(0.557 0.254 284); /* primary      */
+  --chart-8: var(--primary); /* derived: primary */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0.001 106.423);
   --sidebar-foreground: oklch(0.147 0.004 49.25);
@@ -228,7 +242,7 @@
      Intent-based names that map to palette values.
      Override in .dark for theme switching.
      ============================================================ */
-  --brand: var(--color-purple-700); /* #6c47ff — primary brand */
+  --brand: var(--primary); /* derived: primary brand */
   --positive: var(--color-green-700); /* #15892b — success */
   --negative: var(--color-red-700); /* #e02e2e — error/danger */
   --warning: var(--color-orange-500); /* #fd7224 — warning */
@@ -270,6 +284,11 @@
   --popover-foreground: oklch(0.985 0.001 106.423);
   --primary: oklch(0.5573 0.2543 283.67);
   --primary-foreground: oklch(0.3 0.05 230);
+  /* derived: on dark, hover goes a step lighter */
+  --primary-hover: oklch(from var(--primary) calc(l + 0.07) c h);
+  --primary-edge: oklch(from var(--primary) calc(l + 0.04) c h);
+  /* derived: lifted to at least 0.66 lightness so text stays readable (4.5:1) on dark surfaces */
+  --primary-text: oklch(from var(--primary) max(calc(l + 0.07), 0.66) c h);
   /* secondary: #fff #33333e */
   --secondary: oklch(0.3256 0.0194 285.28);
   --secondary-foreground: oklch(0.985 0.001 106.423);
@@ -283,7 +302,7 @@
   /* #232328 */
   --border: oklch(0.2582 0.0093 285.73);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.5573 0.2543 283.67);
+  --ring: var(--primary); /* derived */
   --sidebar: oklch(0.216 0.006 56.043);
   --sidebar-foreground: oklch(0.985 0.001 106.423);
   --sidebar-primary: oklch(0.8 0.13 212);
@@ -296,7 +315,7 @@
   /* ============================================================
      SEMANTIC ALIASES — Dark Mode overrides
      ============================================================ */
-  --brand: var(--color-purple-600); /* #846bff */
+  --brand: var(--primary-text); /* derived: lighter brand on dark */
   --positive: var(--color-green-400); /* #31c854 */
   --negative: var(--color-red-600); /* #f73d3d */
   --warning: var(--color-orange-500); /* #fd7224 */
@@ -320,7 +339,19 @@
   --chart-5: oklch(0.78 0.21 44); /* orange neon   */
   --chart-6: oklch(0.86 0.18 70); /* amber neon    */
   --chart-7: oklch(0.72 0.23 27); /* red neon      */
-  --chart-8: oklch(0.7 0.26 284); /* primary neon  */
+  --chart-8: oklch(from var(--primary) 0.7 calc(c + 0.005) h); /* derived: primary neon */
+}
+
+/* Fallback for browsers without relative colour syntax (Safari < 18, Chrome < 119):
+   the derived primary shades collapse to plain --primary instead of going invalid. */
+@supports not (color: oklch(from red l c h)) {
+  :root,
+  .dark {
+    --primary-hover: var(--primary);
+    --primary-edge: var(--primary);
+    --primary-text: var(--primary);
+    --chart-8: var(--primary);
+  }
 }
 
 @layer base {

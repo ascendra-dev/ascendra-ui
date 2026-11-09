@@ -67,12 +67,12 @@ function RadioGroupItem({
           'data-[state=checked]:before:hidden data-[state=checked]:after:block',
           'data-[state=checked]:bg-primary',
           'data-[state=checked]:shadow-[0_4px_4px_-3px_rgba(0,0,0,0.32)]',
-          'data-[state=checked]:ring-(--color-purple-650)',
+          'data-[state=checked]:ring-primary-edge',
 
           /* Dark checked */
           'dark:data-[state=checked]:bg-primary',
           'dark:data-[state=checked]:shadow-[0_4px_4px_-3px_rgba(0,0,0,0.16)]',
-          'dark:data-[state=checked]:ring-purple-600',
+          'dark:data-[state=checked]:ring-primary-hover',
 
           /* Checked + hover — gloss fades */
           'group-hover/radio:data-[state=checked]:after:opacity-0',

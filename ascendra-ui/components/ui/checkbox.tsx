@@ -47,32 +47,32 @@ function Checkbox({
         /* Checked — ! overrides hover bg/shadow */
         'data-[state=checked]:bg-primary!',
         'data-[state=checked]:before:hidden',
-        'data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]!',
+        'data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_var(--primary-edge)]!',
 
         /* Dark checked */
         'dark:data-[state=checked]:bg-primary!',
-        'dark:data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
+        'dark:data-[state=checked]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_var(--primary-edge),0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Checked hover — ring darkens */
-        'data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]!',
+        'data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_var(--primary-hover)]!',
 
         /* Dark checked hover — upward highlight dims .32 → .20 */
-        'dark:data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
+        'dark:data-[state=checked]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_var(--primary-edge),0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Indeterminate — same visual treatment as checked */
         'data-[state=indeterminate]:bg-primary!',
         'data-[state=indeterminate]:before:hidden',
-        'data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6c47ff]!',
+        'data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_var(--primary-edge)]!',
 
         /* Dark indeterminate */
         'dark:data-[state=indeterminate]:bg-primary!',
-        'dark:data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
+        'dark:data-[state=indeterminate]:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.32),0_0_0_1px_var(--primary-edge),0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Indeterminate hover */
-        'data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_#6038ff]!',
+        'data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_var(--primary-hover)]!',
 
         /* Dark indeterminate hover */
-        'dark:data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_#775cff,0_0_0_2px_rgba(0,0,0,0.16)]!',
+        'dark:data-[state=indeterminate]:hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0),0_-1px_0_rgba(255,255,255,0.2),0_0_0_1px_var(--primary-edge),0_0_0_2px_rgba(0,0,0,0.16)]!',
 
         /* Invalid */
         'aria-invalid:bg-red-100!',
