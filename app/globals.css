@@ -101,9 +101,12 @@
   /* derived: hover fill and hover text — a step darker */
   --primary-hover: oklch(from var(--primary) calc(l - 0.055) c h);
   /* derived: 1px edge around checked controls (checkbox, radio, button).
-     Never darker than 0.53 lightness, so a dark primary doesn't read as a black outline
-     against the button's gloss. */
-  --primary-edge: oklch(from var(--primary) max(l, 0.53) c h);
+     Always a step lighter and a touch more vivid than the fill, like the destructive
+     button's edge, so the bottom edge survives the drop shadow on a dark primary. */
+  --primary-edge: oklch(from var(--primary) calc(l + 0.07) calc(c * 1.15) h);
+  /* derived: top-down gloss on the primary button. Tinted, not white, so a dark or
+     muted primary stays rich instead of washing towards grey. */
+  --primary-gloss: oklch(from var(--primary) calc(l + 0.18) c h / 0.4);
   /* derived: primary used as text — links, ghost buttons, anchors */
   --primary-text: var(--primary);
   /* secondary: #fff #33333e */
@@ -351,6 +354,7 @@
   .dark {
     --primary-hover: var(--primary);
     --primary-edge: var(--primary);
+    --primary-gloss: rgb(255 255 255 / 0.2);
     --primary-text: var(--primary);
     --chart-1: var(--primary);
     --chart-8: var(--primary);
