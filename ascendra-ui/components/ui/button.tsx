@@ -12,10 +12,10 @@ const buttonVariants = cva(
           'focus-visible:outline-primary',
           'bg-primary text-white',
           /* The 4-Layer Shadow Stack */
-          'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.12),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(255,255,255,0.024),0_0_0_1px_var(--primary-edge)]',
+          'shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.12),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-3px_rgba(0,0,0,0.24),0_0_0_1px_var(--primary-edge)]',
           'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.16),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.12)]',
           /* Gloss Effect */
-          'before:bg-linear-to-b before:from-white/20 before:to-transparent hover:before:opacity-0 dark:hover:bg-primary-hover',
+          'before:bg-linear-to-b before:from-(--primary-gloss) before:to-transparent hover:before:opacity-0 dark:hover:bg-primary-hover',
         ],
         secondary: [
           'focus-visible:outline-primary',
